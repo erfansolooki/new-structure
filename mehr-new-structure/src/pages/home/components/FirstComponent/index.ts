@@ -1,0 +1,1 @@
+export { FirstComponent } from './view';
