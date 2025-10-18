@@ -1,5 +1,5 @@
 import type { ITextArea } from './types';
-import './TextArea.css';
+import styles from './style.module.scss';
 
 export const TextArea = ({
   label,
@@ -11,15 +11,34 @@ export const TextArea = ({
   required,
   ...textareaProps
 }: ITextArea) => {
+  const wrapperClasses = [styles.wrapper, fullWidth && styles.fullWidth].filter(Boolean).join(' ');
+  
+  const labelClasses = [
+    styles.label,
+    required && styles.required,
+    error && styles.error
+  ].filter(Boolean).join(' ');
+
+  const textareaClasses = [
+    styles.textarea,
+    styles[variant],
+    error && styles.error
+  ].filter(Boolean).join(' ');
+
+  const helperClasses = [
+    styles.helperText,
+    error && styles.error
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={`textarea-wrapper ${fullWidth ? 'full-width' : ''}`}>
+    <div className={wrapperClasses}>
       {label && (
-        <label className={`textarea-label ${required ? 'required' : ''} ${error ? 'error' : ''}`}>
+        <label className={labelClasses}>
           {label}
         </label>
       )}
       <textarea
-        className={`textarea ${variant} ${error ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
+        className={textareaClasses}
         disabled={disabled}
         required={required}
         aria-invalid={!!error}
@@ -27,7 +46,7 @@ export const TextArea = ({
         {...textareaProps}
       />
       {(error || helperText) && (
-        <span id="textarea-helper-text" className={`textarea-helper-text ${error ? 'error' : ''}`}>
+        <span id="textarea-helper-text" className={helperClasses}>
           {error || helperText}
         </span>
       )}

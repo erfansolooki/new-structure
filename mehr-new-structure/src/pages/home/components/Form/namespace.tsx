@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import type { IForm, IFormContext, IFormProvider } from './types';
+import { Textfield } from '@shared/components/Textfield';
+import { TextArea } from '@/shared/components/TextArea';
 
 const FormContext = createContext<IFormContext | undefined>(undefined);
 
@@ -32,3 +34,7 @@ export const useFormContext = () => {
   
   return context;
 };
+
+
+FormProvider.Textfield = Textfield
+FormProvider.TextArea = TextArea

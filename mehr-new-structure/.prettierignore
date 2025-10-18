@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist
+build
+.vite
+*.tsbuildinfo
+
+# Misc
+.DS_Store
+*.log
+.env
+.env.local
+.env.production
+coverage
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+
+# Public assets
+public
+
