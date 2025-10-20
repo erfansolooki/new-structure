@@ -1,0 +1,120 @@
+.header {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+
+  .headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .menuButton {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: inherit;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--hover-bg);
+      }
+
+      &:focus {
+        outline: 2px solid var(--border-color);
+        outline-offset: 2px;
+      }
+    }
+
+    .logo {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .themeToggle {
+      background: none;
+      border: 1px solid currentColor;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: inherit;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--hover-bg);
+      }
+
+      &:focus {
+        outline: 2px solid var(--border-color);
+        outline-offset: 2px;
+      }
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background-color: var(--bg-secondary);
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .userName {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .header {
+    padding: 0.75rem 1rem;
+
+    .headerLeft .logo {
+      font-size: 1.25rem;
+    }
+
+    .headerRight {
+      gap: 0.5rem;
+
+      .themeToggle {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .userInfo .userName {
+        display: none;
+      }
+    }
+  }
+}

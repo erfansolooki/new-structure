@@ -1,0 +1,33 @@
+.navItem {
+  margin-bottom: 0.5rem;
+
+  .navLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    font-weight: 400;
+
+    &:hover {
+      background-color: var(--hover-bg);
+    }
+
+    &.active {
+      background-color: var(--bg-tertiary);
+      font-weight: 600;
+    }
+
+    .navIcon {
+      font-size: 1.25rem;
+    }
+
+    .navLabel {
+      font-size: 0.875rem;
+    }
+  }
+}
