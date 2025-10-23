@@ -1,5 +1,6 @@
 import type { ITextfield } from './types';
 import styles from './style.module.scss';
+import type { ChangeEvent } from 'react';
 
 export const Textfield = ({
   label,
@@ -11,44 +12,41 @@ export const Textfield = ({
   required,
   startIcon,
   endIcon,
+  onChange,
   ...inputProps
 }: ITextfield) => {
   const wrapperClasses = [styles.wrapper, fullWidth && styles.fullWidth].filter(Boolean).join(' ');
-  
-  const labelClasses = [
-    styles.label,
-    required && styles.required,
-    error && styles.error
-  ].filter(Boolean).join(' ');
+
+  const labelClasses = [styles.label, required && styles.required, error && styles.error]
+    .filter(Boolean)
+    .join(' ');
 
   const containerClasses = [
     styles.inputContainer,
     styles[variant],
     error && styles.error,
-    disabled && styles.disabled
-  ].filter(Boolean).join(' ');
+    disabled && styles.disabled,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const inputClasses = [
     styles.input,
     startIcon && styles.hasStartIcon,
-    endIcon && styles.hasEndIcon
-  ].filter(Boolean).join(' ');
+    endIcon && styles.hasEndIcon,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const helperClasses = [
-    styles.helperText,
-    error && styles.error
-  ].filter(Boolean).join(' ');
+  const helperClasses = [styles.helperText, error && styles.error].filter(Boolean).join(' ');
 
   return (
     <div className={wrapperClasses}>
-      {label && (
-        <label className={labelClasses}>
-          {label}
-        </label>
-      )}
+      {label && <label className={labelClasses}>{label}</label>}
       <div className={containerClasses}>
         {startIcon && <span className={`${styles.icon} ${styles.startIcon}`}>{startIcon}</span>}
         <input
+          onChange={onChange}
           className={inputClasses}
           disabled={disabled}
           required={required}

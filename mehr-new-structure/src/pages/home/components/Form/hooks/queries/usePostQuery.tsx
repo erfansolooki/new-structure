@@ -1,5 +1,6 @@
 export const usePostQuery = () => {
-    const data = null!
+  const data = null!;
+  const isPending = false;
 
-    return {data}
-}
+  return { data, isPending };
+};
