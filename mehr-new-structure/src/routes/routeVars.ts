@@ -1,0 +1,10 @@
+export const HOME_ROUTE = '/';
+export const LOGIN_ROUTE = '/login';
+export const REGISTER_ROUTE = '/register';
+export const FORGOT_PASSWORD_ROUTE = '/forgot-password';
+export const RESET_PASSWORD_ROUTE = '/reset-password';
+export const PROFILE_ROUTE = '/profile';
+export const SETTINGS_ROUTE = '/settings';
+export const NOT_FOUND_ROUTE = '/404';
+export const UNAUTHORIZED_ROUTE = '/401';
+export const SERVER_ERROR_ROUTE = '/500';
