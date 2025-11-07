@@ -24,6 +24,7 @@ import type {
   CreateTicketCategoryDto,
   PaginatedTicketCategoryResponseDto,
   TicketCategory,
+  TicketCategoryControllerFindAllAdminParams,
   TicketCategoryControllerFindAllParams,
   TicketCategoryResponseDto,
   UpdateTicketCategoryDto,
@@ -228,6 +229,147 @@ export const useTicketCategoryControllerCreate = <
 
   return useMutation(mutationOptions, queryClient);
 };
+export const ticketCategoryControllerFindAllAdmin = (
+  params?: TicketCategoryControllerFindAllAdminParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({ url: `/api/ticket-categories/admin`, method: 'GET', params, signal });
+};
+
+export const getTicketCategoryControllerFindAllAdminQueryKey = (
+  params?: TicketCategoryControllerFindAllAdminParams
+) => {
+  return [`/api/ticket-categories/admin`, ...(params ? [params] : [])] as const;
+};
+
+export const getTicketCategoryControllerFindAllAdminQueryOptions = <
+  TData = Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+  TError = PaginatedTicketCategoryResponseDto,
+>(
+  params?: TicketCategoryControllerFindAllAdminParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getTicketCategoryControllerFindAllAdminQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>
+  > = ({ signal }) => ticketCategoryControllerFindAllAdmin(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type TicketCategoryControllerFindAllAdminQueryResult = NonNullable<
+  Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>
+>;
+export type TicketCategoryControllerFindAllAdminQueryError = PaginatedTicketCategoryResponseDto;
+
+export function useTicketCategoryControllerFindAllAdmin<
+  TData = Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+  TError = PaginatedTicketCategoryResponseDto,
+>(
+  params: undefined | TicketCategoryControllerFindAllAdminParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+          TError,
+          Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useTicketCategoryControllerFindAllAdmin<
+  TData = Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+  TError = PaginatedTicketCategoryResponseDto,
+>(
+  params?: TicketCategoryControllerFindAllAdminParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+          TError,
+          Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useTicketCategoryControllerFindAllAdmin<
+  TData = Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+  TError = PaginatedTicketCategoryResponseDto,
+>(
+  params?: TicketCategoryControllerFindAllAdminParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useTicketCategoryControllerFindAllAdmin<
+  TData = Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+  TError = PaginatedTicketCategoryResponseDto,
+>(
+  params?: TicketCategoryControllerFindAllAdminParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof ticketCategoryControllerFindAllAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getTicketCategoryControllerFindAllAdminQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const ticketCategoryControllerFindOne = (id: string, signal?: AbortSignal) => {
   return apiInstance<TicketCategory>({
     url: `/api/ticket-categories/${id}`,

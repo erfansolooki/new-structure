@@ -24,6 +24,7 @@ import type {
   CreateWalletDto,
   File,
   FundTransferDto,
+  IncreaseBalanceDto,
   PaginatedWalletResponseDto,
   PayPreInvoice,
   PayTreatmentPlanByAdminDto,
@@ -40,6 +41,270 @@ import type {
 } from '../../models';
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
+
+export const walletControllerGetRevertableAmount = (signal?: AbortSignal) => {
+  return apiInstance<void>({ url: `/api/wallet/revertable-amount`, method: 'GET', signal });
+};
+
+export const getWalletControllerGetRevertableAmountQueryKey = () => {
+  return [`/api/wallet/revertable-amount`] as const;
+};
+
+export const getWalletControllerGetRevertableAmountQueryOptions = <
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>, TError, TData>
+  >;
+}) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getWalletControllerGetRevertableAmountQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>> = ({
+    signal,
+  }) => walletControllerGetRevertableAmount(signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type WalletControllerGetRevertableAmountQueryResult = NonNullable<
+  Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>
+>;
+export type WalletControllerGetRevertableAmountQueryError = unknown;
+
+export function useWalletControllerGetRevertableAmount<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+  TError = unknown,
+>(
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+          TError,
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletControllerGetRevertableAmount<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+          TError,
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletControllerGetRevertableAmount<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useWalletControllerGetRevertableAmount<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmount>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getWalletControllerGetRevertableAmountQueryOptions(options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+export const walletControllerGetRevertableAmountByAdmin = (id: string, signal?: AbortSignal) => {
+  return apiInstance<void>({
+    url: `/api/wallet/${id}/admin-revertable-amount`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getWalletControllerGetRevertableAmountByAdminQueryKey = (id?: string) => {
+  return [`/api/wallet/${id}/admin-revertable-amount`] as const;
+};
+
+export const getWalletControllerGetRevertableAmountByAdminQueryOptions = <
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getWalletControllerGetRevertableAmountByAdminQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>
+  > = ({ signal }) => walletControllerGetRevertableAmountByAdmin(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type WalletControllerGetRevertableAmountByAdminQueryResult = NonNullable<
+  Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>
+>;
+export type WalletControllerGetRevertableAmountByAdminQueryError = unknown;
+
+export function useWalletControllerGetRevertableAmountByAdmin<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+          TError,
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletControllerGetRevertableAmountByAdmin<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+          TError,
+          Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletControllerGetRevertableAmountByAdmin<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useWalletControllerGetRevertableAmountByAdmin<
+  TData = Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletControllerGetRevertableAmountByAdmin>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getWalletControllerGetRevertableAmountByAdminQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
 
 export const walletControllerCreate = (createWalletDto: CreateWalletDto, signal?: AbortSignal) => {
   return apiInstance<Wallet>({
@@ -600,12 +865,12 @@ export function useWalletControllerGetQrcode<
   return query;
 }
 
-export const walletControllerIncreaseBalance = (userFundTransferDto: UserFundTransferDto) => {
+export const walletControllerIncreaseBalance = (increaseBalanceDto: IncreaseBalanceDto) => {
   return apiInstance<Wallet>({
     url: `/api/wallet/increase-balance`,
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    data: userFundTransferDto,
+    data: increaseBalanceDto,
   });
 };
 
@@ -616,13 +881,13 @@ export const getWalletControllerIncreaseBalanceMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof walletControllerIncreaseBalance>>,
     TError,
-    { data: UserFundTransferDto },
+    { data: IncreaseBalanceDto },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof walletControllerIncreaseBalance>>,
   TError,
-  { data: UserFundTransferDto },
+  { data: IncreaseBalanceDto },
   TContext
 > => {
   const mutationKey = ['walletControllerIncreaseBalance'];
@@ -634,7 +899,7 @@ export const getWalletControllerIncreaseBalanceMutationOptions = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof walletControllerIncreaseBalance>>,
-    { data: UserFundTransferDto }
+    { data: IncreaseBalanceDto }
   > = (props) => {
     const { data } = props ?? {};
 
@@ -647,7 +912,7 @@ export const getWalletControllerIncreaseBalanceMutationOptions = <
 export type WalletControllerIncreaseBalanceMutationResult = NonNullable<
   Awaited<ReturnType<typeof walletControllerIncreaseBalance>>
 >;
-export type WalletControllerIncreaseBalanceMutationBody = UserFundTransferDto;
+export type WalletControllerIncreaseBalanceMutationBody = IncreaseBalanceDto;
 export type WalletControllerIncreaseBalanceMutationError = unknown;
 
 export const useWalletControllerIncreaseBalance = <TError = unknown, TContext = unknown>(
@@ -655,7 +920,7 @@ export const useWalletControllerIncreaseBalance = <TError = unknown, TContext = 
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof walletControllerIncreaseBalance>>,
       TError,
-      { data: UserFundTransferDto },
+      { data: IncreaseBalanceDto },
       TContext
     >;
   },
@@ -663,7 +928,7 @@ export const useWalletControllerIncreaseBalance = <TError = unknown, TContext = 
 ): UseMutationResult<
   Awaited<ReturnType<typeof walletControllerIncreaseBalance>>,
   TError,
-  { data: UserFundTransferDto },
+  { data: IncreaseBalanceDto },
   TContext
 > => {
   const mutationOptions = getWalletControllerIncreaseBalanceMutationOptions(options);

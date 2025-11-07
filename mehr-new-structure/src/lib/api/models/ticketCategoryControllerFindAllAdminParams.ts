@@ -5,7 +5,8 @@
  * OpenAPI spec version: 2.0.0
  */
 
-export type TicketCategoryControllerFindAllParams = {
+export type TicketCategoryControllerFindAllAdminParams = {
+  isActive?: boolean;
   page?: number;
   limit?: number;
   search?: string;

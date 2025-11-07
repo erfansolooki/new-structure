@@ -265,6 +265,121 @@ export function usePaidInvoiceControllerFindMine<
   return query;
 }
 
+export const paidInvoiceControllerFindOneMine = (id: string, signal?: AbortSignal) => {
+  return apiInstance<PaidInvoice>({ url: `/api/paid-invoices/mine/${id}`, method: 'GET', signal });
+};
+
+export const getPaidInvoiceControllerFindOneMineQueryKey = (id?: string) => {
+  return [`/api/paid-invoices/mine/${id}`] as const;
+};
+
+export const getPaidInvoiceControllerFindOneMineQueryOptions = <
+  TData = Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getPaidInvoiceControllerFindOneMineQueryKey(id);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>> = ({
+    signal,
+  }) => paidInvoiceControllerFindOneMine(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type PaidInvoiceControllerFindOneMineQueryResult = NonNullable<
+  Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>
+>;
+export type PaidInvoiceControllerFindOneMineQueryError = unknown;
+
+export function usePaidInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function usePaidInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paidInvoiceControllerFindOneMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getPaidInvoiceControllerFindOneMineQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const paidInvoiceControllerFindOne = (id: string, signal?: AbortSignal) => {
   return apiInstance<PaidInvoice>({ url: `/api/paid-invoices/${id}`, method: 'GET', signal });
 };

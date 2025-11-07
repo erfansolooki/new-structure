@@ -10,6 +10,7 @@ import type { SmsEntity } from './smsEntity';
 import type { Widget } from './widget';
 import type { Address } from './address';
 import type { File } from './file';
+import type { Buffer } from './buffer';
 import type { ReminderEntity } from './reminderEntity';
 import type { Personnel } from './personnel';
 import type { Wallet } from './wallet';
@@ -36,7 +37,7 @@ export interface User {
   address: Address;
   files: File[];
   avatar: string;
-  fingerprint: string;
+  fingerprint: Buffer;
   signature: string;
   reminders: ReminderEntity[];
   personnel: Personnel;

@@ -30,6 +30,7 @@ import type {
   InvoiceControllerAddTreatmentPlan200,
   InvoiceControllerDeleteTreatmentPlan200,
   InvoiceControllerFindAllParams,
+  InvoiceControllerFindMineParams,
   InvoiceControllerRecalculate200,
   InvoicePaginatedResopnse,
   UpdateInvoiceDto,
@@ -229,6 +230,239 @@ export function useInvoiceControllerFindAll<
   return query;
 }
 
+export const invoiceControllerFindMine = (
+  params?: InvoiceControllerFindMineParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({ url: `/api/invoices/mine`, method: 'GET', params, signal });
+};
+
+export const getInvoiceControllerFindMineQueryKey = (params?: InvoiceControllerFindMineParams) => {
+  return [`/api/invoices/mine`, ...(params ? [params] : [])] as const;
+};
+
+export const getInvoiceControllerFindMineQueryOptions = <
+  TData = Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+  TError = InvoicePaginatedResopnse,
+>(
+  params?: InvoiceControllerFindMineParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindMine>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getInvoiceControllerFindMineQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof invoiceControllerFindMine>>> = ({
+    signal,
+  }) => invoiceControllerFindMine(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type InvoiceControllerFindMineQueryResult = NonNullable<
+  Awaited<ReturnType<typeof invoiceControllerFindMine>>
+>;
+export type InvoiceControllerFindMineQueryError = InvoicePaginatedResopnse;
+
+export function useInvoiceControllerFindMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+  TError = InvoicePaginatedResopnse,
+>(
+  params: undefined | InvoiceControllerFindMineParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindMine>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+          TError,
+          Awaited<ReturnType<typeof invoiceControllerFindMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useInvoiceControllerFindMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+  TError = InvoicePaginatedResopnse,
+>(
+  params?: InvoiceControllerFindMineParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindMine>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+          TError,
+          Awaited<ReturnType<typeof invoiceControllerFindMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useInvoiceControllerFindMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+  TError = InvoicePaginatedResopnse,
+>(
+  params?: InvoiceControllerFindMineParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useInvoiceControllerFindMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindMine>>,
+  TError = InvoicePaginatedResopnse,
+>(
+  params?: InvoiceControllerFindMineParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getInvoiceControllerFindMineQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+export const invoiceControllerFindOneMine = (id: string, signal?: AbortSignal) => {
+  return apiInstance<Invoice>({ url: `/api/invoices/mine/${id}`, method: 'GET', signal });
+};
+
+export const getInvoiceControllerFindOneMineQueryKey = (id?: string) => {
+  return [`/api/invoices/mine/${id}`] as const;
+};
+
+export const getInvoiceControllerFindOneMineQueryOptions = <
+  TData = Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getInvoiceControllerFindOneMineQueryKey(id);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>> = ({
+    signal,
+  }) => invoiceControllerFindOneMine(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type InvoiceControllerFindOneMineQueryResult = NonNullable<
+  Awaited<ReturnType<typeof invoiceControllerFindOneMine>>
+>;
+export type InvoiceControllerFindOneMineQueryError = unknown;
+
+export function useInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof invoiceControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof invoiceControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useInvoiceControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof invoiceControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof invoiceControllerFindOneMine>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getInvoiceControllerFindOneMineQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const invoiceControllerFindOne = (id: string, signal?: AbortSignal) => {
   return apiInstance<Invoice>({ url: `/api/invoices/${id}`, method: 'GET', signal });
 };
@@ -414,144 +648,6 @@ export const useInvoiceControllerUpdate = <TError = unknown, TContext = unknown>
 
   return useMutation(mutationOptions, queryClient);
 };
-export const invoiceControllerFindByTreatmentPlanId = (id: string, signal?: AbortSignal) => {
-  return apiInstance<Invoice[]>({
-    url: `/api/invoices/treatment-plan/${id}`,
-    method: 'GET',
-    signal,
-  });
-};
-
-export const getInvoiceControllerFindByTreatmentPlanIdQueryKey = (id?: string) => {
-  return [`/api/invoices/treatment-plan/${id}`] as const;
-};
-
-export const getInvoiceControllerFindByTreatmentPlanIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-  TError = unknown,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-        TError,
-        TData
-      >
-    >;
-  }
-) => {
-  const { query: queryOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getInvoiceControllerFindByTreatmentPlanIdQueryKey(id);
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>
-  > = ({ signal }) => invoiceControllerFindByTreatmentPlanId(id, signal);
-
-  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
-
-export type InvoiceControllerFindByTreatmentPlanIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>
->;
-export type InvoiceControllerFindByTreatmentPlanIdQueryError = unknown;
-
-export function useInvoiceControllerFindByTreatmentPlanId<
-  TData = Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-  TError = unknown,
->(
-  id: string,
-  options: {
-    query: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-          TError,
-          Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>
-        >,
-        'initialData'
-      >;
-  },
-  queryClient?: QueryClient
-): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-export function useInvoiceControllerFindByTreatmentPlanId<
-  TData = Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-  TError = unknown,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-          TError,
-          Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>
-        >,
-        'initialData'
-      >;
-  },
-  queryClient?: QueryClient
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-export function useInvoiceControllerFindByTreatmentPlanId<
-  TData = Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-  TError = unknown,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-        TError,
-        TData
-      >
-    >;
-  },
-  queryClient?: QueryClient
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-export function useInvoiceControllerFindByTreatmentPlanId<
-  TData = Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-  TError = unknown,
->(
-  id: string,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof invoiceControllerFindByTreatmentPlanId>>,
-        TError,
-        TData
-      >
-    >;
-  },
-  queryClient?: QueryClient
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getInvoiceControllerFindByTreatmentPlanIdQueryOptions(id, options);
-
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-}
 
 export const invoiceControllerAttachReferralDiscount = (
   id: string,

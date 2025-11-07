@@ -10,6 +10,7 @@ import type { TreatmentEntity } from './treatmentEntity';
 import type { Appointment } from './appointment';
 import type { DoctorTreatmentPlan } from './doctorTreatmentPlan';
 import type { Section } from './section';
+import type { DoctorEntityAppointmentLimitType } from './doctorEntityAppointmentLimitType';
 
 export interface DoctorEntity {
   medicalCouncilNumber: string;
@@ -23,6 +24,9 @@ export interface DoctorEntity {
   doctorTreatmentPlans: DoctorTreatmentPlan[];
   section: Section;
   sectionId: string;
+  contractEndDate: string;
+  appointmentDateMaxDaysAfterToday: number;
+  appointmentLimitType: DoctorEntityAppointmentLimitType;
   id: string;
   createdAt: string;
   updatedAt: string;

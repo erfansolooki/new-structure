@@ -10,4 +10,5 @@ import type { PaginatedTransactionResponse } from './paginatedTransactionRespons
 export interface WalletDetailsResponseDto {
   wallet: Wallet;
   transactions: PaginatedTransactionResponse;
+  totalRevertableAmount: number;
 }

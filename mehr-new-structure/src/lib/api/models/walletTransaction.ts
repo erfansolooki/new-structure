@@ -8,6 +8,7 @@ import type { Wallet } from './wallet';
 import type { WalletTransactionType } from './walletTransactionType';
 import type { WalletTransactionStatus } from './walletTransactionStatus';
 import type { PaidTreatmentPlan } from './paidTreatmentPlan';
+import type { Check } from './check';
 
 export interface WalletTransaction {
   amount: number;
@@ -19,6 +20,7 @@ export interface WalletTransaction {
   description: string;
   status: WalletTransactionStatus;
   paidTreatmentPlan: PaidTreatmentPlan;
+  check: Check;
   id: string;
   createdAt: string;
   updatedAt: string;

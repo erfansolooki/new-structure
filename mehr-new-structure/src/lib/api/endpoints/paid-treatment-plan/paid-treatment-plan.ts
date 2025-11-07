@@ -290,6 +290,145 @@ export function usePaidTreatmentPlanControllerFindMine<
   return query;
 }
 
+export const paidTreatmentPlanControllerFindOneMine = (id: string, signal?: AbortSignal) => {
+  return apiInstance<PaidTreatmentPlan>({
+    url: `/api/paid-treatment-plans/mine/${id}`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getPaidTreatmentPlanControllerFindOneMineQueryKey = (id?: string) => {
+  return [`/api/paid-treatment-plans/mine/${id}`] as const;
+};
+
+export const getPaidTreatmentPlanControllerFindOneMineQueryOptions = <
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getPaidTreatmentPlanControllerFindOneMineQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>
+  > = ({ signal }) => paidTreatmentPlanControllerFindOneMine(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type PaidTreatmentPlanControllerFindOneMineQueryResult = NonNullable<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>
+>;
+export type PaidTreatmentPlanControllerFindOneMineQueryError = unknown;
+
+export function usePaidTreatmentPlanControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function usePaidTreatmentPlanControllerFindOneMine<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOneMine>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getPaidTreatmentPlanControllerFindOneMineQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const paidTreatmentPlanControllerFindOne = (id: string, signal?: AbortSignal) => {
   return apiInstance<PaidTreatmentPlan>({
     url: `/api/paid-treatment-plans/${id}`,

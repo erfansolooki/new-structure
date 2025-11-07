@@ -21,17 +21,12 @@ import type { AddressControllerFindCitiesParams } from '../../models';
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
-export const ADDRESS_URLS = {
-  FIND_ALL_PROVINCES: '/api/address/provinces',
-  FIND_CITIES: '/api/address/cities',
-};
-
 export const addressControllerFindAllProvinces = (signal?: AbortSignal) => {
-  return apiInstance<string[]>({ url: ADDRESS_URLS.FIND_ALL_PROVINCES, method: 'GET', signal });
+  return apiInstance<string[]>({ url: `/api/address/provinces`, method: 'GET', signal });
 };
 
 export const getAddressControllerFindAllProvincesQueryKey = () => {
-  return [ADDRESS_URLS.FIND_ALL_PROVINCES] as const;
+  return [`/api/address/provinces`] as const;
 };
 
 export const getAddressControllerFindAllProvincesQueryOptions = <
@@ -138,13 +133,13 @@ export const addressControllerFindCities = (
   params: AddressControllerFindCitiesParams,
   signal?: AbortSignal
 ) => {
-  return apiInstance<string[]>({ url: ADDRESS_URLS.FIND_CITIES, method: 'GET', params, signal });
+  return apiInstance<string[]>({ url: `/api/address/cities`, method: 'GET', params, signal });
 };
 
 export const getAddressControllerFindCitiesQueryKey = (
   params?: AddressControllerFindCitiesParams
 ) => {
-  return [ADDRESS_URLS.FIND_CITIES, ...(params ? [params] : [])] as const;
+  return [`/api/address/cities`, ...(params ? [params] : [])] as const;
 };
 
 export const getAddressControllerFindCitiesQueryOptions = <
