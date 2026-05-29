@@ -27,6 +27,7 @@
             }
           }
         },
+        "summary": "required permisson: create_check",
         "tags": [
           "Check"
         ]
@@ -148,6 +149,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_check",
         "tags": [
           "Check"
         ]
@@ -301,6 +303,7 @@
             }
           }
         },
+        "summary": "required permisson: read_check",
         "tags": [
           "Check"
         ]
@@ -339,6 +342,7 @@
             }
           }
         },
+        "summary": "required permisson: update_check",
         "tags": [
           "Check"
         ]
@@ -360,6 +364,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_check",
         "tags": [
           "Check"
         ]
@@ -476,6 +481,14 @@
                 "createdAt",
                 "updatedAt"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -611,6 +624,7 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -640,6 +654,7 @@
             }
           }
         },
+        "summary": "required permisson: create_patient",
         "tags": [
           "Patient"
         ]
@@ -779,6 +794,7 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -835,6 +851,7 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -887,6 +904,7 @@
             }
           }
         },
+        "summary": "required permisson: update_patient",
         "tags": [
           "Patient"
         ]
@@ -949,6 +967,39 @@
             }
           }
         },
+        "summary": "required permisson: update_patient",
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/activate-insurance": {
+      "put": {
+        "operationId": "PatientController_activateInsurance",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveInsuranceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: update_patient",
         "tags": [
           "Patient"
         ]
@@ -1003,6 +1054,7 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -1041,6 +1093,7 @@
             }
           }
         },
+        "summary": "required permisson: update_patient",
         "tags": [
           "Patient"
         ]
@@ -1062,6 +1115,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_patient",
         "tags": [
           "Patient"
         ]
@@ -1121,7 +1175,6 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Upload patient documents",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -1132,14 +1185,9 @@
                     "items": {
                       "type": "string",
                       "format": "binary"
-                    },
-                    "maxItems": 5,
-                    "description": "Patient document files (max 5 files)"
+                    }
                   }
-                },
-                "required": [
-                  "document"
-                ]
+                }
               }
             }
           }
@@ -1175,6 +1223,26 @@
             }
           },
           {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-29",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-30",
+              "type": "string"
+            }
+          },
+          {
             "name": "extension",
             "required": false,
             "in": "query",
@@ -1193,6 +1261,22 @@
                 "image/svg+xml",
                 "image/webp"
               ]
+            }
+          },
+          {
+            "name": "relationType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relatedId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1227,6 +1311,124 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/{id}/radiology-images": {
+      "get": {
+        "operationId": "PatientController_getRadiologyImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "description": "Search term to filter files by title",
+            "schema": {
+              "example": "medical report",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-29",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-30",
+              "type": "string"
+            }
+          },
+          {
+            "name": "extension",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/msword",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "image/jpg",
+                "image/png",
+                "image/jpeg",
+                "image/jfif",
+                "image/svg+xml",
+                "image/webp"
+              ]
+            }
+          },
+          {
+            "name": "relationType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relatedId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilesPaginatedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -1257,6 +1459,7 @@
             }
           }
         },
+        "summary": "required permisson: read_patient",
         "tags": [
           "Patient"
         ]
@@ -1282,6 +1485,170 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/mydocument/medical-info": {
+      "get": {
+        "operationId": "PatientController_getMyMedicalInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalInfo"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      },
+      "put": {
+        "operationId": "PatientController_updateMyMedicalInfo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalInfo"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/mydocument/dental-info": {
+      "get": {
+        "operationId": "PatientController_getMyDentalInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DentalInfo"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      },
+      "put": {
+        "operationId": "PatientController_updateMyDentalInfo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDentalInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DentalInfo"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/mydocument/insurance-info": {
+      "get": {
+        "operationId": "PatientController_getMyInsuranceInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InsuranceInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
+    "/api/patients/mydocument/insurance-info/{id}": {
+      "put": {
+        "operationId": "PatientController_updateMyInsuranceInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInsuranceInfoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsuranceInfo"
                 }
               }
             }
@@ -1329,6 +1696,56 @@
         ]
       }
     },
+    "/api/patients/{id}/visit-images": {
+      "post": {
+        "operationId": "PatientController_uploadVisitImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "VISIT": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Patient"
+        ]
+      }
+    },
     "/api/treatments": {
       "post": {
         "operationId": "TreatmentController_create",
@@ -1358,6 +1775,7 @@
             }
           }
         },
+        "summary": "required permisson: create_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1420,6 +1838,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1454,6 +1873,7 @@
             }
           }
         },
+        "summary": "required permisson: create_custom_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1488,6 +1908,7 @@
             }
           }
         },
+        "summary": "required permisson: create_custom_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1612,6 +2033,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1650,6 +2072,7 @@
             }
           }
         },
+        "summary": "required permisson: update_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1671,6 +2094,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_treatment",
         "tags": [
           "Treatment"
         ]
@@ -1749,6 +2173,254 @@
         ]
       }
     },
+    "/api/treatments/{id}/during-treatment-images": {
+      "post": {
+        "operationId": "TreatmentController_uploadDuringTreatmentImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "DURING_TREATMENT": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Treatment"
+        ]
+      }
+    },
+    "/api/treatments/{id}/after-treatment-images": {
+      "post": {
+        "operationId": "TreatmentController_uploadAfterTreatmentImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AFTER_TREATMENT": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Treatment"
+        ]
+      }
+    },
+    "/api/treatments/{id}/files": {
+      "get": {
+        "operationId": "TreatmentController_getFiles",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "description": "Search term to filter files by title",
+            "schema": {
+              "example": "medical report",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-29",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-30",
+              "type": "string"
+            }
+          },
+          {
+            "name": "extension",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/msword",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "image/jpg",
+                "image/png",
+                "image/jpeg",
+                "image/jfif",
+                "image/svg+xml",
+                "image/webp"
+              ]
+            }
+          },
+          {
+            "name": "relationType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relatedId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilesPaginatedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_treatment",
+        "tags": [
+          "Treatment"
+        ]
+      }
+    },
+    "/api/treatments/files/{fileId}": {
+      "get": {
+        "operationId": "TreatmentController_getFile",
+        "parameters": [
+          {
+            "name": "fileId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_treatment",
+        "tags": [
+          "Treatment"
+        ]
+      }
+    },
     "/api/treatment-categories": {
       "post": {
         "operationId": "TreatMentCategoryController_create",
@@ -1775,6 +2447,7 @@
             }
           }
         },
+        "summary": "required permisson: create_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -1880,6 +2553,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -1990,6 +2664,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2014,6 +2689,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2044,6 +2720,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2082,6 +2759,7 @@
             }
           }
         },
+        "summary": "required permisson: update_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2103,6 +2781,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2202,6 +2881,40 @@
             }
           }
         },
+        "tags": [
+          "TreatMentCategory"
+        ]
+      }
+    },
+    "/api/treatment-categories/{id}/deposit-seetings": {
+      "patch": {
+        "operationId": "TreatMentCategoryController_setDeppositSettings",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositSettingsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: update_treatment_category",
         "tags": [
           "TreatMentCategory"
         ]
@@ -2337,6 +3050,8 @@
               "type": "string",
               "enum": [
                 "order",
+                "baseOrder",
+                "categoryOrder",
                 "createdAt",
                 "updatedAt",
                 "deletedAt"
@@ -2372,6 +3087,38 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_plan",
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/multiple": {
+      "post": {
+        "operationId": "TreatmentPlanController_createMultiple",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMultipleTreatmentPlansDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
         "tags": [
           "TreatmentPlan"
         ]
@@ -2396,6 +3143,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: create_custom_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2427,6 +3175,7 @@
             }
           }
         },
+        "summary": "required permisson: create_custom_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2533,6 +3282,8 @@
               "type": "string",
               "enum": [
                 "order",
+                "baseOrder",
+                "categoryOrder",
                 "createdAt",
                 "updatedAt",
                 "deletedAt"
@@ -2563,6 +3314,96 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TreatmentPlanRaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/patient/history": {
+      "get": {
+        "operationId": "TreatmentPlanController_getHistoryByDate",
+        "parameters": [
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TreatmentPlansHistoryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/patient/details/{treatmentId}": {
+      "get": {
+        "operationId": "TreatmentPlanController_getDetailsByTreatmentId",
+        "parameters": [
+          {
+            "name": "treatmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TreatmentPlanDetailsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/patient/cost/{treatmentId}": {
+      "get": {
+        "operationId": "TreatmentPlanController_getCostByTreatmentId",
+        "parameters": [
+          {
+            "name": "treatmentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TreatmentPlanCostResponseDto"
                 }
               }
             }
@@ -2605,6 +3446,8 @@
               "type": "string",
               "enum": [
                 "order",
+                "baseOrder",
+                "categoryOrder",
                 "createdAt",
                 "updatedAt",
                 "deletedAt"
@@ -2640,6 +3483,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2754,6 +3598,8 @@
               "type": "string",
               "enum": [
                 "order",
+                "baseOrder",
+                "categoryOrder",
                 "createdAt",
                 "updatedAt",
                 "deletedAt"
@@ -2792,6 +3638,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2838,6 +3685,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2898,6 +3746,7 @@
             }
           }
         },
+        "summary": "required permisson: read_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -2962,6 +3811,31 @@
         ]
       }
     },
+    "/api/treatment-plans/multiple-toggle-select": {
+      "patch": {
+        "operationId": "TreatmentPlanController_multipleToggleSelect",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleSelectMultiplePlans"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: toggle_select_treatment_plan",
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
     "/api/treatment-plans/{id}/toggle-select": {
       "patch": {
         "operationId": "TreatmentPlanController_toggleSelect",
@@ -2980,6 +3854,205 @@
             "description": ""
           }
         },
+        "summary": "required permisson: toggle_select_treatment_plan",
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/{id}/before-treatment-images": {
+      "post": {
+        "operationId": "TreatmentPlanController_uploadBeforTreatmentImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "BEFORE_TREATMENT": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/{id}/files": {
+      "get": {
+        "operationId": "TreatmentPlanController_getFiles",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "description": "Search term to filter files by title",
+            "schema": {
+              "example": "medical report",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-29",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-30",
+              "type": "string"
+            }
+          },
+          {
+            "name": "extension",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/msword",
+                "application/pdf",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "image/jpg",
+                "image/png",
+                "image/jpeg",
+                "image/jfif",
+                "image/svg+xml",
+                "image/webp"
+              ]
+            }
+          },
+          {
+            "name": "relationType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relatedId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilesPaginatedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_treatment_plan",
+        "tags": [
+          "TreatmentPlan"
+        ]
+      }
+    },
+    "/api/treatment-plans/files/{fileId}": {
+      "get": {
+        "operationId": "TreatmentPlanController_getFile",
+        "parameters": [
+          {
+            "name": "fileId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_treatment_plan",
         "tags": [
           "TreatmentPlan"
         ]
@@ -3011,6 +4084,7 @@
             }
           }
         },
+        "summary": "required permisson: create_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3083,6 +4157,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3113,6 +4188,7 @@
             }
           }
         },
+        "summary": "required permisson: read_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3134,6 +4210,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3155,6 +4232,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3178,6 +4256,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3201,6 +4280,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_renewed_treatment_plan",
         "tags": [
           "RenewedTreatmentPlan"
         ]
@@ -3415,6 +4495,15 @@
             }
           },
           {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
             "name": "sortType",
             "required": false,
             "in": "query",
@@ -3446,6 +4535,14 @@
             }
           },
           {
+            "name": "orderNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "required": false,
             "in": "query",
@@ -3467,6 +4564,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -3524,6 +4622,7 @@
             }
           }
         },
+        "summary": "required permisson: read_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -3555,6 +4654,7 @@
             }
           }
         },
+        "summary": "required permisson: read_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -3594,6 +4694,7 @@
             }
           }
         },
+        "summary": "required permisson: update_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -3616,6 +4717,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -3740,6 +4842,7 @@
             }
           }
         },
+        "summary": "required permisson: read_lab_order",
         "tags": [
           "LabOrders"
         ]
@@ -4095,6 +5198,7 @@
             }
           }
         },
+        "summary": "required permisson: create_price",
         "tags": [
           "Prices"
         ]
@@ -4176,6 +5280,7 @@
             }
           }
         },
+        "summary": "required permisson: read_price",
         "tags": [
           "Prices"
         ]
@@ -4206,6 +5311,7 @@
             }
           }
         },
+        "summary": "required permisson: read_price",
         "tags": [
           "Prices"
         ]
@@ -4244,6 +5350,7 @@
             }
           }
         },
+        "summary": "required permisson: update_price",
         "tags": [
           "Prices"
         ]
@@ -4265,6 +5372,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_price",
         "tags": [
           "Prices"
         ]
@@ -4296,6 +5404,7 @@
             }
           }
         },
+        "summary": "required permisson: create_appointment",
         "tags": [
           "Appointments"
         ]
@@ -4455,6 +5564,14 @@
             }
           },
           {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "page",
             "required": false,
             "in": "query",
@@ -4483,6 +5600,7 @@
             }
           }
         },
+        "summary": "required permisson: read_appointment",
         "tags": [
           "Appointments"
         ]
@@ -4670,6 +5788,14 @@
                 "createdAt",
                 "updatedAt"
               ]
+            }
+          },
+          {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -4862,6 +5988,14 @@
             }
           },
           {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "page",
             "required": false,
             "in": "query",
@@ -4936,8 +6070,375 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FindFreeApointmentSlotsResponseDto"
+                    "$ref": "#/components/schemas/TimeSlot"
                   }
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_appointment",
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/free-doctors": {
+      "get": {
+        "operationId": "AppointmentsController_getFreeDoctors",
+        "parameters": [
+          {
+            "name": "startTime",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "requiredMinutes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 15,
+              "maximum": 120,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_appointment",
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/assistant-free-slots": {
+      "get": {
+        "operationId": "AppointmentsController_getAssistantFreeSlots",
+        "parameters": [
+          {
+            "name": "requiredMinutes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 15,
+              "maximum": 120,
+              "type": "number"
+            }
+          },
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeSlot"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_appointment",
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/unit-free-slots": {
+      "get": {
+        "operationId": "AppointmentsController_getUnitFreeSlots",
+        "parameters": [
+          {
+            "name": "requiredMinutes",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 15,
+              "maximum": 120,
+              "type": "number"
+            }
+          },
+          {
+            "name": "unitId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeSlot"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_appointment",
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/assistant": {
+      "get": {
+        "operationId": "AppointmentsController_assistantAppointments",
+        "parameters": [
+          {
+            "name": "date",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "unitId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "assistantId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "treatmentPlanId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "WAITING",
+                "ACCEPTED",
+                "VISIT",
+                "CANCELED",
+                "DELAYED",
+                "EMERGENCY"
+              ]
+            }
+          },
+          {
+            "name": "guestPatientFirstName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guestPatientLastName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "ASC",
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "startTime",
+              "type": "string",
+              "enum": [
+                "startTime",
+                "endTime",
+                "date",
+                "createdAt",
+                "updatedAt"
+              ]
+            }
+          },
+          {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedAppointment"
                 }
               }
             }
@@ -4948,9 +6449,365 @@
         ]
       }
     },
-    "/api/appointments/assistant": {
+    "/api/appointments/count": {
       "get": {
-        "operationId": "AppointmentsController_assistantAppointments",
+        "operationId": "AppointmentsController_count",
+        "parameters": [
+          {
+            "required": false,
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "startTime",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "endTime",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "patientId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "doctorId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "unitId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "assistantId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "treatmentPlanId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "guestPatientFirstName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "guestPatientLastName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "sortType",
+            "in": "query",
+            "schema": {
+              "default": "ASC",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "default": "startTime",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "isSuspended",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/last-update": {
+      "get": {
+        "operationId": "AppointmentsController_lastUpdate",
+        "parameters": [
+          {
+            "required": false,
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "startTime",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "endTime",
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "patientId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "doctorId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "unitId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "assistantId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "treatmentPlanId",
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "guestPatientFirstName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "guestPatientLastName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "sortType",
+            "in": "query",
+            "schema": {
+              "default": "ASC",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "default": "startTime",
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "name": "isSuspended",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Date"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended": {
+      "get": {
+        "operationId": "AppointmentsController_findSuspended",
         "parameters": [
           {
             "name": "date",
@@ -5137,156 +6994,16 @@
         ]
       }
     },
-    "/api/appointments/count": {
+    "/api/appointments/{id}/suspension-histories/expanded": {
       "get": {
-        "operationId": "AppointmentsController_count",
+        "operationId": "AppointmentsController_getExpandedHistoriesByAppointmentId",
         "parameters": [
           {
-            "required": false,
-            "name": "date",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "startDate",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "endDate",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "startTime",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "endTime",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "patientId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "doctorId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "unitId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "assistantId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "treatmentPlanId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "status",
-            "in": "query",
+            "name": "id",
+            "required": true,
+            "in": "path",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "guestPatientFirstName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "guestPatientLastName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "sortType",
-            "in": "query",
-            "schema": {
-              "default": "ASC",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "sortBy",
-            "in": "query",
-            "schema": {
-              "default": "startTime",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "required": false,
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "number"
             }
           }
         ],
@@ -5296,177 +7013,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "number"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Appointments"
-        ]
-      }
-    },
-    "/api/appointments/last-update": {
-      "get": {
-        "operationId": "AppointmentsController_lastUpdate",
-        "parameters": [
-          {
-            "required": false,
-            "name": "date",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "startDate",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "endDate",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "startTime",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "endTime",
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "patientId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "doctorId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "unitId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "assistantId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "treatmentPlanId",
-            "in": "query",
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "status",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "guestPatientFirstName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "guestPatientLastName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "sortType",
-            "in": "query",
-            "schema": {
-              "default": "ASC",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "sortBy",
-            "in": "query",
-            "schema": {
-              "default": "startTime",
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "required": false,
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Date"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SuspensionHistoryExpandedResponseDto"
+                  }
                 }
               }
             }
@@ -5502,6 +7052,7 @@
             }
           }
         },
+        "summary": "required permisson: read_appointment",
         "tags": [
           "Appointments"
         ]
@@ -5540,6 +7091,328 @@
             }
           }
         },
+        "summary": "required permisson: update_appointment",
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/{id}/update-doctor": {
+      "patch": {
+        "operationId": "AppointmentsController_updateDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentDoctorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/{id}/update-date-and-times": {
+      "patch": {
+        "operationId": "AppointmentsController_updateAppointmentDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentDateAndTimesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/{id}/suspend": {
+      "post": {
+        "operationId": "AppointmentsController_suspendAppointment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuspendAppointmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/bulk-suspend": {
+      "post": {
+        "operationId": "AppointmentsController_bulkSuspend",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSuspendAppointmentsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/{id}/reschedule": {
+      "patch": {
+        "operationId": "AppointmentsController_rescheduleSuspended",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleAppointmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/{id}/change-doctor": {
+      "patch": {
+        "operationId": "AppointmentsController_changeDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeAppointmentDoctorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/{id}/change-assistant": {
+      "patch": {
+        "operationId": "AppointmentsController_changeAssistant",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeAppointmentAssistantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/{id}/cancel": {
+      "delete": {
+        "operationId": "AppointmentsController_cancelSuspended",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelSuspendedAppointmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Appointments"
+        ]
+      }
+    },
+    "/api/appointments/suspended/bulk-cancel": {
+      "post": {
+        "operationId": "AppointmentsController_bulkCancel",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCancelAppointmentsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
         "tags": [
           "Appointments"
         ]
@@ -5571,6 +7444,7 @@
             }
           }
         },
+        "summary": "required permisson: create_doctor",
         "tags": [
           "Doctor"
         ]
@@ -5662,6 +7536,7 @@
             }
           }
         },
+        "summary": "required permisson: read_doctor",
         "tags": [
           "Doctor"
         ]
@@ -5713,6 +7588,7 @@
             }
           }
         },
+        "summary": "required permisson: read_doctor",
         "tags": [
           "Doctor"
         ]
@@ -5751,6 +7627,7 @@
             }
           }
         },
+        "summary": "required permisson: update_doctor",
         "tags": [
           "Doctor"
         ]
@@ -5772,6 +7649,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_doctor",
         "tags": [
           "Doctor"
         ]
@@ -5851,6 +7729,7 @@
             }
           }
         },
+        "summary": "required permisson: create_personnel",
         "tags": [
           "Personnel"
         ]
@@ -5943,6 +7822,7 @@
             }
           }
         },
+        "summary": "required permisson: read_personnel",
         "tags": [
           "Personnel"
         ]
@@ -5974,6 +7854,7 @@
             }
           }
         },
+        "summary": "required permisson: update_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6005,6 +7886,7 @@
             }
           }
         },
+        "summary": "required permisson: update_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6059,6 +7941,7 @@
             }
           }
         },
+        "summary": "required permisson: read_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6089,6 +7972,7 @@
             }
           }
         },
+        "summary": "required permisson: read_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6120,6 +8004,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6141,6 +8026,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6197,6 +8083,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6223,6 +8110,26 @@
             }
           },
           {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-29",
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "example": "2025-11-30",
+              "type": "string"
+            }
+          },
+          {
             "name": "extension",
             "required": false,
             "in": "query",
@@ -6241,6 +8148,22 @@
                 "image/svg+xml",
                 "image/webp"
               ]
+            }
+          },
+          {
+            "name": "relationType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relatedId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -6275,6 +8198,7 @@
             }
           }
         },
+        "summary": "required permisson: read_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6305,6 +8229,7 @@
             }
           }
         },
+        "summary": "required permisson: read_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6342,6 +8267,7 @@
             }
           }
         },
+        "summary": "required permisson: create_personnel",
         "tags": [
           "Personnel"
         ]
@@ -6373,6 +8299,7 @@
             }
           }
         },
+        "summary": "required permisson: create_irregular_schedule",
         "tags": [
           "IrregularSchedule"
         ]
@@ -6455,6 +8382,7 @@
             }
           }
         },
+        "summary": "required permisson: read_irregular_schedule",
         "tags": [
           "IrregularSchedule"
         ]
@@ -6485,6 +8413,7 @@
             }
           }
         },
+        "summary": "required permisson: read_irregular_schedule",
         "tags": [
           "IrregularSchedule"
         ]
@@ -6516,6 +8445,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_irregular_schedule",
         "tags": [
           "IrregularSchedule"
         ]
@@ -6537,6 +8467,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_irregular_schedule",
         "tags": [
           "IrregularSchedule"
         ]
@@ -6568,6 +8499,7 @@
             }
           }
         },
+        "summary": "required permisson: create_position",
         "tags": [
           "Position"
         ]
@@ -6590,6 +8522,7 @@
             }
           }
         },
+        "summary": "required permisson: read_position",
         "tags": [
           "Position"
         ]
@@ -6620,6 +8553,7 @@
             }
           }
         },
+        "summary": "required permisson: read_position",
         "tags": [
           "Position"
         ]
@@ -6651,6 +8585,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_position",
         "tags": [
           "Position"
         ]
@@ -6672,6 +8607,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_position",
         "tags": [
           "Position"
         ]
@@ -6703,6 +8639,7 @@
             }
           }
         },
+        "summary": "required permisson: create_unit",
         "tags": [
           "Unit"
         ]
@@ -6778,6 +8715,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_unit",
         "tags": [
           "Unit"
         ]
@@ -6808,6 +8746,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit",
         "tags": [
           "Unit"
         ]
@@ -6846,6 +8785,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit",
         "tags": [
           "Unit"
         ]
@@ -6867,6 +8807,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_unit",
         "tags": [
           "Unit"
         ]
@@ -6898,6 +8839,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit",
         "tags": [
           "Unit"
         ]
@@ -6929,6 +8871,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit",
         "tags": [
           "Unit"
         ]
@@ -6960,6 +8903,7 @@
             }
           }
         },
+        "summary": "required permisson: create_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7032,6 +8976,7 @@
             }
           }
         },
+        "summary": "required permisson: read_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7069,6 +9014,7 @@
             }
           }
         },
+        "summary": "required permisson: create_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7115,6 +9061,7 @@
             }
           }
         },
+        "summary": "required permisson: create_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7183,6 +9130,7 @@
             }
           }
         },
+        "summary": "required permisson: read_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7213,6 +9161,7 @@
             }
           }
         },
+        "summary": "required permisson: read_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7251,6 +9200,7 @@
             }
           }
         },
+        "summary": "required permisson: update_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7272,6 +9222,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_doctor_treatment_plan",
         "tags": [
           "DoctorTreatmentPlan"
         ]
@@ -7303,6 +9254,7 @@
             }
           }
         },
+        "summary": "required permisson: create_discount",
         "tags": [
           "Discounts"
         ]
@@ -7405,6 +9357,7 @@
             }
           }
         },
+        "summary": "required permisson: read_discount",
         "tags": [
           "Discounts"
         ]
@@ -7459,6 +9412,7 @@
             }
           }
         },
+        "summary": "required permisson: read_discount",
         "tags": [
           "Discounts"
         ]
@@ -7497,6 +9451,7 @@
             }
           }
         },
+        "summary": "required permisson: update_discount",
         "tags": [
           "Discounts"
         ]
@@ -7518,6 +9473,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_discount",
         "tags": [
           "Discounts"
         ]
@@ -7575,8 +9531,185 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_discount",
         "tags": [
           "Discounts"
+        ]
+      }
+    },
+    "/api/special-discounts": {
+      "post": {
+        "operationId": "SpecialDiscountsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSpecialDiscountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecialDiscount"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: create_discount",
+        "tags": [
+          "SpecialDiscounts"
+        ]
+      },
+      "get": {
+        "operationId": "SpecialDiscountsController_findAll",
+        "parameters": [
+          {
+            "name": "method",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FIXED",
+                "PERCENTAGE"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscountPaginatedResopnse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_discount",
+        "tags": [
+          "SpecialDiscounts"
+        ]
+      }
+    },
+    "/api/special-discounts/{id}": {
+      "get": {
+        "operationId": "SpecialDiscountsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecialDiscount"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_discount",
+        "tags": [
+          "SpecialDiscounts"
+        ]
+      },
+      "put": {
+        "operationId": "SpecialDiscountsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpecialDiscountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: update_discount",
+        "tags": [
+          "SpecialDiscounts"
+        ]
+      },
+      "delete": {
+        "operationId": "SpecialDiscountsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: delete_discount",
+        "tags": [
+          "SpecialDiscounts"
         ]
       }
     },
@@ -7606,6 +9739,7 @@
             }
           }
         },
+        "summary": "required permisson: create_miscellaneous_service",
         "tags": [
           "MiscellaneousService"
         ]
@@ -7663,6 +9797,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_miscellaneous_service",
         "tags": [
           "MiscellaneousService"
         ]
@@ -7693,6 +9828,7 @@
             }
           }
         },
+        "summary": "required permisson: read_miscellaneous_service",
         "tags": [
           "MiscellaneousService"
         ]
@@ -7731,6 +9867,7 @@
             }
           }
         },
+        "summary": "required permisson: update_miscellaneous_service",
         "tags": [
           "MiscellaneousService"
         ]
@@ -7752,6 +9889,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_miscellaneous_service",
         "tags": [
           "MiscellaneousService"
         ]
@@ -7783,6 +9921,7 @@
             }
           }
         },
+        "summary": "required permisson: create_miscellaneous_expense",
         "tags": [
           "MiscellaneousExpense"
         ]
@@ -7870,6 +10009,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_miscellaneous_expense",
         "tags": [
           "MiscellaneousExpense"
         ]
@@ -8105,6 +10245,7 @@
             }
           }
         },
+        "summary": "required permisson: read_miscellaneous_expense",
         "tags": [
           "MiscellaneousExpense"
         ]
@@ -8176,6 +10317,30 @@
         ]
       }
     },
+    "/api/miscellaneous-expenses/{id}/rollback": {
+      "delete": {
+        "operationId": "MiscellaneousExpenseController_rollback",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "rollback one miscellaneous-expense",
+        "tags": [
+          "MiscellaneousExpense"
+        ]
+      }
+    },
     "/api/insurance-categories": {
       "get": {
         "operationId": "InsuranceCategoryController_findAll",
@@ -8210,6 +10375,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_insurance_category",
         "tags": [
           "InsuranceCategory"
         ]
@@ -8239,6 +10405,7 @@
             }
           }
         },
+        "summary": "required permisson: create_insurance_category",
         "tags": [
           "InsuranceCategory"
         ]
@@ -8269,6 +10436,7 @@
             }
           }
         },
+        "summary": "required permisson: read_insurance_category",
         "tags": [
           "InsuranceCategory"
         ]
@@ -8307,6 +10475,7 @@
             }
           }
         },
+        "summary": "required permisson: update_insurance_category",
         "tags": [
           "InsuranceCategory"
         ]
@@ -8328,6 +10497,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_insurance_category",
         "tags": [
           "InsuranceCategory"
         ]
@@ -8579,6 +10749,70 @@
         ]
       }
     },
+    "/api/auth/forget-pass": {
+      "post": {
+        "operationId": "AuthController_forgetPass",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgetPassDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpSentResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/set-new-pass": {
+      "put": {
+        "operationId": "AuthController_setNewPass",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetNewPassDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
     "/api/users": {
       "get": {
         "operationId": "UserController_findAll",
@@ -8686,6 +10920,7 @@
             }
           }
         },
+        "summary": "required permisson: read_user",
         "tags": [
           "User"
         ]
@@ -8715,6 +10950,7 @@
             }
           }
         },
+        "summary": "required permisson: create_user",
         "tags": [
           "User"
         ]
@@ -8788,6 +11024,7 @@
             }
           }
         },
+        "summary": "required permisson: read_user",
         "tags": [
           "User"
         ]
@@ -8868,6 +11105,7 @@
             }
           }
         },
+        "summary": "required permisson: read_user",
         "tags": [
           "User"
         ]
@@ -8906,6 +11144,7 @@
             }
           }
         },
+        "summary": "required permisson: update_user",
         "tags": [
           "User"
         ]
@@ -8927,6 +11166,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_user",
         "tags": [
           "User"
         ]
@@ -8948,6 +11188,45 @@
             "description": ""
           }
         },
+        "summary": "required permisson: recover_user",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/profile/mine/avatar": {
+      "delete": {
+        "operationId": "UserController_removeProfileAvatarMine",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/users/profile/avatar/{id}": {
+      "delete": {
+        "operationId": "UserController_removeProfileAvatar",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: update_user",
         "tags": [
           "User"
         ]
@@ -9117,6 +11396,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_user",
         "tags": [
           "User"
         ]
@@ -9620,6 +11900,43 @@
         ]
       }
     },
+    "/api/role-permissions/import-excel": {
+      "post": {
+        "operationId": "RolePermissionController_bulkImport",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "RolePermission"
+        ]
+      }
+    },
     "/api/warehouses": {
       "post": {
         "operationId": "WarehouseController_create",
@@ -9646,6 +11963,7 @@
             }
           }
         },
+        "summary": "required permisson: create_warehouse",
         "tags": [
           "Warehouse"
         ]
@@ -9722,6 +12040,7 @@
             }
           }
         },
+        "summary": "required permisson: read_warehouse",
         "tags": [
           "Warehouse"
         ]
@@ -9752,6 +12071,7 @@
             }
           }
         },
+        "summary": "required permisson: read_warehouse",
         "tags": [
           "Warehouse"
         ]
@@ -9790,6 +12110,7 @@
             }
           }
         },
+        "summary": "required permisson: update_warehouse",
         "tags": [
           "Warehouse"
         ]
@@ -9811,6 +12132,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_warehouse",
         "tags": [
           "Warehouse"
         ]
@@ -9842,6 +12164,7 @@
             }
           }
         },
+        "summary": "required permisson: create_good",
         "tags": [
           "Good"
         ]
@@ -9936,6 +12259,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good",
         "tags": [
           "Good"
         ]
@@ -9966,6 +12290,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good",
         "tags": [
           "Good"
         ]
@@ -10004,6 +12329,7 @@
             }
           }
         },
+        "summary": "required permisson: update_good",
         "tags": [
           "Good"
         ]
@@ -10025,6 +12351,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_good",
         "tags": [
           "Good"
         ]
@@ -10062,6 +12389,7 @@
             }
           }
         },
+        "summary": "required permisson: create_good",
         "tags": [
           "Good"
         ]
@@ -10093,6 +12421,7 @@
             }
           }
         },
+        "summary": "required permisson: create_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10115,6 +12444,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10139,6 +12469,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10169,6 +12500,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10207,6 +12539,7 @@
             }
           }
         },
+        "summary": "required permisson: update_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10228,6 +12561,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_good_category",
         "tags": [
           "GoodCategory"
         ]
@@ -10259,6 +12593,7 @@
             }
           }
         },
+        "summary": "required permisson: create_measurement_unit",
         "tags": [
           "MeasurementUnits"
         ]
@@ -10322,6 +12657,7 @@
             }
           }
         },
+        "summary": "required permisson: read_measurement_unit",
         "tags": [
           "MeasurementUnits"
         ]
@@ -10352,6 +12688,7 @@
             }
           }
         },
+        "summary": "required permisson: read_measurement_unit",
         "tags": [
           "MeasurementUnits"
         ]
@@ -10390,6 +12727,7 @@
             }
           }
         },
+        "summary": "required permisson: update_measurement_unit",
         "tags": [
           "MeasurementUnits"
         ]
@@ -10411,6 +12749,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_measurement_unit",
         "tags": [
           "MeasurementUnits"
         ]
@@ -10442,6 +12781,7 @@
             }
           }
         },
+        "summary": "required permisson: create_good_arrival_departure",
         "tags": [
           "GoodArrivalDeparture"
         ]
@@ -10520,6 +12860,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good_arrival_departure",
         "tags": [
           "GoodArrivalDeparture"
         ]
@@ -10550,6 +12891,7 @@
             }
           }
         },
+        "summary": "required permisson: read_good_arrival_departure",
         "tags": [
           "GoodArrivalDeparture"
         ]
@@ -10588,6 +12930,7 @@
             }
           }
         },
+        "summary": "required permisson: update_good_arrival_departure",
         "tags": [
           "GoodArrivalDeparture"
         ]
@@ -10609,6 +12952,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_good_arrival_departure",
         "tags": [
           "GoodArrivalDeparture"
         ]
@@ -10689,6 +13033,7 @@
             }
           }
         },
+        "summary": "required permisson: create_laboratory",
         "tags": [
           "Laboratory"
         ]
@@ -10814,6 +13159,7 @@
             }
           }
         },
+        "summary": "required permisson: read_laboratory",
         "tags": [
           "Laboratory"
         ]
@@ -10844,6 +13190,7 @@
             }
           }
         },
+        "summary": "required permisson: read_laboratory",
         "tags": [
           "Laboratory"
         ]
@@ -10882,6 +13229,7 @@
             }
           }
         },
+        "summary": "required permisson: update_laboratory",
         "tags": [
           "Laboratory"
         ]
@@ -10903,6 +13251,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_laboratory",
         "tags": [
           "Laboratory"
         ]
@@ -10934,6 +13283,7 @@
             }
           }
         },
+        "summary": "required permisson: create_lab_loan_good",
         "tags": [
           "LabLoanGoods"
         ]
@@ -11067,6 +13417,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_lab_loan_good",
         "tags": [
           "LabLoanGoods"
         ]
@@ -11097,6 +13448,7 @@
             }
           }
         },
+        "summary": "required permisson: read_lab_loan_good",
         "tags": [
           "LabLoanGoods"
         ]
@@ -11135,6 +13487,7 @@
             }
           }
         },
+        "summary": "required permisson: update_lab_loan_good",
         "tags": [
           "LabLoanGoods"
         ]
@@ -11156,6 +13509,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_lab_loan_good",
         "tags": [
           "LabLoanGoods"
         ]
@@ -11187,6 +13541,7 @@
             }
           }
         },
+        "summary": "required permisson: create_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11194,14 +13549,6 @@
       "get": {
         "operationId": "ShelfController_findAll",
         "parameters": [
-          {
-            "name": "code",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "page",
             "required": false,
@@ -11217,6 +13564,41 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.code",
+            "required": false,
+            "in": "query",
+            "description": "Filter by code using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$eq:abcd",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "example": [
+                "createdAt:ASC",
+                "updatedAt:ASC"
+              ],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
@@ -11225,15 +13607,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Shelf"
-                  }
+                  "$ref": "#/components/schemas/PaginatedShelfResponse"
                 }
               }
             }
           }
         },
+        "summary": "required permisson: read_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11283,6 +13663,7 @@
             }
           }
         },
+        "summary": "required permisson: read_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11313,6 +13694,7 @@
             }
           }
         },
+        "summary": "required permisson: create_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11351,6 +13733,7 @@
             }
           }
         },
+        "summary": "required permisson: update_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11372,6 +13755,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_shelf",
         "tags": [
           "Shelf"
         ]
@@ -11403,28 +13787,121 @@
             }
           }
         },
+        "summary": "required permisson: create_unit_order",
         "tags": [
           "UnitOrders"
         ]
       },
       "get": {
         "operationId": "UnitOrdersController_findAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.unitId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by unitId using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$eq:253c4aa3-1363-488b-a50d-90cea849cd22",
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.consumableGoodId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by consumableGoodId using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$eq:253c4aa3-1363-488b-a50d-90cea849cd22",
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.receiverId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by receiverId using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$eq:253c4aa3-1363-488b-a50d-90cea849cd22",
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.quantity",
+            "required": false,
+            "in": "query",
+            "description": "Filter by quantity using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$gte:10",
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.receiveDate",
+            "required": false,
+            "in": "query",
+            "description": "Filter by receiveDate using operators like $eq, $gte, etc.",
+            "schema": {
+              "example": "$lte:2026-01-01T00:00:00.000Z",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "example": [
+                "createdAt:DESC",
+                "updatedAt:ASC",
+                "quantity:DESC",
+                "receiveDate:ASC"
+              ],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UnitOrdersEntity"
-                  }
+                  "$ref": "#/components/schemas/PaginatedUnitOrdersResponse"
                 }
               }
             }
           }
         },
+        "summary": "required permisson: read_unit_order",
         "tags": [
           "UnitOrders"
         ]
@@ -11455,6 +13932,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit_order",
         "tags": [
           "UnitOrders"
         ]
@@ -11486,6 +13964,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_unit_order",
         "tags": [
           "UnitOrders"
         ]
@@ -11507,6 +13986,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_unit_order",
         "tags": [
           "UnitOrders"
         ]
@@ -11538,6 +14018,7 @@
             }
           }
         },
+        "summary": "required permisson: create_unit_equipment",
         "tags": [
           "UnitEquipment"
         ]
@@ -11611,6 +14092,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit_equipment",
         "tags": [
           "UnitEquipment"
         ]
@@ -11641,6 +14123,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit_equipment",
         "tags": [
           "UnitEquipment"
         ]
@@ -11672,6 +14155,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: update_unit_equipment",
         "tags": [
           "UnitEquipment"
         ]
@@ -11693,6 +14177,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_unit_equipment",
         "tags": [
           "UnitEquipment"
         ]
@@ -11724,6 +14209,7 @@
             }
           }
         },
+        "summary": "required permisson: create_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11817,6 +14303,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11847,6 +14334,7 @@
             }
           }
         },
+        "summary": "required permisson: read_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11885,6 +14373,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11906,6 +14395,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11937,6 +14427,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -11968,6 +14459,7 @@
             }
           }
         },
+        "summary": "required permisson: update_unit_consumable_good",
         "tags": [
           "UnitConsumableGoods"
         ]
@@ -12051,6 +14543,7 @@
             }
           }
         },
+        "summary": "required permisson: read_sms",
         "tags": [
           "Sms"
         ]
@@ -12082,6 +14575,7 @@
             }
           }
         },
+        "summary": "required permisson: create_sms",
         "tags": [
           "Sms"
         ]
@@ -12147,6 +14641,7 @@
             }
           }
         },
+        "summary": "required permisson: create_sms",
         "tags": [
           "Sms"
         ]
@@ -12178,6 +14673,7 @@
             }
           }
         },
+        "summary": "required permisson: create_sms",
         "tags": [
           "Sms"
         ]
@@ -12243,6 +14739,7 @@
             }
           }
         },
+        "summary": "required permisson: update_sms",
         "tags": [
           "Sms"
         ]
@@ -12392,6 +14889,7 @@
             }
           }
         },
+        "summary": "required permisson: create_sms_template",
         "tags": [
           "SmsTemplate"
         ]
@@ -12414,6 +14912,7 @@
             }
           }
         },
+        "summary": "required permisson: read_sms_template",
         "tags": [
           "SmsTemplate"
         ]
@@ -12444,6 +14943,7 @@
             }
           }
         },
+        "summary": "required permisson: read_sms_template",
         "tags": [
           "SmsTemplate"
         ]
@@ -12482,6 +14982,7 @@
             }
           }
         },
+        "summary": "required permisson: update_sms_template",
         "tags": [
           "SmsTemplate"
         ]
@@ -12503,6 +15004,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_sms_template",
         "tags": [
           "SmsTemplate"
         ]
@@ -12527,6 +15029,7 @@
             }
           }
         },
+        "summary": "required permisson: read_template_parameter",
         "tags": [
           "TemplateParameter"
         ]
@@ -12558,6 +15061,7 @@
             }
           }
         },
+        "summary": "required permisson: create_manufacture_type",
         "tags": [
           "ManufactureTypes"
         ]
@@ -12617,6 +15121,7 @@
             }
           }
         },
+        "summary": "required permisson: read_manufacture_type",
         "tags": [
           "ManufactureTypes"
         ]
@@ -12647,6 +15152,7 @@
             }
           }
         },
+        "summary": "required permisson: read_manufacture_type",
         "tags": [
           "ManufactureTypes"
         ]
@@ -12685,6 +15191,7 @@
             }
           }
         },
+        "summary": "required permisson: update_manufacture_type",
         "tags": [
           "ManufactureTypes"
         ]
@@ -12706,6 +15213,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_manufacture_type",
         "tags": [
           "ManufactureTypes"
         ]
@@ -12746,6 +15254,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_dent_name",
         "tags": [
           "DentNames"
         ]
@@ -12776,6 +15285,7 @@
             }
           }
         },
+        "summary": "required permisson: read_dent_name",
         "tags": [
           "DentNames"
         ]
@@ -12807,6 +15317,7 @@
             }
           }
         },
+        "summary": "required permisson: create_dent_color",
         "tags": [
           "DentColors"
         ]
@@ -12846,6 +15357,7 @@
             }
           }
         },
+        "summary": "required permisson: read_dent_color",
         "tags": [
           "DentColors"
         ]
@@ -12876,6 +15388,7 @@
             }
           }
         },
+        "summary": "required permisson: read_dent_color",
         "tags": [
           "DentColors"
         ]
@@ -12914,6 +15427,7 @@
             }
           }
         },
+        "summary": "required permisson: update_dent_color",
         "tags": [
           "DentColors"
         ]
@@ -12935,6 +15449,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: delete_dent_color",
         "tags": [
           "DentColors"
         ]
@@ -13554,6 +16069,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_support_request",
         "tags": [
           "SupportRequest"
         ]
@@ -13606,6 +16122,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_support_request",
         "tags": [
           "SupportRequest"
         ]
@@ -13639,7 +16156,9 @@
     "title": "clinic reservation system api",
     "description": "",
     "version": "1.0.0",
-    "contact": {}
+    "contact": {
+
+    }
   },
   "tags": [],
   "servers": [],
@@ -13693,7 +16212,9 @@
       },
       "Check": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateCheckDto": {
         "type": "object",
@@ -13815,7 +16336,9 @@
       },
       "Patient": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PatientPaginatedResopnse": {
         "type": "object",
@@ -14057,11 +16580,11 @@
             "format": "uuid"
           },
           "gender": {
-            "type": "string",
             "enum": [
               "Male",
               "Female"
-            ]
+            ],
+            "type": "string"
           },
           "isPregnant": {
             "type": "boolean"
@@ -14097,7 +16620,9 @@
       },
       "UpdateInsuranceInfoDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateAdditionalInfoDto": {
         "type": "object",
@@ -14141,7 +16666,9 @@
       },
       "File": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "FilesPaginatedResponseDto": {
         "type": "object",
@@ -14164,6 +16691,24 @@
           "links",
           "items"
         ]
+      },
+      "MedicalInfo": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "DentalInfo": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "InsuranceInfo": {
+        "type": "object",
+        "properties": {
+
+        }
       },
       "CreateTreatmentDto": {
         "type": "object",
@@ -14217,7 +16762,9 @@
       },
       "TreatmentEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateCustomTreatmentDto": {
         "type": "object",
@@ -14303,7 +16850,9 @@
       },
       "updateTreatmentDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "completeTreatmentDto": {
         "type": "object",
@@ -14355,6 +16904,22 @@
           },
           "code": {
             "type": "string"
+          },
+          "depositPercent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "depositAmount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "depositType": {
+            "type": "string",
+            "enum": [
+              "PERCENTAGE",
+              "FIXED"
+            ]
           }
         },
         "required": [
@@ -14366,11 +16931,38 @@
       },
       "TreatmentCategoryEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "updateTreatmentCategoryDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "UpdateDepositSettingsDto": {
+        "type": "object",
+        "properties": {
+          "depositPercent": {
+            "type": "number",
+            "minimum": 0
+          },
+          "depositAmount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "depositType": {
+            "type": "string",
+            "enum": [
+              "PERCENTAGE",
+              "FIXED"
+            ]
+          }
+        },
+        "required": [
+          "depositType"
+        ]
       },
       "CreateTreatmentPlanDto": {
         "type": "object",
@@ -14389,9 +16981,6 @@
           "treatmentPrice": {
             "type": "string"
           },
-          "paymentMethod": {
-            "type": "string"
-          },
           "isSelected": {
             "type": "boolean"
           },
@@ -14399,6 +16988,10 @@
             "type": "number"
           },
           "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "singleStepCategoryId": {
             "type": "string",
             "format": "uuid"
           },
@@ -14447,12 +17040,89 @@
         "required": [
           "dentNameId",
           "categoryId",
-          "doctorId",
-          "patientId",
-          "autoCreateParents",
-          "autoCreateChildren",
-          "order",
-          "activeInsuranceId"
+          "patientId"
+        ]
+      },
+      "CreateMultipleTreatmentPlansDto": {
+        "type": "object",
+        "properties": {
+          "dentNameIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "assistantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "treatmentPrice": {
+            "type": "string"
+          },
+          "isSelected": {
+            "type": "boolean"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "singleStepCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "doctorId": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "autoCreateParents": {
+            "type": "boolean"
+          },
+          "autoCreateChildren": {
+            "type": "boolean"
+          },
+          "order": {
+            "type": "number",
+            "minimum": 1
+          },
+          "activeInsuranceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "generatePreInvoice": {
+            "type": "boolean"
+          },
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cancelledPlanId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "renewDescription": {
+            "type": "string"
+          },
+          "needsReview": {
+            "type": "boolean"
+          },
+          "reviewText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dentNameIds",
+          "categoryId",
+          "patientId"
         ]
       },
       "CreateCustomTreatmentPlanDto": {
@@ -14535,7 +17205,9 @@
       },
       "TreatmentPlanEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "TreatmentPlanRaginatedResponse": {
         "type": "object",
@@ -14557,6 +17229,113 @@
           "meta",
           "links",
           "items"
+        ]
+      },
+      "HistoryTreatmentItemDto": {
+        "type": "object",
+        "properties": {
+          "treatmentId": {
+            "type": "string"
+          },
+          "toothName": {
+            "type": "string"
+          },
+          "treatmentTitle": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "treatmentId",
+          "toothName",
+          "treatmentTitle"
+        ]
+      },
+      "TreatmentPlansHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalPrice": {
+            "type": "number"
+          },
+          "historyTreatment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryTreatmentItemDto"
+            }
+          }
+        },
+        "required": [
+          "totalPrice",
+          "historyTreatment"
+        ]
+      },
+      "TreatmentPlanDetailsResponseDto": {
+        "type": "object",
+        "properties": {
+          "visitDateTime": {
+            "type": "string"
+          },
+          "descriptionTreatmentPlans": {
+            "type": "string"
+          },
+          "treatmentHeading": {
+            "type": "string"
+          },
+          "treatmentDoctor": {
+            "type": "string"
+          },
+          "treatmentDate": {
+            "type": "string"
+          },
+          "completion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "visitDateTime",
+          "descriptionTreatmentPlans",
+          "treatmentHeading",
+          "treatmentDoctor",
+          "treatmentDate",
+          "completion"
+        ]
+      },
+      "TreatmentPlanCostResponseDto": {
+        "type": "object",
+        "properties": {
+          "treatmentPlanPrice": {
+            "type": "number"
+          },
+          "percentageCoveredByInsurance": {
+            "type": "number"
+          },
+          "priceCoveredByInsurance": {
+            "type": "number"
+          },
+          "amountPayable": {
+            "type": "number"
+          },
+          "insuranceCoverageAmount": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "amountOutsideTheTariff": {
+            "type": "number"
+          },
+          "discountedAmountStability": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "treatmentPlanPrice",
+          "percentageCoveredByInsurance",
+          "priceCoveredByInsurance",
+          "amountPayable",
+          "insuranceCoverageAmount",
+          "discount",
+          "amountOutsideTheTariff",
+          "discountedAmountStability"
         ]
       },
       "GroupedTreatmentPlanResponseDto": {
@@ -14658,7 +17437,33 @@
       },
       "UpdateTreatmentPlanDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "ToggleSelectMultiplePlans": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "treatmentPlanIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isSelected": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "invoiceId",
+          "treatmentPlanIds",
+          "isSelected"
+        ]
       },
       "CreateRenewedTreatmentPlanDto": {
         "type": "object",
@@ -14700,7 +17505,9 @@
       },
       "RenewedTreatmentPlan": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateLabOrderDto": {
         "type": "object",
@@ -14753,11 +17560,15 @@
       },
       "LabOrder": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateLabOrderDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UploadScanFilesDto": {
         "type": "object",
@@ -14904,7 +17715,9 @@
       },
       "Price": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedPriceResponse": {
         "type": "object",
@@ -14930,7 +17743,9 @@
       },
       "UpdatePriceDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateAppointmentDto": {
         "type": "object",
@@ -15042,7 +17857,9 @@
       },
       "Appointment": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedAppointment": {
         "type": "object",
@@ -15066,7 +17883,7 @@
           "items"
         ]
       },
-      "FindFreeApointmentSlotsResponseDto": {
+      "TimeSlot": {
         "type": "object",
         "properties": {
           "startTime": {
@@ -15083,11 +17900,294 @@
       },
       "Date": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "ExpandedAppointmentSnapshotDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "patientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientDocumentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "doctorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assistantName": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "startTime",
+          "endTime",
+          "patientName",
+          "patientDocumentNumber",
+          "doctorName",
+          "assistantName",
+          "unitName",
+          "status"
+        ]
+      },
+      "SuspensionHistoryExpandedResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "suspendedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "suspensionReason": {
+            "enum": [
+              "DoctorLeave",
+              "AssistantLeave",
+              "PatientAbsent",
+              "UnitFailure",
+              "Other"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "registerType": {
+            "enum": [
+              "System",
+              "Operator"
+            ],
+            "type": "string"
+          },
+          "oldAppointmentExpanded": {
+            "$ref": "#/components/schemas/ExpandedAppointmentSnapshotDto"
+          }
+        },
+        "required": [
+          "id",
+          "suspendedAt",
+          "suspensionReason",
+          "description",
+          "registerType",
+          "oldAppointmentExpanded"
+        ]
       },
       "UpdateAppointmentDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "UpdateAppointmentDoctorDto": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "doctorId"
+        ]
+      },
+      "UpdateAppointmentDateAndTimesDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "startTime",
+          "endTime"
+        ]
+      },
+      "SuspendAppointmentDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "enum": [
+              "DoctorLeave",
+              "AssistantLeave",
+              "PatientAbsent",
+              "UnitFailure",
+              "Other"
+            ],
+            "type": "string",
+            "description": "Reason for suspension (only DoctorLeave, AssistantLeave, PatientAbsent, UnitFailure, Other allowed for manual suspend)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description (required if reason is Other)"
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "BulkSuspendAppointmentsDto": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "minItems": 1,
+            "description": "Array of appointment IDs to suspend",
+            "example": [
+              "uuid-1",
+              "uuid-2",
+              "uuid-3"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "enum": [
+              "DoctorLeave",
+              "AssistantLeave",
+              "PatientAbsent",
+              "UnitFailure",
+              "Other"
+            ],
+            "type": "string",
+            "description": "Reason for suspension (only DoctorLeave, AssistantLeave, PatientAbsent, UnitFailure, Other allowed)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description (required if reason is Other)"
+          }
+        },
+        "required": [
+          "ids",
+          "reason"
+        ]
+      },
+      "RescheduleAppointmentDto": {
+        "type": "object",
+        "properties": {
+          "newDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2025-03-15"
+          },
+          "newStartTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "09:00",
+            "default": "09:00"
+          },
+          "newEndTime": {
+            "format": "date-time",
+            "type": "string",
+            "example": "10:00",
+            "default": "10:00"
+          }
+        },
+        "required": [
+          "newDate",
+          "newStartTime",
+          "newEndTime"
+        ]
+      },
+      "ChangeAppointmentDoctorDto": {
+        "type": "object",
+        "properties": {
+          "newDoctorId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "newDoctorId"
+        ]
+      },
+      "ChangeAppointmentAssistantDto": {
+        "type": "object",
+        "properties": {
+          "newAssistantId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "newAssistantId"
+        ]
+      },
+      "CancelSuspendedAppointmentDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "دلیل کنسل کردن نوبت",
+            "example": "بیمار قادر به حضور نیست"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "BulkCancelAppointmentsDto": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "دلیل کنسل کردن گروهی"
+          }
+        },
+        "required": [
+          "ids",
+          "description"
+        ]
       },
       "CreateDoctorDto": {
         "type": "object",
@@ -15121,7 +18221,9 @@
       },
       "DoctorEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedDoctorResponse": {
         "type": "object",
@@ -15147,7 +18249,9 @@
       },
       "UpdateDoctorDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "AddDoctorToSectionDto": {
         "type": "object",
@@ -15223,7 +18327,9 @@
       },
       "Personnel": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "DeletePersonFromSectionDto": {
         "type": "object",
@@ -15269,7 +18375,9 @@
       },
       "UpdatePersonnelDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateIrregularScheduleDto": {
         "type": "object",
@@ -15302,7 +18410,9 @@
       },
       "IrregularScheduleEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedIrregularScheduleResponse": {
         "type": "object",
@@ -15364,11 +18474,15 @@
       },
       "Position": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdatePositionDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateUnitDto": {
         "type": "object",
@@ -15387,11 +18501,15 @@
       },
       "Unit": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateUnitDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "AddUnitToSectionDto": {
         "type": "object",
@@ -15453,7 +18571,9 @@
       },
       "DoctorTreatmentPlan": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "DoctorTreatmentPlanPaginatedResopnse": {
         "type": "object",
@@ -15479,7 +18599,9 @@
       },
       "UpdateDoctorTreatmentPlanDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateDiscountDto": {
         "type": "object",
@@ -15539,7 +18661,9 @@
       },
       "Discount": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "DiscountPaginatedResopnse": {
         "type": "object",
@@ -15565,7 +18689,9 @@
       },
       "UpdateDiscountDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "GrantDiscountToPatientDto": {
         "type": "object",
@@ -15584,6 +18710,48 @@
           "discountId"
         ]
       },
+      "CreateSpecialDiscountDto": {
+        "type": "object",
+        "properties": {
+          "specialCriteria": {
+            "type": "string"
+          },
+          "fixedAmount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "PERCENTAGE"
+            ]
+          }
+        },
+        "required": [
+          "specialCriteria",
+          "fixedAmount",
+          "percentage",
+          "method"
+        ]
+      },
+      "SpecialDiscount": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "UpdateSpecialDiscountDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
       "CreateMiscellaneaosDto": {
         "type": "object",
         "properties": {
@@ -15601,7 +18769,9 @@
       },
       "MiscellaneousService": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateMiscellaneousServiceDto": {
         "type": "object",
@@ -15650,7 +18820,9 @@
       },
       "MiscellaneousExpense": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PayMultipleMiscellaneousExpenseDto": {
         "type": "object",
@@ -15706,7 +18878,9 @@
       },
       "InsuranceCategoryEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateInsuranceCategoryDto": {
         "type": "object",
@@ -15749,7 +18923,9 @@
       },
       "LoginResponse": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateLocationDto": {
         "type": "object",
@@ -15838,7 +19014,7 @@
           "emergencyNumber": {
             "type": "string"
           },
-          "avater": {
+          "avatar": {
             "type": "object"
           },
           "fingerprint": {
@@ -15889,7 +19065,9 @@
       },
       "OtpSentResponse": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "EmailVerificationDto": {
         "type": "object",
@@ -15939,24 +19117,51 @@
           "phoneNumber": {
             "type": "string"
           },
-          "fingerprintData": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "maximum": 255,
-              "minimum": 0
-            }
+          "fingerprint": {
+            "type": "string",
+            "format": "base64"
           }
         },
         "required": [
           "phoneNumber",
-          "fingerprintData"
+          "fingerprint"
+        ]
+      },
+      "ForgetPassDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "phone"
+        ]
+      },
+      "SetNewPassDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string"
+          },
+          "otp": {
+            "type": "string"
+          },
+          "new_pass": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "phone",
+          "otp",
+          "new_pass"
         ]
       },
       "User": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UserPaginatedResopnse": {
         "type": "object",
@@ -16042,7 +19247,7 @@
           "emergencyNumber": {
             "type": "string"
           },
-          "avater": {
+          "avatar": {
             "type": "object"
           },
           "fingerprint": {
@@ -16106,15 +19311,21 @@
       },
       "UpdateUserDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "Permission": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "Role": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "VerifyUserDto": {
         "type": "object",
@@ -16130,23 +19341,20 @@
       "SaveFingerprintDto": {
         "type": "object",
         "properties": {
-          "fingerprintData": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "maximum": 255,
-              "minimum": 0
-            }
+          "fingerprint": {
+            "type": "string",
+            "format": "base64"
           }
         },
         "required": [
-          "fingerprintData"
+          "fingerprint"
         ]
       },
       "PermissionCategory": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreatePermissionDto": {
         "type": "object",
@@ -16158,7 +19366,9 @@
               "read",
               "update",
               "delete",
-              "recover"
+              "recover",
+              "complete",
+              "cancel"
             ]
           },
           "categoryId": {
@@ -16203,7 +19413,9 @@
       },
       "UpdatePermissinDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateRoleDto": {
         "type": "object",
@@ -16314,7 +19526,9 @@
       },
       "Warehouse": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "WarehousePaginatedResopnse": {
         "type": "object",
@@ -16340,7 +19554,9 @@
       },
       "UpdateWarehouseDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateGoodDto": {
         "type": "object",
@@ -16440,7 +19656,9 @@
       },
       "Good": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedGoodResponse": {
         "type": "object",
@@ -16466,7 +19684,9 @@
       },
       "UpdateGoodDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateGoodCategoryDto": {
         "type": "object",
@@ -16489,11 +19709,15 @@
       },
       "GoodCategory": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateGoodCategoryDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateMeasurementUnitDto": {
         "type": "object",
@@ -16516,7 +19740,9 @@
       },
       "MeasurementUnit": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "MeasurementUnitPaginatedResopnse": {
         "type": "object",
@@ -16542,7 +19768,9 @@
       },
       "UpdateMeasurementUnitDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateGoodArrivalDepratureDto": {
         "type": "object",
@@ -16595,7 +19823,9 @@
       },
       "GoodArrivalDeparture": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "GoodArrivalDeparturePaginatedResopnse": {
         "type": "object",
@@ -16621,7 +19851,9 @@
       },
       "UpdateGoodArrivalDepratureDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateLaboratoryDto": {
         "type": "object",
@@ -16668,7 +19900,9 @@
       },
       "Laboratory": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "LaboratoryPaginatedResponse": {
         "type": "object",
@@ -16694,7 +19928,9 @@
       },
       "UpdateLaboratoryDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateLabLoanGoodDto": {
         "type": "object",
@@ -16756,11 +19992,15 @@
       },
       "LabLoanGood": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateLabLoanGoodDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateShelfDto": {
         "type": "object",
@@ -16775,11 +20015,37 @@
       },
       "Shelf": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "PaginatedShelfResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shelf"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "data"
+        ]
       },
       "UpdateShelfDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateUnitOrderDto": {
         "type": "object",
@@ -16813,7 +20079,31 @@
       },
       "UnitOrdersEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
+      },
+      "PaginatedUnitOrdersResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitOrdersEntity"
+            }
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "data"
+        ]
       },
       "UpdateUnitOrderDto": {
         "type": "object",
@@ -16863,7 +20153,9 @@
       },
       "UnitEquipment": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedUnitEquipmentResponse": {
         "type": "object",
@@ -16889,7 +20181,9 @@
       },
       "UpdateUnitEquipmentDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateUnitConsumableGoodsDto": {
         "type": "object",
@@ -16959,7 +20253,9 @@
       },
       "UnitConsumableGoods": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedUnitConsumableGoodsResponse": {
         "type": "object",
@@ -17060,7 +20356,9 @@
       },
       "SmsEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "PaginatedSmsResponse": {
         "type": "object",
@@ -17228,15 +20526,21 @@
       },
       "SmsTemplateEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateSmsTemplateDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "TemplateParameterEntity": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateManufactureTypeDto": {
         "type": "object",
@@ -17262,7 +20566,9 @@
       },
       "ManufactureType": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "ManufactureTypePaginatedResopnse": {
         "type": "object",
@@ -17288,11 +20594,15 @@
       },
       "UpdateManufactureTypeDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "DentName": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateDentColorDto": {
         "type": "object",
@@ -17311,11 +20621,15 @@
       },
       "DentColor": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateDentColorDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "CreateClinicWorkScheduleDto": {
         "type": "object",
@@ -17439,7 +20753,9 @@
       },
       "ClinicInfo": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "UpdateClinicInfoDto": {
         "type": "object",
@@ -17540,7 +20856,9 @@
       },
       "ChatRoom": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "Cursor": {
         "type": "object",
@@ -17561,7 +20879,9 @@
       },
       "OmitTypeClass": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       },
       "ChatRoomHistoryResponse": {
         "type": "object",
@@ -17596,7 +20916,9 @@
       },
       "SupportRequest": {
         "type": "object",
-        "properties": {}
+        "properties": {
+
+        }
       }
     }
   },

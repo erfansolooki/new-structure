@@ -6,10 +6,10 @@ export default defineConfig({
       target: './swagger.json',
     },
     output: {
-      target: './src/lib/api/endpoints',
+      target: './src/lib/api/endpoints1',
       client: 'react-query',
       mode: 'tags-split',
-      schemas: './src/lib/api/models',
+      schemas: './src/lib/api/models1',
       mock: false,
       clean: true,
       prettier: true,
