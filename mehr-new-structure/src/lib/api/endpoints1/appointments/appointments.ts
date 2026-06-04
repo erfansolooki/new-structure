@@ -37,6 +37,7 @@ import type {
   AppointmentsControllerLastUpdateParams,
   AppointmentsControllerPatientAppointmentsParams,
   BulkCancelAppointmentsDto,
+  BulkCancelSuspendedAppointmentsResultDto,
   BulkSuspendAppointmentsDto,
   CancelSuspendedAppointmentDto,
   ChangeAppointmentAssistantDto,
@@ -47,6 +48,7 @@ import type {
   PaginatedAppointment,
   RescheduleAppointmentDto,
   SuspendAppointmentDto,
+  SuspendAppointmentResponseDto,
   SuspensionHistoryExpandedResponseDto,
   TimeSlot,
   UpdateAppointmentDateAndTimesDto,
@@ -2276,7 +2278,7 @@ export const appointmentsControllerSuspendAppointment = (
   suspendAppointmentDto: SuspendAppointmentDto,
   signal?: AbortSignal
 ) => {
-  return apiInstance<void>({
+  return apiInstance<SuspendAppointmentResponseDto>({
     url: `/api/appointments/${id}/suspend`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -2350,7 +2352,7 @@ export const appointmentsControllerBulkSuspend = (
   bulkSuspendAppointmentsDto: BulkSuspendAppointmentsDto,
   signal?: AbortSignal
 ) => {
-  return apiInstance<void>({
+  return apiInstance<SuspendAppointmentResponseDto>({
     url: `/api/appointments/suspended/bulk-suspend`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -2716,7 +2718,7 @@ export const appointmentsControllerBulkCancel = (
   bulkCancelAppointmentsDto: BulkCancelAppointmentsDto,
   signal?: AbortSignal
 ) => {
-  return apiInstance<void>({
+  return apiInstance<BulkCancelSuspendedAppointmentsResultDto>({
     url: `/api/appointments/suspended/bulk-cancel`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

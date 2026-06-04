@@ -1425,6 +1425,9 @@ export function useUserControllerGetFiles<
   return query;
 }
 
+/**
+ * @summary required permisson: update_user
+ */
 export const userControllerVerify = (id: string, verifyUserDto: VerifyUserDto) => {
   return apiInstance<void>({
     url: `/api/users/${id}/verify`,
@@ -1475,6 +1478,9 @@ export type UserControllerVerifyMutationResult = NonNullable<
 export type UserControllerVerifyMutationBody = VerifyUserDto;
 export type UserControllerVerifyMutationError = unknown;
 
+/**
+ * @summary required permisson: update_user
+ */
 export const useUserControllerVerify = <TError = unknown, TContext = unknown>(
   options?: {
     mutation?: UseMutationOptions<
