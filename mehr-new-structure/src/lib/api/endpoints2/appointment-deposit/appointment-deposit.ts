@@ -24,6 +24,10 @@ import type {
   AppointmentDeposit,
   AppointmentDepositControllerFindAllParams,
   AppointmentDepositDefaultSettings,
+  AppointmentDepositDefaultSettingsResponseDto,
+  AppointmentDepositPaginatedResopnse,
+  AppointmentDepositResponseDto,
+  CalculateDepositResponseDto,
   PayAppointmentDepositDto,
   RevertAppointmentDepositDto,
   SetAppointmentDepositDefaultSettings,
@@ -49,7 +53,7 @@ export const getAppointmentDepositControllerFindAllQueryKey = (
 
 export const getAppointmentDepositControllerFindAllQueryOptions = <
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>,
-  TError = unknown,
+  TError = AppointmentDepositPaginatedResopnse,
 >(
   params?: AppointmentDepositControllerFindAllParams,
   options?: {
@@ -80,11 +84,11 @@ export const getAppointmentDepositControllerFindAllQueryOptions = <
 export type AppointmentDepositControllerFindAllQueryResult = NonNullable<
   Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>
 >;
-export type AppointmentDepositControllerFindAllQueryError = unknown;
+export type AppointmentDepositControllerFindAllQueryError = AppointmentDepositPaginatedResopnse;
 
 export function useAppointmentDepositControllerFindAll<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>,
-  TError = unknown,
+  TError = AppointmentDepositPaginatedResopnse,
 >(
   params: undefined | AppointmentDepositControllerFindAllParams,
   options: {
@@ -108,7 +112,7 @@ export function useAppointmentDepositControllerFindAll<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerFindAll<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>,
-  TError = unknown,
+  TError = AppointmentDepositPaginatedResopnse,
 >(
   params?: AppointmentDepositControllerFindAllParams,
   options?: {
@@ -132,7 +136,7 @@ export function useAppointmentDepositControllerFindAll<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerFindAll<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>,
-  TError = unknown,
+  TError = AppointmentDepositPaginatedResopnse,
 >(
   params?: AppointmentDepositControllerFindAllParams,
   options?: {
@@ -152,7 +156,7 @@ export function useAppointmentDepositControllerFindAll<
 
 export function useAppointmentDepositControllerFindAll<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindAll>>,
-  TError = unknown,
+  TError = AppointmentDepositPaginatedResopnse,
 >(
   params?: AppointmentDepositControllerFindAllParams,
   options?: {
@@ -191,7 +195,7 @@ export const getAppointmentDepositControllerGetDefaultSettingsQueryKey = () => {
 
 export const getAppointmentDepositControllerGetDefaultSettingsQueryOptions = <
   TData = Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>,
-  TError = unknown,
+  TError = AppointmentDepositDefaultSettingsResponseDto,
 >(options?: {
   query?: Partial<
     UseQueryOptions<
@@ -220,11 +224,12 @@ export const getAppointmentDepositControllerGetDefaultSettingsQueryOptions = <
 export type AppointmentDepositControllerGetDefaultSettingsQueryResult = NonNullable<
   Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>
 >;
-export type AppointmentDepositControllerGetDefaultSettingsQueryError = unknown;
+export type AppointmentDepositControllerGetDefaultSettingsQueryError =
+  AppointmentDepositDefaultSettingsResponseDto;
 
 export function useAppointmentDepositControllerGetDefaultSettings<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>,
-  TError = unknown,
+  TError = AppointmentDepositDefaultSettingsResponseDto,
 >(
   options: {
     query: Partial<
@@ -247,7 +252,7 @@ export function useAppointmentDepositControllerGetDefaultSettings<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerGetDefaultSettings<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>,
-  TError = unknown,
+  TError = AppointmentDepositDefaultSettingsResponseDto,
 >(
   options?: {
     query?: Partial<
@@ -270,7 +275,7 @@ export function useAppointmentDepositControllerGetDefaultSettings<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerGetDefaultSettings<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>,
-  TError = unknown,
+  TError = AppointmentDepositDefaultSettingsResponseDto,
 >(
   options?: {
     query?: Partial<
@@ -286,7 +291,7 @@ export function useAppointmentDepositControllerGetDefaultSettings<
 
 export function useAppointmentDepositControllerGetDefaultSettings<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerGetDefaultSettings>>,
-  TError = unknown,
+  TError = AppointmentDepositDefaultSettingsResponseDto,
 >(
   options?: {
     query?: Partial<
@@ -403,7 +408,7 @@ export const getAppointmentDepositControllerFindOneQueryKey = (id?: string) => {
 
 export const getAppointmentDepositControllerFindOneQueryOptions = <
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>,
-  TError = unknown,
+  TError = AppointmentDepositResponseDto,
 >(
   id: string,
   options?: {
@@ -434,11 +439,11 @@ export const getAppointmentDepositControllerFindOneQueryOptions = <
 export type AppointmentDepositControllerFindOneQueryResult = NonNullable<
   Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>
 >;
-export type AppointmentDepositControllerFindOneQueryError = unknown;
+export type AppointmentDepositControllerFindOneQueryError = AppointmentDepositResponseDto;
 
 export function useAppointmentDepositControllerFindOne<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>,
-  TError = unknown,
+  TError = AppointmentDepositResponseDto,
 >(
   id: string,
   options: {
@@ -462,7 +467,7 @@ export function useAppointmentDepositControllerFindOne<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerFindOne<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>,
-  TError = unknown,
+  TError = AppointmentDepositResponseDto,
 >(
   id: string,
   options?: {
@@ -486,7 +491,7 @@ export function useAppointmentDepositControllerFindOne<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerFindOne<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>,
-  TError = unknown,
+  TError = AppointmentDepositResponseDto,
 >(
   id: string,
   options?: {
@@ -506,7 +511,7 @@ export function useAppointmentDepositControllerFindOne<
 
 export function useAppointmentDepositControllerFindOne<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerFindOne>>,
-  TError = unknown,
+  TError = AppointmentDepositResponseDto,
 >(
   id: string,
   options?: {
@@ -538,7 +543,7 @@ export const appointmentDepositControllerCalculateAmount = (
   invoiceItemId: string,
   signal?: AbortSignal
 ) => {
-  return apiInstance<void>({
+  return apiInstance<CalculateDepositResponseDto>({
     url: `/api/appointment-deposits/${invoiceItemId}/calculate`,
     method: 'GET',
     signal,
@@ -551,7 +556,7 @@ export const getAppointmentDepositControllerCalculateAmountQueryKey = (invoiceIt
 
 export const getAppointmentDepositControllerCalculateAmountQueryOptions = <
   TData = Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>,
-  TError = unknown,
+  TError = CalculateDepositResponseDto,
 >(
   invoiceItemId: string,
   options?: {
@@ -583,11 +588,11 @@ export const getAppointmentDepositControllerCalculateAmountQueryOptions = <
 export type AppointmentDepositControllerCalculateAmountQueryResult = NonNullable<
   Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>
 >;
-export type AppointmentDepositControllerCalculateAmountQueryError = unknown;
+export type AppointmentDepositControllerCalculateAmountQueryError = CalculateDepositResponseDto;
 
 export function useAppointmentDepositControllerCalculateAmount<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>,
-  TError = unknown,
+  TError = CalculateDepositResponseDto,
 >(
   invoiceItemId: string,
   options: {
@@ -611,7 +616,7 @@ export function useAppointmentDepositControllerCalculateAmount<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerCalculateAmount<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>,
-  TError = unknown,
+  TError = CalculateDepositResponseDto,
 >(
   invoiceItemId: string,
   options?: {
@@ -635,7 +640,7 @@ export function useAppointmentDepositControllerCalculateAmount<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useAppointmentDepositControllerCalculateAmount<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>,
-  TError = unknown,
+  TError = CalculateDepositResponseDto,
 >(
   invoiceItemId: string,
   options?: {
@@ -655,7 +660,7 @@ export function useAppointmentDepositControllerCalculateAmount<
 
 export function useAppointmentDepositControllerCalculateAmount<
   TData = Awaited<ReturnType<typeof appointmentDepositControllerCalculateAmount>>,
-  TError = unknown,
+  TError = CalculateDepositResponseDto,
 >(
   invoiceItemId: string,
   options?: {

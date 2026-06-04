@@ -21,4 +21,5 @@ export interface UpdateReferralDiscountDto {
   description?: string;
   status?: UpdateReferralDiscountDtoStatus;
   method: UpdateReferralDiscountDtoMethod;
+  invoiceId?: string;
 }
