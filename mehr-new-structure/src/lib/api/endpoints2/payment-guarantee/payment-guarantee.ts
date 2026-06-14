@@ -25,6 +25,7 @@ import type {
   PaginatedPaymentGuaranteeResponse,
   PaymentGuarantee,
   PaymentGuaranteeControllerFindAllParams,
+  PaymentGuaranteeControllerReferredParams,
   UpdatePaymentGuaranteeDto,
   UpdatePaymentGuaranteeStatusDto,
 } from '../../models2';
@@ -242,6 +243,131 @@ export function usePaymentGuaranteeControllerFindAll<
   return query;
 }
 
+export const paymentGuaranteeControllerReferred = (
+  params?: PaymentGuaranteeControllerReferredParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<PaginatedPaymentGuaranteeResponse>({
+    url: `/api/payment-guarantee/referred`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getPaymentGuaranteeControllerReferredQueryKey = (
+  params?: PaymentGuaranteeControllerReferredParams
+) => {
+  return [`/api/payment-guarantee/referred`, ...(params ? [params] : [])] as const;
+};
+
+export const getPaymentGuaranteeControllerReferredQueryOptions = <
+  TData = Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+  TError = unknown,
+>(
+  params?: PaymentGuaranteeControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getPaymentGuaranteeControllerReferredQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>> = ({
+    signal,
+  }) => paymentGuaranteeControllerReferred(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type PaymentGuaranteeControllerReferredQueryResult = NonNullable<
+  Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>
+>;
+export type PaymentGuaranteeControllerReferredQueryError = unknown;
+
+export function usePaymentGuaranteeControllerReferred<
+  TData = Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+  TError = unknown,
+>(
+  params: undefined | PaymentGuaranteeControllerReferredParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+          TError,
+          Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaymentGuaranteeControllerReferred<
+  TData = Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+  TError = unknown,
+>(
+  params?: PaymentGuaranteeControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+          TError,
+          Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaymentGuaranteeControllerReferred<
+  TData = Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+  TError = unknown,
+>(
+  params?: PaymentGuaranteeControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function usePaymentGuaranteeControllerReferred<
+  TData = Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>,
+  TError = unknown,
+>(
+  params?: PaymentGuaranteeControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof paymentGuaranteeControllerReferred>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getPaymentGuaranteeControllerReferredQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 /**
  * @summary required permisson: read_payment_guarantee
  */
@@ -356,6 +482,79 @@ export function usePaymentGuaranteeControllerFindMine<
   return query;
 }
 
+export const paymentGuaranteeControllerUpdateReferred = (
+  id: string,
+  updatePaymentGuaranteeDto: UpdatePaymentGuaranteeDto
+) => {
+  return apiInstance<PaymentGuarantee>({
+    url: `/api/payment-guarantee/${id}/referred`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: updatePaymentGuaranteeDto,
+  });
+};
+
+export const getPaymentGuaranteeControllerUpdateReferredMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>,
+    TError,
+    { id: string; data: UpdatePaymentGuaranteeDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>,
+  TError,
+  { id: string; data: UpdatePaymentGuaranteeDto },
+  TContext
+> => {
+  const mutationKey = ['paymentGuaranteeControllerUpdateReferred'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>,
+    { id: string; data: UpdatePaymentGuaranteeDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return paymentGuaranteeControllerUpdateReferred(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PaymentGuaranteeControllerUpdateReferredMutationResult = NonNullable<
+  Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>
+>;
+export type PaymentGuaranteeControllerUpdateReferredMutationBody = UpdatePaymentGuaranteeDto;
+export type PaymentGuaranteeControllerUpdateReferredMutationError = unknown;
+
+export const usePaymentGuaranteeControllerUpdateReferred = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>,
+      TError,
+      { id: string; data: UpdatePaymentGuaranteeDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof paymentGuaranteeControllerUpdateReferred>>,
+  TError,
+  { id: string; data: UpdatePaymentGuaranteeDto },
+  TContext
+> => {
+  const mutationOptions = getPaymentGuaranteeControllerUpdateReferredMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
 /**
  * @summary required permisson: read_payment_guarantee
  */
@@ -488,7 +687,7 @@ export const paymentGuaranteeControllerUpdate = (
   id: string,
   updatePaymentGuaranteeDto: UpdatePaymentGuaranteeDto
 ) => {
-  return apiInstance<void>({
+  return apiInstance<PaymentGuarantee>({
     url: `/api/payment-guarantee/${id}`,
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

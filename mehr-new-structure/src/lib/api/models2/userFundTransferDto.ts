@@ -4,11 +4,13 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { UserFundTransferDtoTransferType } from './userFundTransferDtoTransferType';
 
 export interface UserFundTransferDto {
   /** @minimum 1 */
   amount: number;
   toWalletId: string;
+  transferType: UserFundTransferDtoTransferType;
   paymentGateId?: string;
   userDescription?: string;
   date?: string;

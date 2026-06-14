@@ -13,5 +13,6 @@ export const WalletTransactionControllerFindAllType = {
   deposit: 'deposit',
   withdrawal: 'withdrawal',
   transfer: 'transfer',
+  loantransfer: 'loantransfer',
   loan: 'loan',
 } as const;

@@ -12,5 +12,6 @@ export type ReviewRequestControllerFindAllStatus =
 export const ReviewRequestControllerFindAllStatus = {
   WATTING: 'WATTING',
   ASSIGNED: 'ASSIGNED',
+  ANSWERED: 'ANSWERED',
   CLOSED: 'CLOSED',
 } as const;

@@ -31,6 +31,7 @@ import type {
   AppointmentsControllerFindSuspendedParams,
   AppointmentsControllerGetAssistantFreeSlotsParams,
   AppointmentsControllerGetDoctorFreeSlotsParams,
+  AppointmentsControllerGetFirstFreeSlotsParams,
   AppointmentsControllerGetFreeDoctors200Item,
   AppointmentsControllerGetFreeDoctorsParams,
   AppointmentsControllerGetUnitFreeSlotsParams,
@@ -45,8 +46,11 @@ import type {
   CreateAppointmentByPatientDto,
   CreateAppointmentDto,
   Date,
+  EnableRushDto,
+  FristFreeSlotsResponseDto,
   PaginatedAppointment,
   RescheduleAppointmentDto,
+  SubstituteAppointmentsDto,
   SuspendAppointmentDto,
   SuspendAppointmentResponseDto,
   SuspensionHistoryExpandedResponseDto,
@@ -1774,6 +1778,152 @@ export function useAppointmentsControllerFindSuspended<
   return query;
 }
 
+export const appointmentsControllerGetFirstFreeSlots = (
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<FristFreeSlotsResponseDto>({
+    url: `/api/appointments/first-free-slots`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getAppointmentsControllerGetFirstFreeSlotsQueryKey = (
+  params?: AppointmentsControllerGetFirstFreeSlotsParams
+) => {
+  return [`/api/appointments/first-free-slots`, ...(params ? [params] : [])] as const;
+};
+
+export const getAppointmentsControllerGetFirstFreeSlotsQueryOptions = <
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+  TError = unknown,
+>(
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getAppointmentsControllerGetFirstFreeSlotsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>
+  > = ({ signal }) => appointmentsControllerGetFirstFreeSlots(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type AppointmentsControllerGetFirstFreeSlotsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>
+>;
+export type AppointmentsControllerGetFirstFreeSlotsQueryError = unknown;
+
+export function useAppointmentsControllerGetFirstFreeSlots<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+  TError = unknown,
+>(
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetFirstFreeSlots<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+  TError = unknown,
+>(
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetFirstFreeSlots<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+  TError = unknown,
+>(
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useAppointmentsControllerGetFirstFreeSlots<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+  TError = unknown,
+>(
+  params: AppointmentsControllerGetFirstFreeSlotsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetFirstFreeSlots>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getAppointmentsControllerGetFirstFreeSlotsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const appointmentsControllerGetExpandedHistoriesByAppointmentId = (
   id: string,
   signal?: AbortSignal
@@ -2123,6 +2273,526 @@ export const useAppointmentsControllerUpdate = <TError = unknown, TContext = unk
 
   return useMutation(mutationOptions, queryClient);
 };
+/**
+ * @summary required permisson: update_appointment
+ */
+export const appointmentsControllerSubstitute = (
+  substituteAppointmentsDto: SubstituteAppointmentsDto
+) => {
+  return apiInstance<Appointment>({
+    url: `/api/appointments/substitute`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: substituteAppointmentsDto,
+  });
+};
+
+export const getAppointmentsControllerSubstituteMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof appointmentsControllerSubstitute>>,
+    TError,
+    { data: SubstituteAppointmentsDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof appointmentsControllerSubstitute>>,
+  TError,
+  { data: SubstituteAppointmentsDto },
+  TContext
+> => {
+  const mutationKey = ['appointmentsControllerSubstitute'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof appointmentsControllerSubstitute>>,
+    { data: SubstituteAppointmentsDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return appointmentsControllerSubstitute(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AppointmentsControllerSubstituteMutationResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerSubstitute>>
+>;
+export type AppointmentsControllerSubstituteMutationBody = SubstituteAppointmentsDto;
+export type AppointmentsControllerSubstituteMutationError = unknown;
+
+/**
+ * @summary required permisson: update_appointment
+ */
+export const useAppointmentsControllerSubstitute = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof appointmentsControllerSubstitute>>,
+      TError,
+      { data: SubstituteAppointmentsDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof appointmentsControllerSubstitute>>,
+  TError,
+  { data: SubstituteAppointmentsDto },
+  TContext
+> => {
+  const mutationOptions = getAppointmentsControllerSubstituteMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_appointment
+ */
+export const appointmentsControllerEnableRush = (id: string, enableRushDto: EnableRushDto) => {
+  return apiInstance<void>({
+    url: `/api/appointments/${id}/enable-rush`,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    data: enableRushDto,
+  });
+};
+
+export const getAppointmentsControllerEnableRushMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof appointmentsControllerEnableRush>>,
+    TError,
+    { id: string; data: EnableRushDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof appointmentsControllerEnableRush>>,
+  TError,
+  { id: string; data: EnableRushDto },
+  TContext
+> => {
+  const mutationKey = ['appointmentsControllerEnableRush'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof appointmentsControllerEnableRush>>,
+    { id: string; data: EnableRushDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return appointmentsControllerEnableRush(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AppointmentsControllerEnableRushMutationResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerEnableRush>>
+>;
+export type AppointmentsControllerEnableRushMutationBody = EnableRushDto;
+export type AppointmentsControllerEnableRushMutationError = unknown;
+
+/**
+ * @summary required permisson: update_appointment
+ */
+export const useAppointmentsControllerEnableRush = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof appointmentsControllerEnableRush>>,
+      TError,
+      { id: string; data: EnableRushDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof appointmentsControllerEnableRush>>,
+  TError,
+  { id: string; data: EnableRushDto },
+  TContext
+> => {
+  const mutationOptions = getAppointmentsControllerEnableRushMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_appointment
+ */
+export const appointmentsControllerDisableRush = (id: string) => {
+  return apiInstance<void>({ url: `/api/appointments/${id}/disable-rush`, method: 'PATCH' });
+};
+
+export const getAppointmentsControllerDisableRushMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof appointmentsControllerDisableRush>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof appointmentsControllerDisableRush>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ['appointmentsControllerDisableRush'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof appointmentsControllerDisableRush>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return appointmentsControllerDisableRush(id);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AppointmentsControllerDisableRushMutationResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerDisableRush>>
+>;
+
+export type AppointmentsControllerDisableRushMutationError = unknown;
+
+/**
+ * @summary required permisson: update_appointment
+ */
+export const useAppointmentsControllerDisableRush = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof appointmentsControllerDisableRush>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof appointmentsControllerDisableRush>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getAppointmentsControllerDisableRushMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_appointment
+ */
+export const appointmentsControllerGetSubstitutableCanceled = (
+  id: string,
+  signal?: AbortSignal
+) => {
+  return apiInstance<Appointment[]>({
+    url: `/api/appointments/${id}/substitutable-canceled`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getAppointmentsControllerGetSubstitutableCanceledQueryKey = (id?: string) => {
+  return [`/api/appointments/${id}/substitutable-canceled`] as const;
+};
+
+export const getAppointmentsControllerGetSubstitutableCanceledQueryOptions = <
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableCanceledQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>
+  > = ({ signal }) => appointmentsControllerGetSubstitutableCanceled(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type AppointmentsControllerGetSubstitutableCanceledQueryResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>
+>;
+export type AppointmentsControllerGetSubstitutableCanceledQueryError = unknown;
+
+export function useAppointmentsControllerGetSubstitutableCanceled<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetSubstitutableCanceled<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetSubstitutableCanceled<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: update_appointment
+ */
+
+export function useAppointmentsControllerGetSubstitutableCanceled<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getAppointmentsControllerGetSubstitutableCanceledQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary required permisson: update_appointment
+ */
+export const appointmentsControllerGetSubstitutableRushed = (id: string, signal?: AbortSignal) => {
+  return apiInstance<Appointment[]>({
+    url: `/api/appointments/${id}/substitutable-rushed`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getAppointmentsControllerGetSubstitutableRushedQueryKey = (id?: string) => {
+  return [`/api/appointments/${id}/substitutable-rushed`] as const;
+};
+
+export const getAppointmentsControllerGetSubstitutableRushedQueryOptions = <
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableRushedQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>
+  > = ({ signal }) => appointmentsControllerGetSubstitutableRushed(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type AppointmentsControllerGetSubstitutableRushedQueryResult = NonNullable<
+  Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>
+>;
+export type AppointmentsControllerGetSubstitutableRushedQueryError = unknown;
+
+export function useAppointmentsControllerGetSubstitutableRushed<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetSubstitutableRushed<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+          TError,
+          Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useAppointmentsControllerGetSubstitutableRushed<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: update_appointment
+ */
+
+export function useAppointmentsControllerGetSubstitutableRushed<
+  TData = Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getAppointmentsControllerGetSubstitutableRushedQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
 export const appointmentsControllerUpdateDoctor = (
   id: string,
   updateAppointmentDoctorDto: UpdateAppointmentDoctorDto

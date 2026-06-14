@@ -4,10 +4,10 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
-import type { PaymentGuaranteeControllerFindAllFilterStatus } from './paymentGuaranteeControllerFindAllFilterStatus';
-import type { PaymentGuaranteeControllerFindAllFilterIsPremium } from './paymentGuaranteeControllerFindAllFilterIsPremium';
+import type { PaymentGuaranteeControllerReferredFilterStatus } from './paymentGuaranteeControllerReferredFilterStatus';
+import type { PaymentGuaranteeControllerReferredFilterIsPremium } from './paymentGuaranteeControllerReferredFilterIsPremium';
 
-export type PaymentGuaranteeControllerFindAllParams = {
+export type PaymentGuaranteeControllerReferredParams = {
   page?: number;
   limit?: number;
   search?: string;
@@ -22,11 +22,11 @@ export type PaymentGuaranteeControllerFindAllParams = {
   /**
    * Filter by status using operators like $eq, $gte, etc.
    */
-  'filter.status'?: PaymentGuaranteeControllerFindAllFilterStatus;
+  'filter.status'?: PaymentGuaranteeControllerReferredFilterStatus;
   /**
    * Filter by isPremium using operators like $eq, $gte, etc.
    */
-  'filter.isPremium'?: PaymentGuaranteeControllerFindAllFilterIsPremium;
+  'filter.isPremium'?: PaymentGuaranteeControllerReferredFilterIsPremium;
   /**
    * Filter by invoiceId using operators like $eq, $gte, etc.
    */

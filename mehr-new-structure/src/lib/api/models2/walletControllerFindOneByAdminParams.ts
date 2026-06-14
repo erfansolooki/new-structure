@@ -16,6 +16,7 @@ export type WalletControllerFindOneByAdminParams = {
   status?: WalletControllerFindOneByAdminStatus;
   fromWalletId?: string;
   toWalletId?: string;
+  date?: string;
   page?: number;
   limit?: number;
 };

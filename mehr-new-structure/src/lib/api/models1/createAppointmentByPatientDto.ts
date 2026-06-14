@@ -14,4 +14,5 @@ export interface CreateAppointmentByPatientDto {
   assistantId?: string;
   treatmentPlanId?: string;
   description: string;
+  isRushed?: boolean;
 }

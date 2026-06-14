@@ -22,6 +22,7 @@ export type AppointmentsControllerPatientAppointmentsParams = {
   status?: AppointmentsControllerPatientAppointmentsStatus;
   guestPatientFirstName?: string;
   guestPatientLastName?: string;
+  isRushed?: boolean;
   sortType?: AppointmentsControllerPatientAppointmentsSortType;
   sortBy?: AppointmentsControllerPatientAppointmentsSortBy;
   isSuspended?: boolean;

@@ -21,6 +21,7 @@ import type {
   PaginatedTransactionResponse,
   WalletTransactionControllerFindAllByAdminParams,
   WalletTransactionControllerFindAllParams,
+  WalletTransactionControllerFindCorrectionsParams,
 } from '../../models2';
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
@@ -150,6 +151,9 @@ export function useWalletTransactionControllerFindAll<
   return query;
 }
 
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
 export const walletTransactionControllerFindAllByAdmin = (
   params?: WalletTransactionControllerFindAllByAdminParams,
   signal?: AbortSignal
@@ -268,6 +272,9 @@ export function useWalletTransactionControllerFindAllByAdmin<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
 
 export function useWalletTransactionControllerFindAllByAdmin<
   TData = Awaited<ReturnType<typeof walletTransactionControllerFindAllByAdmin>>,
@@ -286,6 +293,283 @@ export function useWalletTransactionControllerFindAllByAdmin<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getWalletTransactionControllerFindAllByAdminQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
+export const walletTransactionControllerFindCorrections = (
+  params?: WalletTransactionControllerFindCorrectionsParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<PaginatedTransactionResponse>({
+    url: `/api/wallet-transactions/corrections`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getWalletTransactionControllerFindCorrectionsQueryKey = (
+  params?: WalletTransactionControllerFindCorrectionsParams
+) => {
+  return [`/api/wallet-transactions/corrections`, ...(params ? [params] : [])] as const;
+};
+
+export const getWalletTransactionControllerFindCorrectionsQueryOptions = <
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+  TError = unknown,
+>(
+  params?: WalletTransactionControllerFindCorrectionsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getWalletTransactionControllerFindCorrectionsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>
+  > = ({ signal }) => walletTransactionControllerFindCorrections(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type WalletTransactionControllerFindCorrectionsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>
+>;
+export type WalletTransactionControllerFindCorrectionsQueryError = unknown;
+
+export function useWalletTransactionControllerFindCorrections<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+  TError = unknown,
+>(
+  params: undefined | WalletTransactionControllerFindCorrectionsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+          TError,
+          Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletTransactionControllerFindCorrections<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+  TError = unknown,
+>(
+  params?: WalletTransactionControllerFindCorrectionsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+          TError,
+          Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletTransactionControllerFindCorrections<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+  TError = unknown,
+>(
+  params?: WalletTransactionControllerFindCorrectionsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
+
+export function useWalletTransactionControllerFindCorrections<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+  TError = unknown,
+>(
+  params?: WalletTransactionControllerFindCorrectionsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof walletTransactionControllerFindCorrections>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getWalletTransactionControllerFindCorrectionsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
+export const walletTransactionControllerFindOne = (id: string, signal?: AbortSignal) => {
+  return apiInstance<PaginatedTransactionResponse>({
+    url: `/api/wallet-transactions/${id}`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getWalletTransactionControllerFindOneQueryKey = (id?: string) => {
+  return [`/api/wallet-transactions/${id}`] as const;
+};
+
+export const getWalletTransactionControllerFindOneQueryOptions = <
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getWalletTransactionControllerFindOneQueryKey(id);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>> = ({
+    signal,
+  }) => walletTransactionControllerFindOne(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type WalletTransactionControllerFindOneQueryResult = NonNullable<
+  Awaited<ReturnType<typeof walletTransactionControllerFindOne>>
+>;
+export type WalletTransactionControllerFindOneQueryError = unknown;
+
+export function useWalletTransactionControllerFindOne<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+          TError,
+          Awaited<ReturnType<typeof walletTransactionControllerFindOne>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletTransactionControllerFindOne<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+          TError,
+          Awaited<ReturnType<typeof walletTransactionControllerFindOne>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useWalletTransactionControllerFindOne<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_transaction
+ */
+
+export function useWalletTransactionControllerFindOne<
+  TData = Awaited<ReturnType<typeof walletTransactionControllerFindOne>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof walletTransactionControllerFindOne>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getWalletTransactionControllerFindOneQueryOptions(id, options);
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;

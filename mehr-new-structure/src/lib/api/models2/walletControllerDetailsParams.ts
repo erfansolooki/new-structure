@@ -16,6 +16,7 @@ export type WalletControllerDetailsParams = {
   status?: WalletControllerDetailsStatus;
   fromWalletId?: string;
   toWalletId?: string;
+  date?: string;
   page?: number;
   limit?: number;
 };

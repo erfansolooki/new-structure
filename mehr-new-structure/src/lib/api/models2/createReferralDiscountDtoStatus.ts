@@ -11,6 +11,8 @@ export type CreateReferralDiscountDtoStatus =
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateReferralDiscountDtoStatus = {
   waiting: 'waiting',
+  CONFIRMED_BY_PERSONNEL: 'CONFIRMED_BY_PERSONNEL',
+  REJECTED_BY_PERSONNEL: 'REJECTED_BY_PERSONNEL',
   confirm: 'confirm',
   cancel: 'cancel',
 } as const;

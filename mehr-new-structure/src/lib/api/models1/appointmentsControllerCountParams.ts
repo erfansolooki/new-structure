@@ -19,6 +19,7 @@ export type AppointmentsControllerCountParams = {
   status?: string;
   guestPatientFirstName?: string;
   guestPatientLastName?: string;
+  isRushed?: boolean;
   sortType?: string;
   sortBy?: string;
   isSuspended?: boolean;

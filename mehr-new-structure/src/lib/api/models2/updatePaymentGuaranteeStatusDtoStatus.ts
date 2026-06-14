@@ -11,6 +11,8 @@ export type UpdatePaymentGuaranteeStatusDtoStatus =
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UpdatePaymentGuaranteeStatusDtoStatus = {
   WAITING: 'WAITING',
+  CONFIRMED_BY_PERSONNEL: 'CONFIRMED_BY_PERSONNEL',
+  REJECTED_BY_PERSONNEL: 'REJECTED_BY_PERSONNEL',
   CONFIRMED: 'CONFIRMED',
   CANCELED: 'CANCELED',
 } as const;

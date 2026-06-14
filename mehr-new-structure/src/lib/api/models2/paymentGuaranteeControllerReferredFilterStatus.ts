@@ -5,11 +5,11 @@
  * OpenAPI spec version: 2.0.0
  */
 
-export type PaymentGuaranteeControllerFindAllFilterStatus =
-  (typeof PaymentGuaranteeControllerFindAllFilterStatus)[keyof typeof PaymentGuaranteeControllerFindAllFilterStatus];
+export type PaymentGuaranteeControllerReferredFilterStatus =
+  (typeof PaymentGuaranteeControllerReferredFilterStatus)[keyof typeof PaymentGuaranteeControllerReferredFilterStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const PaymentGuaranteeControllerFindAllFilterStatus = {
+export const PaymentGuaranteeControllerReferredFilterStatus = {
   WAITING: 'WAITING',
   CONFIRMED: 'CONFIRMED',
   CANCELED: 'CANCELED',

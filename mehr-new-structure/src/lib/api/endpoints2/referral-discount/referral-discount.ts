@@ -25,6 +25,9 @@ import type {
   PaginatedReferralDiscountResponse,
   ReferralDiscount,
   ReferralDiscountControllerFindAllParams,
+  ReferralDiscountControllerReferredParams,
+  ReferralDiscountControllerUpdate200,
+  ReferralDiscountControllerUpdateReferred200,
   UpdateReferralDiscountDto,
   UpdateReferralDiscountStatusDto,
 } from '../../models2';
@@ -242,6 +245,204 @@ export function useReferralDiscountControllerFindAll<
   return query;
 }
 
+export const referralDiscountControllerReferred = (
+  params?: ReferralDiscountControllerReferredParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<PaginatedReferralDiscountResponse>({
+    url: `/api/referral-discount/referred`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getReferralDiscountControllerReferredQueryKey = (
+  params?: ReferralDiscountControllerReferredParams
+) => {
+  return [`/api/referral-discount/referred`, ...(params ? [params] : [])] as const;
+};
+
+export const getReferralDiscountControllerReferredQueryOptions = <
+  TData = Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+  TError = unknown,
+>(
+  params?: ReferralDiscountControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof referralDiscountControllerReferred>>, TError, TData>
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getReferralDiscountControllerReferredQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof referralDiscountControllerReferred>>> = ({
+    signal,
+  }) => referralDiscountControllerReferred(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type ReferralDiscountControllerReferredQueryResult = NonNullable<
+  Awaited<ReturnType<typeof referralDiscountControllerReferred>>
+>;
+export type ReferralDiscountControllerReferredQueryError = unknown;
+
+export function useReferralDiscountControllerReferred<
+  TData = Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+  TError = unknown,
+>(
+  params: undefined | ReferralDiscountControllerReferredParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof referralDiscountControllerReferred>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+          TError,
+          Awaited<ReturnType<typeof referralDiscountControllerReferred>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReferralDiscountControllerReferred<
+  TData = Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+  TError = unknown,
+>(
+  params?: ReferralDiscountControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof referralDiscountControllerReferred>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+          TError,
+          Awaited<ReturnType<typeof referralDiscountControllerReferred>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReferralDiscountControllerReferred<
+  TData = Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+  TError = unknown,
+>(
+  params?: ReferralDiscountControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof referralDiscountControllerReferred>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useReferralDiscountControllerReferred<
+  TData = Awaited<ReturnType<typeof referralDiscountControllerReferred>>,
+  TError = unknown,
+>(
+  params?: ReferralDiscountControllerReferredParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof referralDiscountControllerReferred>>, TError, TData>
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getReferralDiscountControllerReferredQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+export const referralDiscountControllerUpdateReferred = (
+  id: string,
+  updateReferralDiscountDto: UpdateReferralDiscountDto
+) => {
+  return apiInstance<ReferralDiscountControllerUpdateReferred200>({
+    url: `/api/referral-discount/${id}/referred`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: updateReferralDiscountDto,
+  });
+};
+
+export const getReferralDiscountControllerUpdateReferredMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>,
+    TError,
+    { id: string; data: UpdateReferralDiscountDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>,
+  TError,
+  { id: string; data: UpdateReferralDiscountDto },
+  TContext
+> => {
+  const mutationKey = ['referralDiscountControllerUpdateReferred'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>,
+    { id: string; data: UpdateReferralDiscountDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return referralDiscountControllerUpdateReferred(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type ReferralDiscountControllerUpdateReferredMutationResult = NonNullable<
+  Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>
+>;
+export type ReferralDiscountControllerUpdateReferredMutationBody = UpdateReferralDiscountDto;
+export type ReferralDiscountControllerUpdateReferredMutationError = unknown;
+
+export const useReferralDiscountControllerUpdateReferred = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>,
+      TError,
+      { id: string; data: UpdateReferralDiscountDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof referralDiscountControllerUpdateReferred>>,
+  TError,
+  { id: string; data: UpdateReferralDiscountDto },
+  TContext
+> => {
+  const mutationOptions = getReferralDiscountControllerUpdateReferredMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
 /**
  * @summary required permisson: read_referral_discount
  */
@@ -374,7 +575,7 @@ export const referralDiscountControllerUpdate = (
   id: string,
   updateReferralDiscountDto: UpdateReferralDiscountDto
 ) => {
-  return apiInstance<UpdateReferralDiscountDto>({
+  return apiInstance<ReferralDiscountControllerUpdate200>({
     url: `/api/referral-discount/${id}`,
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

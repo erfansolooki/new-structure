@@ -19,4 +19,5 @@ export interface CreateAppointmentDto {
   guestPatientFirstName?: string;
   guestPatientLastName?: string;
   description: string;
+  isRushed?: boolean;
 }

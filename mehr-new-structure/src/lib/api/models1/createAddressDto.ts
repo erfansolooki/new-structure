@@ -7,13 +7,13 @@
 import type { CreateLocationDto } from './createLocationDto';
 
 export interface CreateAddressDto {
-  province: string;
-  city: string;
-  address: string;
+  province?: string;
+  city?: string;
+  address?: string;
   /**
    * @minLength 10
    * @maxLength 10
    */
   postalCode?: string;
-  location: CreateLocationDto;
+  location?: CreateLocationDto;
 }

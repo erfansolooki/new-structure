@@ -4,8 +4,10 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { TimeSlotStartTime } from './timeSlotStartTime';
+import type { TimeSlotEndTime } from './timeSlotEndTime';
 
 export interface TimeSlot {
-  startTime: string;
-  endTime: string;
+  startTime: TimeSlotStartTime;
+  endTime: TimeSlotEndTime;
 }

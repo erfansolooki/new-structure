@@ -12,5 +12,6 @@ export type UpdateReviewRequestDtoStatus =
 export const UpdateReviewRequestDtoStatus = {
   WATTING: 'WATTING',
   ASSIGNED: 'ASSIGNED',
+  ANSWERED: 'ANSWERED',
   CLOSED: 'CLOSED',
 } as const;
