@@ -11,4 +11,5 @@ export interface SetAppointmentDepositDefaultSettings {
    * @maximum 100
    */
   depositPercent: number;
+  disableGlobally: boolean;
 }

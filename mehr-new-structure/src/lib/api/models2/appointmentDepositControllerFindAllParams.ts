@@ -11,6 +11,7 @@ export type AppointmentDepositControllerFindAllParams = {
   treatmentPlanId?: string;
   patientId?: string;
   invoiceId?: string;
+  invoiceNumber?: string;
   page?: number;
   limit?: number;
 };

@@ -5,7 +5,4 @@
  * OpenAPI spec version: 2.0.0
  */
 
-export interface AppointmentDepositDefaultSettingsResponseDto {
-  depositPercent: number;
-  disableGlobally: boolean;
-}
+export type WalletDecreaseReportControllerWalletDecreaseReport200 = { [key: string]: unknown };

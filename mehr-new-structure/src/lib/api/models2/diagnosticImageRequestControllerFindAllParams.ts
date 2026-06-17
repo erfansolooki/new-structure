@@ -19,6 +19,7 @@ export type DiagnosticImageRequestControllerFindAllParams = {
   type?: DiagnosticImageRequestControllerFindAllType;
   stage?: DiagnosticImageRequestControllerFindAllStage;
   hasImage?: boolean;
+  dentNameId?: string;
   page?: number;
   limit?: number;
 };
