@@ -5,13 +5,15 @@
  * OpenAPI spec version: 2.0.0
  */
 
-export interface WalletIncreaseReportItemDto {
+export interface WalletTransactionReportItemDto {
   date: string;
   patientName: string;
-  nationalCode: string;
   paymentGate: string;
+  nationalCode: string;
   userDescription: string;
-  amount: number;
+  treatmentTitle: string;
+  toothNumber: string;
   isCorrected: boolean;
   statusText: string;
+  amount: number;
 }

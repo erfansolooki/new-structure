@@ -12,4 +12,6 @@ export interface WalletDecreaseReportPaginatedResponse {
   meta: PaginationMetaDto;
   links: PaginationLinksDto;
   items: WalletDecreaseReportItemDto[];
+  /** Sum of amount for current page */
+  totalAmount: number;
 }

@@ -9,6 +9,7 @@ import type { InvoiceControllerFindAllSortType } from './invoiceControllerFindAl
 import type { InvoiceControllerFindAllSortBy } from './invoiceControllerFindAllSortBy';
 
 export type InvoiceControllerFindAllParams = {
+  invoiceNumber?: string;
   patientId?: string;
   date?: string;
   paymentMethod?: InvoiceControllerFindAllPaymentMethod;

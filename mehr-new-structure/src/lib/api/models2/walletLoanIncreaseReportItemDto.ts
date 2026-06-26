@@ -12,4 +12,5 @@ export interface WalletLoanIncreaseReportItemDto {
   userDescription: string;
   amount: number;
   isCorrected: boolean;
+  statusText: string;
 }

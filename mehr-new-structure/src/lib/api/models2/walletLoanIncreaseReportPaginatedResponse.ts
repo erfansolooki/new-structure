@@ -12,4 +12,6 @@ export interface WalletLoanIncreaseReportPaginatedResponse {
   meta: PaginationMetaDto;
   links: PaginationLinksDto;
   items: WalletLoanIncreaseReportItemDto[];
+  /** Sum of amount for current page */
+  totalAmount: number;
 }

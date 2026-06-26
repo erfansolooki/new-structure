@@ -9,6 +9,7 @@ export type AppointmentDepositControllerFindAllParams = {
   walletTransactionId?: string;
   invoiceItemId?: string;
   treatmentPlanId?: string;
+  categoryId?: string;
   patientId?: string;
   invoiceId?: string;
   invoiceNumber?: string;

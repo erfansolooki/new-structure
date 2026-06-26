@@ -6,12 +6,12 @@
  */
 import type { PaginationMetaDto } from './paginationMetaDto';
 import type { PaginationLinksDto } from './paginationLinksDto';
-import type { WalletTransferReportItemDto } from './walletTransferReportItemDto';
+import type { WalletTransactionReportItemDto } from './walletTransactionReportItemDto';
 
-export interface WalletTransferReportPaginatedResponse {
+export interface WalletTransactionReportPaginatedResponse {
   meta: PaginationMetaDto;
   links: PaginationLinksDto;
-  items: WalletTransferReportItemDto[];
+  items: WalletTransactionReportItemDto[];
   /** Sum of amount for current page */
   totalAmount: number;
 }

@@ -11,6 +11,7 @@ export interface WalletDecreaseReportItemDto {
   nationalCode: string;
   amount: number;
   userDescription: string;
-  isCorrected: boolean;
   reductionReason: string;
+  isCorrected: boolean;
+  statusText: string;
 }

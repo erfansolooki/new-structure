@@ -12,4 +12,6 @@ export interface PaidTreatmentReportPaginatedResponse {
   meta: PaginationMetaDto;
   links: PaginationLinksDto;
   items: PaidTreatmentReportItemDto[];
+  /** Sum of amount for current page */
+  totalAmount: number;
 }
