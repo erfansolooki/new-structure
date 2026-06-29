@@ -26,6 +26,9 @@ import type {
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
+/**
+ * @summary required permisson: read_wallet_increase_report
+ */
 export const walletIncreaseReportControllerWalletIncreaseReport = (
   params?: WalletIncreaseReportControllerWalletIncreaseReportParams,
   signal?: AbortSignal
@@ -145,6 +148,9 @@ export function useWalletIncreaseReportControllerWalletIncreaseReport<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_increase_report
+ */
 
 export function useWalletIncreaseReportControllerWalletIncreaseReport<
   TData = Awaited<ReturnType<typeof walletIncreaseReportControllerWalletIncreaseReport>>,
@@ -176,6 +182,9 @@ export function useWalletIncreaseReportControllerWalletIncreaseReport<
   return query;
 }
 
+/**
+ * @summary required permisson: read_wallet_increase_report
+ */
 export const walletIncreaseReportControllerWalletIncreaseExcel = (
   params?: WalletIncreaseReportControllerWalletIncreaseExcelParams,
   signal?: AbortSignal
@@ -294,6 +303,9 @@ export function useWalletIncreaseReportControllerWalletIncreaseExcel<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_increase_report
+ */
 
 export function useWalletIncreaseReportControllerWalletIncreaseExcel<
   TData = Awaited<ReturnType<typeof walletIncreaseReportControllerWalletIncreaseExcel>>,

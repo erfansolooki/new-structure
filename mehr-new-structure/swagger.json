@@ -201,6 +201,15 @@
             }
           },
           {
+            "name": "walletId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
             "name": "date",
             "required": false,
             "in": "query",
@@ -334,6 +343,15 @@
           },
           {
             "name": "toWalletId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletId",
             "required": false,
             "in": "query",
             "schema": {
@@ -913,6 +931,15 @@
             }
           },
           {
+            "name": "walletId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
             "name": "date",
             "required": false,
             "in": "query",
@@ -1028,6 +1055,15 @@
           },
           {
             "name": "toWalletId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletId",
             "required": false,
             "in": "query",
             "schema": {
@@ -1152,6 +1188,15 @@
           },
           {
             "name": "toWalletId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletId",
             "required": false,
             "in": "query",
             "schema": {
@@ -2585,6 +2630,14 @@
       "get": {
         "operationId": "InvoiceController_findAll",
         "parameters": [
+          {
+            "name": "invoiceNumber",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "patientId",
             "required": false,
@@ -5133,6 +5186,15 @@
           },
           {
             "name": "treatmentPlanId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
             "required": false,
             "in": "query",
             "schema": {
@@ -11373,6 +11435,7 @@
             }
           }
         },
+        "summary": "required permisson: read_wallet_increase_report",
         "tags": [
           "WalletIncreaseReport"
         ]
@@ -11422,6 +11485,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_wallet_increase_report",
         "tags": [
           "WalletIncreaseReport"
         ]
@@ -11506,6 +11570,7 @@
             }
           }
         },
+        "summary": "required permisson: read_wallet_decrease_report",
         "tags": [
           "WalletDecreaseReport"
         ]
@@ -11546,6 +11611,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_wallet_decrease_report",
         "tags": [
           "WalletDecreaseReport"
         ]
@@ -11630,6 +11696,7 @@
             }
           }
         },
+        "summary": "required permisson: read_wallet_loan_increase_report",
         "tags": [
           "WalletLoanIncreaseReport"
         ]
@@ -11670,6 +11737,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_wallet_loan_increase_report",
         "tags": [
           "WalletLoanIncreaseReport"
         ]
@@ -11763,6 +11831,7 @@
             }
           }
         },
+        "summary": "required permisson: read_wallet_transfer_report",
         "tags": [
           "WalletTransferReport"
         ]
@@ -11812,6 +11881,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_wallet_transfer_report",
         "tags": [
           "WalletTransferReport"
         ]
@@ -11905,6 +11975,7 @@
             }
           }
         },
+        "summary": "required permisson: read_paid_treatment_report",
         "tags": [
           "PaidTreatmentReport"
         ]
@@ -11954,6 +12025,7 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_paid_treatment_report",
         "tags": [
           "PaidTreatmentReport"
         ]
@@ -12056,6 +12128,7 @@
             }
           }
         },
+        "summary": "required permisson: read_completed_treatment_report",
         "tags": [
           "CompletedTreatmentReport"
         ]
@@ -12114,8 +12187,766 @@
             "description": ""
           }
         },
+        "summary": "required permisson: read_completed_treatment_report",
         "tags": [
           "CompletedTreatmentReport"
+        ]
+      }
+    },
+    "/api/reports/financial/wallet-transactions": {
+      "get": {
+        "operationId": "WalletTransactionReportController_walletTransactionReport",
+        "parameters": [
+          {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "paymentGateId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deposit",
+                "withdrawal",
+                "transfer",
+                "loantransfer",
+                "loan"
+              ]
+            }
+          },
+          {
+            "name": "serviceType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "treatment",
+                "miscellaneous"
+              ]
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exportGridData",
+            "required": false,
+            "in": "query",
+            "description": "If true, returns an Excel file instead of JSON grid data",
+            "schema": {
+              "default": false,
+              "example": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletTransactionReportPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_wallet_transaction_report",
+        "tags": [
+          "WalletTransactionReport"
+        ]
+      }
+    },
+    "/api/reports/financial/wallet-transactions/excel": {
+      "get": {
+        "operationId": "WalletTransactionReportController_walletTransactionExcel",
+        "parameters": [
+          {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "paymentGateId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deposit",
+                "withdrawal",
+                "transfer",
+                "loantransfer",
+                "loan"
+              ]
+            }
+          },
+          {
+            "name": "serviceType",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "treatment",
+                "miscellaneous"
+              ]
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: read_wallet_transaction_report",
+        "tags": [
+          "WalletTransactionReport"
+        ]
+      }
+    },
+    "/api/reports/admission/patient-registration": {
+      "get": {
+        "operationId": "PatientRegistrationReportController_patientRegistrationReport",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "Search term to filter by first name, last name, case number, national code, or phone number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "insuranceCategoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialDiseases",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthDateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Birth date from (user.birthDate)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthDateTo",
+            "required": false,
+            "in": "query",
+            "description": "Birth date to (user.birthDate)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "required": false,
+            "in": "query",
+            "description": "Gender",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Male",
+                "Female"
+              ]
+            }
+          },
+          {
+            "name": "exportGridData",
+            "required": false,
+            "in": "query",
+            "description": "If true, returns an Excel file instead of JSON grid data",
+            "schema": {
+              "default": false,
+              "example": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRegistrationReportPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_patient_registration_report",
+        "tags": [
+          "PatientRegistrationReport"
+        ]
+      }
+    },
+    "/api/reports/admission/patient-registration/excel": {
+      "get": {
+        "operationId": "PatientRegistrationReportController_patientRegistrationExcel",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "Search term to filter by first name, last name, case number, national code, or phone number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "insuranceCategoryId",
+            "required": false,
+            "in": "query",
+            "description": "Insurance category ID",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialDiseases",
+            "required": false,
+            "in": "query",
+            "description": "Special diseases keyword",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "description": "Creation date from (patient.createdAt)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "description": "Creation date to (patient.createdAt)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthDateFrom",
+            "required": false,
+            "in": "query",
+            "description": "Birth date from (user.birthDate)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthDateTo",
+            "required": false,
+            "in": "query",
+            "description": "Birth date to (user.birthDate)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "required": false,
+            "in": "query",
+            "description": "Gender",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Male",
+                "Female"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: read_patient_registration_report",
+        "tags": [
+          "PatientRegistrationReport"
+        ]
+      }
+    },
+    "/api/reports/admission/appointments": {
+      "get": {
+        "operationId": "AppointmentsReportController_appointmentsReport",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "Search term for patient name, document number, national code, or phone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "unitId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "assistantId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "WAITING",
+                "ACCEPTED",
+                "VISIT",
+                "CANCELED",
+                "DELAYED",
+                "EMERGENCY"
+              ]
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "description": "Appointment date from",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "description": "Appointment date to",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "required": false,
+            "in": "query",
+            "description": "Start time (HH:mm:ss)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "required": false,
+            "in": "query",
+            "description": "End time (HH:mm:ss)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guestPatientFirstName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guestPatientLastName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isRushed",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "exportGridData",
+            "required": false,
+            "in": "query",
+            "description": "If true, returns Excel file instead of JSON grid data",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsReportPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_appointments_report",
+        "tags": [
+          "AppointmentsReport"
+        ]
+      }
+    },
+    "/api/reports/admission/appointments/excel": {
+      "get": {
+        "operationId": "AppointmentsReportController_appointmentsExcel",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "Search term for patient name, document number, national code, or phone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "unitId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "assistantId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "WAITING",
+                "ACCEPTED",
+                "VISIT",
+                "CANCELED",
+                "DELAYED",
+                "EMERGENCY"
+              ]
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "description": "Appointment date from (date field)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "description": "Appointment date to (date field)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "required": false,
+            "in": "query",
+            "description": "Start time (HH:mm:ss)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "required": false,
+            "in": "query",
+            "description": "End time (HH:mm:ss)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guestPatientFirstName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guestPatientLastName",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isRushed",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "isSuspended",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: read_appointments_report",
+        "tags": [
+          "AppointmentsReport"
         ]
       }
     }
@@ -15093,6 +15924,9 @@
           "patientName": {
             "type": "string"
           },
+          "patientDocNumber": {
+            "type": "string"
+          },
           "nationalCode": {
             "type": "string"
           },
@@ -15107,16 +15941,21 @@
           },
           "isCorrected": {
             "type": "boolean"
+          },
+          "statusText": {
+            "type": "string"
           }
         },
         "required": [
           "date",
           "patientName",
+          "patientDocNumber",
           "nationalCode",
           "paymentGate",
           "userDescription",
           "amount",
-          "isCorrected"
+          "isCorrected",
+          "statusText"
         ]
       },
       "WalletIncreaseReportPaginatedResopnse": {
@@ -15133,12 +15972,18 @@
             "items": {
               "$ref": "#/components/schemas/WalletIncreaseReportItemDto"
             }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
           }
         },
         "required": [
           "meta",
           "links",
-          "items"
+          "items",
+          "totalAmount"
         ]
       },
       "WalletDecreaseReportItemDto": {
@@ -15150,6 +15995,9 @@
           "patientName": {
             "type": "string"
           },
+          "patientDocNumber": {
+            "type": "string"
+          },
           "nationalCode": {
             "type": "string"
           },
@@ -15159,21 +16007,26 @@
           "userDescription": {
             "type": "string"
           },
+          "reductionReason": {
+            "type": "string"
+          },
           "isCorrected": {
             "type": "boolean"
           },
-          "reductionReason": {
+          "statusText": {
             "type": "string"
           }
         },
         "required": [
           "date",
           "patientName",
+          "patientDocNumber",
           "nationalCode",
           "amount",
           "userDescription",
+          "reductionReason",
           "isCorrected",
-          "reductionReason"
+          "statusText"
         ]
       },
       "WalletDecreaseReportPaginatedResponse": {
@@ -15190,12 +16043,18 @@
             "items": {
               "$ref": "#/components/schemas/WalletDecreaseReportItemDto"
             }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
           }
         },
         "required": [
           "meta",
           "links",
-          "items"
+          "items",
+          "totalAmount"
         ]
       },
       "WalletLoanIncreaseReportItemDto": {
@@ -15205,6 +16064,9 @@
             "type": "string"
           },
           "patientName": {
+            "type": "string"
+          },
+          "patientDocNumber": {
             "type": "string"
           },
           "nationalCode": {
@@ -15218,15 +16080,20 @@
           },
           "isCorrected": {
             "type": "boolean"
+          },
+          "statusText": {
+            "type": "string"
           }
         },
         "required": [
           "date",
           "patientName",
+          "patientDocNumber",
           "nationalCode",
           "userDescription",
           "amount",
-          "isCorrected"
+          "isCorrected",
+          "statusText"
         ]
       },
       "WalletLoanIncreaseReportPaginatedResponse": {
@@ -15243,12 +16110,18 @@
             "items": {
               "$ref": "#/components/schemas/WalletLoanIncreaseReportItemDto"
             }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
           }
         },
         "required": [
           "meta",
           "links",
-          "items"
+          "items",
+          "totalAmount"
         ]
       },
       "WalletTransferReportItemDto": {
@@ -15260,10 +16133,16 @@
           "fromPatientName": {
             "type": "string"
           },
+          "fromPatientDocNumber": {
+            "type": "string"
+          },
           "fromNationalCode": {
             "type": "string"
           },
           "toPatientName": {
+            "type": "string"
+          },
+          "toPatientDocNumber": {
             "type": "string"
           },
           "toNationalCode": {
@@ -15276,8 +16155,10 @@
         "required": [
           "date",
           "fromPatientName",
+          "fromPatientDocNumber",
           "fromNationalCode",
           "toPatientName",
+          "toPatientDocNumber",
           "toNationalCode",
           "amount"
         ]
@@ -15296,12 +16177,18 @@
             "items": {
               "$ref": "#/components/schemas/WalletTransferReportItemDto"
             }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
           }
         },
         "required": [
           "meta",
           "links",
-          "items"
+          "items",
+          "totalAmount"
         ]
       },
       "PaidTreatmentReportItemDto": {
@@ -15313,7 +16200,19 @@
           "patientName": {
             "type": "string"
           },
+          "patientDocNumber": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
           "treatmentTitle": {
+            "type": "string"
+          },
+          "treatmentDescription": {
+            "type": "string"
+          },
+          "treatmentPlanDescription": {
             "type": "string"
           },
           "toothNumber": {
@@ -15329,7 +16228,11 @@
         "required": [
           "date",
           "patientName",
+          "patientDocNumber",
+          "nationalCode",
           "treatmentTitle",
+          "treatmentDescription",
+          "treatmentPlanDescription",
           "toothNumber",
           "amount",
           "status"
@@ -15349,12 +16252,18 @@
             "items": {
               "$ref": "#/components/schemas/PaidTreatmentReportItemDto"
             }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
           }
         },
         "required": [
           "meta",
           "links",
-          "items"
+          "items",
+          "totalAmount"
         ]
       },
       "CompletedTreatmentReportItemDto": {
@@ -15366,7 +16275,19 @@
           "patientName": {
             "type": "string"
           },
+          "patientDocNumber": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
           "treatmentTitle": {
+            "type": "string"
+          },
+          "treatmentDescription": {
+            "type": "string"
+          },
+          "treatmentPlanDescription": {
             "type": "string"
           },
           "toothNumber": {
@@ -15385,7 +16306,11 @@
         "required": [
           "date",
           "patientName",
+          "patientDocNumber",
+          "nationalCode",
           "treatmentTitle",
+          "treatmentDescription",
+          "treatmentPlanDescription",
           "toothNumber",
           "amount",
           "status",
@@ -15405,6 +16330,410 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CompletedTreatmentReportItemDto"
+            }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "items",
+          "totalAmount"
+        ]
+      },
+      "WalletTransactionReportItemDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "patientName": {
+            "type": "string"
+          },
+          "patientDocNumber": {
+            "type": "string"
+          },
+          "paymentGate": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
+          "userDescription": {
+            "type": "string"
+          },
+          "treatmentTitle": {
+            "type": "string"
+          },
+          "toothNumber": {
+            "type": "string"
+          },
+          "isCorrected": {
+            "type": "boolean"
+          },
+          "statusText": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "date",
+          "patientName",
+          "patientDocNumber",
+          "paymentGate",
+          "nationalCode",
+          "userDescription",
+          "treatmentTitle",
+          "toothNumber",
+          "isCorrected",
+          "statusText",
+          "amount"
+        ]
+      },
+      "WalletTransactionReportPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WalletTransactionReportItemDto"
+            }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amount for current page",
+            "example": 1250000
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "items",
+          "totalAmount"
+        ]
+      },
+      "PatientRegistrationReportItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "documentNumber": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "specialDiseases": {
+            "type": "string"
+          },
+          "allergyBackground": {
+            "type": "string"
+          },
+          "medications": {
+            "type": "string"
+          },
+          "surgeryHistory": {
+            "type": "string"
+          },
+          "communicableDiseases": {
+            "type": "string"
+          },
+          "drugSensitivity": {
+            "type": "string"
+          },
+          "visitReason": {
+            "type": "string"
+          },
+          "oralHygieneHabits": {
+            "type": "string"
+          },
+          "toothSensitivity": {
+            "type": "string"
+          },
+          "lastVisitDate": {
+            "type": "string"
+          },
+          "lastTreatmentType": {
+            "type": "string"
+          },
+          "insuranceCompany": {
+            "type": "string"
+          },
+          "insurancePlan": {
+            "type": "string"
+          },
+          "insuranceNumber": {
+            "type": "string"
+          },
+          "insuranceExpirationDate": {
+            "type": "string"
+          },
+          "dentalCoverage": {
+            "type": "boolean"
+          },
+          "maxSupport": {
+            "type": "number"
+          },
+          "stressLevel": {
+            "type": "string"
+          },
+          "specialRequests": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "documentNumber",
+          "createdAt",
+          "firstName",
+          "lastName",
+          "nationalCode",
+          "phoneNumber",
+          "birthDate",
+          "gender",
+          "specialDiseases",
+          "allergyBackground",
+          "medications",
+          "surgeryHistory",
+          "communicableDiseases",
+          "drugSensitivity",
+          "visitReason",
+          "oralHygieneHabits",
+          "toothSensitivity",
+          "lastVisitDate",
+          "lastTreatmentType",
+          "insuranceCompany",
+          "insurancePlan",
+          "insuranceNumber",
+          "insuranceExpirationDate",
+          "dentalCoverage",
+          "maxSupport",
+          "stressLevel",
+          "specialRequests"
+        ]
+      },
+      "PatientRegistrationReportPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientRegistrationReportItemDto"
+            }
+          },
+          "totalCount": {
+            "type": "number",
+            "description": "Total count of all records matching filter"
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "items",
+          "totalCount"
+        ]
+      },
+      "AppointmentsReportItemDto": {
+        "type": "object",
+        "properties": {
+          "appointment": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "startTime": {
+                "type": "string"
+              },
+              "endTime": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "isRushed": {
+                "type": "boolean"
+              },
+              "isSuspended": {
+                "type": "boolean"
+              },
+              "guestPatientFirstName": {
+                "type": "string"
+              },
+              "guestPatientLastName": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "date",
+              "startTime",
+              "endTime",
+              "status",
+              "isRushed",
+              "isSuspended",
+              "guestPatientFirstName",
+              "guestPatientLastName",
+              "createdAt"
+            ]
+          },
+          "patient": {
+            "type": "object",
+            "properties": {
+              "documentNumber": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "nationalCode": {
+                "type": "string"
+              },
+              "phoneNumber": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "documentNumber",
+              "firstName",
+              "lastName",
+              "nationalCode",
+              "phoneNumber"
+            ]
+          },
+          "doctor": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName"
+            ]
+          },
+          "unit": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "assistant": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName"
+            ]
+          },
+          "treatmentPlan": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "categoryName": {
+                "type": "string"
+              },
+              "dentNameId": {
+                "type": "string"
+              },
+              "dentNameNumber": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "description",
+              "categoryName",
+              "dentNameId",
+              "dentNameNumber",
+              "status"
+            ]
+          }
+        },
+        "required": [
+          "appointment",
+          "patient",
+          "doctor",
+          "unit",
+          "assistant",
+          "treatmentPlan"
+        ]
+      },
+      "AppointmentsReportPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentsReportItemDto"
             }
           }
         },

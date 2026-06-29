@@ -26,6 +26,9 @@ import type {
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
+/**
+ * @summary required permisson: read_wallet_loan_increase_report
+ */
 export const walletLoanIncreaseReportControllerWalletLoanIncreaseReport = (
   params?: WalletLoanIncreaseReportControllerWalletLoanIncreaseReportParams,
   signal?: AbortSignal
@@ -146,6 +149,9 @@ export function useWalletLoanIncreaseReportControllerWalletLoanIncreaseReport<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_loan_increase_report
+ */
 
 export function useWalletLoanIncreaseReportControllerWalletLoanIncreaseReport<
   TData = Awaited<ReturnType<typeof walletLoanIncreaseReportControllerWalletLoanIncreaseReport>>,
@@ -177,6 +183,9 @@ export function useWalletLoanIncreaseReportControllerWalletLoanIncreaseReport<
   return query;
 }
 
+/**
+ * @summary required permisson: read_wallet_loan_increase_report
+ */
 export const walletLoanIncreaseReportControllerWalletLoanIncreaseExcel = (
   params?: WalletLoanIncreaseReportControllerWalletLoanIncreaseExcelParams,
   signal?: AbortSignal
@@ -299,6 +308,9 @@ export function useWalletLoanIncreaseReportControllerWalletLoanIncreaseExcel<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_loan_increase_report
+ */
 
 export function useWalletLoanIncreaseReportControllerWalletLoanIncreaseExcel<
   TData = Awaited<ReturnType<typeof walletLoanIncreaseReportControllerWalletLoanIncreaseExcel>>,

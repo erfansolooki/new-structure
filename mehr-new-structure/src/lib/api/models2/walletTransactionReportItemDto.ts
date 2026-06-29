@@ -8,6 +8,7 @@
 export interface WalletTransactionReportItemDto {
   date: string;
   patientName: string;
+  patientDocNumber: string;
   paymentGate: string;
   nationalCode: string;
   userDescription: string;

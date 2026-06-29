@@ -26,6 +26,9 @@ import type {
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
+/**
+ * @summary required permisson: read_wallet_transfer_report
+ */
 export const walletTransferReportControllerWalletTransferReport = (
   params?: WalletTransferReportControllerWalletTransferReportParams,
   signal?: AbortSignal
@@ -145,6 +148,9 @@ export function useWalletTransferReportControllerWalletTransferReport<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_transfer_report
+ */
 
 export function useWalletTransferReportControllerWalletTransferReport<
   TData = Awaited<ReturnType<typeof walletTransferReportControllerWalletTransferReport>>,
@@ -176,6 +182,9 @@ export function useWalletTransferReportControllerWalletTransferReport<
   return query;
 }
 
+/**
+ * @summary required permisson: read_wallet_transfer_report
+ */
 export const walletTransferReportControllerWalletTransferExcel = (
   params?: WalletTransferReportControllerWalletTransferExcelParams,
   signal?: AbortSignal
@@ -294,6 +303,9 @@ export function useWalletTransferReportControllerWalletTransferExcel<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_wallet_transfer_report
+ */
 
 export function useWalletTransferReportControllerWalletTransferExcel<
   TData = Awaited<ReturnType<typeof walletTransferReportControllerWalletTransferExcel>>,

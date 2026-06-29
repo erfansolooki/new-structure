@@ -26,6 +26,9 @@ import type {
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
+/**
+ * @summary required permisson: read_paid_treatment_report
+ */
 export const paidTreatmentReportControllerPaidTreatmentReport = (
   params?: PaidTreatmentReportControllerPaidTreatmentReportParams,
   signal?: AbortSignal
@@ -145,6 +148,9 @@ export function usePaidTreatmentReportControllerPaidTreatmentReport<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_paid_treatment_report
+ */
 
 export function usePaidTreatmentReportControllerPaidTreatmentReport<
   TData = Awaited<ReturnType<typeof paidTreatmentReportControllerPaidTreatmentReport>>,
@@ -176,6 +182,9 @@ export function usePaidTreatmentReportControllerPaidTreatmentReport<
   return query;
 }
 
+/**
+ * @summary required permisson: read_paid_treatment_report
+ */
 export const paidTreatmentReportControllerPaidTreatmentExcel = (
   params?: PaidTreatmentReportControllerPaidTreatmentExcelParams,
   signal?: AbortSignal
@@ -294,6 +303,9 @@ export function usePaidTreatmentReportControllerPaidTreatmentExcel<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_paid_treatment_report
+ */
 
 export function usePaidTreatmentReportControllerPaidTreatmentExcel<
   TData = Awaited<ReturnType<typeof paidTreatmentReportControllerPaidTreatmentExcel>>,

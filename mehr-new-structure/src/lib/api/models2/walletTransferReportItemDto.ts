@@ -8,8 +8,10 @@
 export interface WalletTransferReportItemDto {
   date: string;
   fromPatientName: string;
+  fromPatientDocNumber: string;
   fromNationalCode: string;
   toPatientName: string;
+  toPatientDocNumber: string;
   toNationalCode: string;
   amount: number;
 }

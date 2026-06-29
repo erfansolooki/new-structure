@@ -26,6 +26,9 @@ import type {
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
 
+/**
+ * @summary required permisson: read_completed_treatment_report
+ */
 export const completedTreatmentReportControllerCompletedTreatmentReport = (
   params?: CompletedTreatmentReportControllerCompletedTreatmentReportParams,
   signal?: AbortSignal
@@ -146,6 +149,9 @@ export function useCompletedTreatmentReportControllerCompletedTreatmentReport<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_completed_treatment_report
+ */
 
 export function useCompletedTreatmentReportControllerCompletedTreatmentReport<
   TData = Awaited<ReturnType<typeof completedTreatmentReportControllerCompletedTreatmentReport>>,
@@ -177,6 +183,9 @@ export function useCompletedTreatmentReportControllerCompletedTreatmentReport<
   return query;
 }
 
+/**
+ * @summary required permisson: read_completed_treatment_report
+ */
 export const completedTreatmentReportControllerCompletedTreatmentExcel = (
   params?: CompletedTreatmentReportControllerCompletedTreatmentExcelParams,
   signal?: AbortSignal
@@ -299,6 +308,9 @@ export function useCompletedTreatmentReportControllerCompletedTreatmentExcel<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_completed_treatment_report
+ */
 
 export function useCompletedTreatmentReportControllerCompletedTreatmentExcel<
   TData = Awaited<ReturnType<typeof completedTreatmentReportControllerCompletedTreatmentExcel>>,

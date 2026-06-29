@@ -8,6 +8,7 @@
 export interface WalletLoanIncreaseReportItemDto {
   date: string;
   patientName: string;
+  patientDocNumber: string;
   nationalCode: string;
   userDescription: string;
   amount: number;

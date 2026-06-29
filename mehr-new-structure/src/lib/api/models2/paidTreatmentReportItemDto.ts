@@ -8,7 +8,11 @@
 export interface PaidTreatmentReportItemDto {
   date: string;
   patientName: string;
+  patientDocNumber: string;
+  nationalCode: string;
   treatmentTitle: string;
+  treatmentDescription: string;
+  treatmentPlanDescription: string;
   toothNumber: string;
   amount: number;
   status: string;

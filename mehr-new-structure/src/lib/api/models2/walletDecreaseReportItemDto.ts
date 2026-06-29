@@ -8,6 +8,7 @@
 export interface WalletDecreaseReportItemDto {
   date: string;
   patientName: string;
+  patientDocNumber: string;
   nationalCode: string;
   amount: number;
   userDescription: string;
