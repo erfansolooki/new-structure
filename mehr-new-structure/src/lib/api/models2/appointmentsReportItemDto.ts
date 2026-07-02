@@ -12,6 +12,7 @@ import type { AppointmentsReportItemDtoAssistant } from './appointmentsReportIte
 import type { AppointmentsReportItemDtoTreatmentPlan } from './appointmentsReportItemDtoTreatmentPlan';
 
 export interface AppointmentsReportItemDto {
+  id: string;
   appointment: AppointmentsReportItemDtoAppointment;
   patient: AppointmentsReportItemDtoPatient;
   doctor: AppointmentsReportItemDtoDoctor;

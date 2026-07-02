@@ -6,6 +6,7 @@
  */
 
 export interface WalletIncreaseReportItemDto {
+  id: string;
   date: string;
   patientName: string;
   patientDocNumber: string;

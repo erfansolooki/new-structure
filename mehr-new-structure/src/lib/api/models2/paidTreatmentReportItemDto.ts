@@ -6,10 +6,12 @@
  */
 
 export interface PaidTreatmentReportItemDto {
+  id: string;
   date: string;
   patientName: string;
   patientDocNumber: string;
   nationalCode: string;
+  categoryName: string;
   treatmentTitle: string;
   treatmentDescription: string;
   treatmentPlanDescription: string;
