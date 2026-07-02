@@ -3821,6 +3821,15 @@
             }
           },
           {
+            "name": "patientId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "required": false,
             "in": "query",
@@ -9109,6 +9118,37 @@
         ]
       }
     },
+    "/api/paid-treatment-plans/treatment-plan/{id}": {
+      "get": {
+        "operationId": "PaidTreatmentPlanController_findByTreatmentPlanId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaidTreatmentPlan"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_paid_treatment_plan",
+        "tags": [
+          "PaidTreatmentPlan"
+        ]
+      }
+    },
     "/api/paid-treatment-plans/{id}": {
       "get": {
         "operationId": "PaidTreatmentPlanController_findOne",
@@ -9134,6 +9174,39 @@
             }
           }
         },
+        "summary": "required permisson: read_paid_treatment_plan",
+        "tags": [
+          "PaidTreatmentPlan"
+        ]
+      },
+      "put": {
+        "operationId": "PaidTreatmentPlanController_setAsRevertable",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaidTreatmentPlanAsUnusedDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: update_paid_treatment_plan",
         "tags": [
           "PaidTreatmentPlan"
         ]
@@ -12391,6 +12464,420 @@
         ]
       }
     },
+    "/api/reports/financial/registered-treatment-plans": {
+      "get": {
+        "operationId": "RegisteredTreatmentPlanReportController_registeredTreatmentPlans",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "جستجو در نام، شماره پرونده یا کد ملی درمانپذیر",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IN_PROGRESS",
+                "WAITING_FOR_REVIEW",
+                "SELECTED",
+                "PAID",
+                "CANCELLED",
+                "COMPLETED"
+              ]
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "CHEQUE",
+                "LOAN"
+              ]
+            }
+          },
+          {
+            "name": "isPaid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exportGridData",
+            "required": false,
+            "in": "query",
+            "description": "If true, returns an Excel file instead of JSON grid data",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisteredTreatmentPlanReportPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_registered_treatment_report",
+        "tags": [
+          "RegisteredTreatmentPlanReport"
+        ]
+      }
+    },
+    "/api/reports/financial/registered-treatment-plans/excel": {
+      "get": {
+        "operationId": "RegisteredTreatmentPlanReportController_registeredTreatmentPlansExcel",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IN_PROGRESS",
+                "WAITING_FOR_REVIEW",
+                "SELECTED",
+                "PAID",
+                "CANCELLED",
+                "COMPLETED"
+              ]
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "CHEQUE",
+                "LOAN"
+              ]
+            }
+          },
+          {
+            "name": "isPaid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: read_registered_treatment_report",
+        "tags": [
+          "RegisteredTreatmentPlanReport"
+        ]
+      }
+    },
+    "/api/reports/financial/loan-paid-treatment-plans": {
+      "get": {
+        "operationId": "LoanPaidTreatmentPlanReportController_loanPaidTreatmentPlans",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "description": "جستجو در نام، شماره پرونده یا کد ملی درمانپذیر",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "dentNameId",
+            "required": false,
+            "in": "query",
+            "description": "شناسه دندان (UUID)",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exportGridData",
+            "required": false,
+            "in": "query",
+            "description": "If true, returns an Excel file instead of JSON grid data",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoanPaidTreatmentPlanReportPaginatedResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "required permisson: read_loan_paid_treatment_report",
+        "tags": [
+          "LoanPaidTreatmentPlanReport"
+        ]
+      }
+    },
+    "/api/reports/financial/loan-paid-treatment-plans/excel": {
+      "get": {
+        "operationId": "LoanPaidTreatmentPlanReportController_loanPaidTreatmentPlansExcel",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "dentNameId",
+            "required": false,
+            "in": "query",
+            "description": "شناسه دندان (UUID)",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "required permisson: read_loan_paid_treatment_report",
+        "tags": [
+          "LoanPaidTreatmentPlanReport"
+        ]
+      }
+    },
     "/api/reports/admission/patient-registration": {
       "get": {
         "operationId": "PatientRegistrationReportController_patientRegistrationReport",
@@ -15362,6 +15849,17 @@
 
         }
       },
+      "SetPaidTreatmentPlanAsUnusedDto": {
+        "type": "object",
+        "properties": {
+          "setAsRevertAbleDescription": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "setAsRevertAbleDescription"
+        ]
+      },
       "CreateSupportRequestDto": {
         "type": "object",
         "properties": {
@@ -15918,6 +16416,9 @@
       "WalletIncreaseReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -15947,6 +16448,7 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
@@ -15989,6 +16491,9 @@
       "WalletDecreaseReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16018,6 +16523,7 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
@@ -16060,6 +16566,9 @@
       "WalletLoanIncreaseReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16086,6 +16595,7 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
@@ -16127,6 +16637,9 @@
       "WalletTransferReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16153,6 +16666,7 @@
           }
         },
         "required": [
+          "id",
           "date",
           "fromPatientName",
           "fromPatientDocNumber",
@@ -16194,6 +16708,9 @@
       "PaidTreatmentReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16204,6 +16721,9 @@
             "type": "string"
           },
           "nationalCode": {
+            "type": "string"
+          },
+          "categoryName": {
             "type": "string"
           },
           "treatmentTitle": {
@@ -16226,10 +16746,12 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
           "nationalCode",
+          "categoryName",
           "treatmentTitle",
           "treatmentDescription",
           "treatmentPlanDescription",
@@ -16269,6 +16791,9 @@
       "CompletedTreatmentReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16279,6 +16804,9 @@
             "type": "string"
           },
           "nationalCode": {
+            "type": "string"
+          },
+          "categoryName": {
             "type": "string"
           },
           "treatmentTitle": {
@@ -16304,10 +16832,12 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
           "nationalCode",
+          "categoryName",
           "treatmentTitle",
           "treatmentDescription",
           "treatmentPlanDescription",
@@ -16348,6 +16878,9 @@
       "WalletTransactionReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "date": {
             "type": "string"
           },
@@ -16383,6 +16916,7 @@
           }
         },
         "required": [
+          "id",
           "date",
           "patientName",
           "patientDocNumber",
@@ -16414,6 +16948,189 @@
           "totalAmount": {
             "type": "number",
             "description": "Sum of amount for current page",
+            "example": 1250000
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "items",
+          "totalAmount"
+        ]
+      },
+      "RegisteredTreatmentPlanReportItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "patientName": {
+            "type": "string"
+          },
+          "patientDocNumber": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
+          "doctorName": {
+            "type": "string"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "treatmentTitle": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "IN_PROGRESS",
+              "WAITING_FOR_REVIEW",
+              "SELECTED",
+              "PAID",
+              "CANCELLED",
+              "COMPLETED"
+            ]
+          },
+          "isSelected": {
+            "type": "boolean"
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": [
+              "CASH",
+              "CHEQUE",
+              "LOAN"
+            ]
+          },
+          "hasTreatment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "patientName",
+          "patientDocNumber",
+          "nationalCode",
+          "doctorName",
+          "categoryName",
+          "treatmentTitle",
+          "status",
+          "isSelected",
+          "isPaid",
+          "amount",
+          "paymentMethod",
+          "hasTreatment"
+        ]
+      },
+      "RegisteredTreatmentPlanReportPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegisteredTreatmentPlanReportItemDto"
+            }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amounts for current page",
+            "example": 1250000
+          }
+        },
+        "required": [
+          "meta",
+          "links",
+          "items",
+          "totalAmount"
+        ]
+      },
+      "LoanPaidTreatmentPlanReportItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "patientName": {
+            "type": "string"
+          },
+          "patientDocNumber": {
+            "type": "string"
+          },
+          "nationalCode": {
+            "type": "string"
+          },
+          "doctorName": {
+            "type": "string"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "treatmentTitle": {
+            "type": "string"
+          },
+          "toothNumber": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "loanAmount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "patientName",
+          "patientDocNumber",
+          "nationalCode",
+          "doctorName",
+          "categoryName",
+          "treatmentTitle",
+          "toothNumber",
+          "amount",
+          "loanAmount"
+        ]
+      },
+      "LoanPaidTreatmentPlanReportPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinksDto"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoanPaidTreatmentPlanReportItemDto"
+            }
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Sum of amounts for current page",
             "example": 1250000
           }
         },
@@ -16573,6 +17290,9 @@
       "AppointmentsReportItemDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "appointment": {
             "type": "object",
             "properties": {
@@ -16693,6 +17413,9 @@
               "categoryName": {
                 "type": "string"
               },
+              "treatmentTitle": {
+                "type": "string"
+              },
               "dentNameId": {
                 "type": "string"
               },
@@ -16706,6 +17429,7 @@
             "required": [
               "description",
               "categoryName",
+              "treatmentTitle",
               "dentNameId",
               "dentNameNumber",
               "status"
@@ -16713,6 +17437,7 @@
           }
         },
         "required": [
+          "id",
           "appointment",
           "patient",
           "doctor",

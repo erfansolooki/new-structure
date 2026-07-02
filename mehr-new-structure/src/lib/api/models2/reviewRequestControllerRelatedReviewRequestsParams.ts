@@ -16,6 +16,7 @@ export type ReviewRequestControllerRelatedReviewRequestsParams = {
   sortBy?: ReviewRequestControllerRelatedReviewRequestsSortBy;
   cancelStage?: ReviewRequestControllerRelatedReviewRequestsCancelStage;
   type?: ReviewRequestControllerRelatedReviewRequestsType;
+  patientId?: string;
   page?: number;
   limit?: number;
 };

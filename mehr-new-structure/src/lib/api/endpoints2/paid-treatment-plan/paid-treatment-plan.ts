@@ -4,15 +4,18 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
   DefinedUseQueryResult,
+  MutationFunction,
   QueryClient,
   QueryFunction,
   QueryKey,
   UndefinedInitialDataOptions,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from '@tanstack/react-query';
@@ -21,6 +24,7 @@ import type {
   PaidTreatmentPlan,
   PaidTreatmentPlanControllerFindAllParams,
   PaidTreatmentPlanControllerFindMineParams,
+  SetPaidTreatmentPlanAsUnusedDto,
 } from '../../models2';
 
 import { apiInstance } from '../../../swaggerConfig/apiInstance';
@@ -435,6 +439,158 @@ export function usePaidTreatmentPlanControllerFindOneMine<
   return query;
 }
 
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
+export const paidTreatmentPlanControllerFindByTreatmentPlanId = (
+  id: string,
+  signal?: AbortSignal
+) => {
+  return apiInstance<PaidTreatmentPlan>({
+    url: `/api/paid-treatment-plans/treatment-plan/${id}`,
+    method: 'GET',
+    signal,
+  });
+};
+
+export const getPaidTreatmentPlanControllerFindByTreatmentPlanIdQueryKey = (id?: string) => {
+  return [`/api/paid-treatment-plans/treatment-plan/${id}`] as const;
+};
+
+export const getPaidTreatmentPlanControllerFindByTreatmentPlanIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getPaidTreatmentPlanControllerFindByTreatmentPlanIdQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>
+  > = ({ signal }) => paidTreatmentPlanControllerFindByTreatmentPlanId(id, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type PaidTreatmentPlanControllerFindByTreatmentPlanIdQueryResult = NonNullable<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>
+>;
+export type PaidTreatmentPlanControllerFindByTreatmentPlanIdQueryError = unknown;
+
+export function usePaidTreatmentPlanControllerFindByTreatmentPlanId<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindByTreatmentPlanId<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindByTreatmentPlanId<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
+
+export function usePaidTreatmentPlanControllerFindByTreatmentPlanId<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindByTreatmentPlanId>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getPaidTreatmentPlanControllerFindByTreatmentPlanIdQueryOptions(id, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
 export const paidTreatmentPlanControllerFindOne = (id: string, signal?: AbortSignal) => {
   return apiInstance<PaidTreatmentPlan>({
     url: `/api/paid-treatment-plans/${id}`,
@@ -530,6 +686,9 @@ export function usePaidTreatmentPlanControllerFindOne<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
 
 export function usePaidTreatmentPlanControllerFindOne<
   TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindOne>>,
@@ -554,6 +713,86 @@ export function usePaidTreatmentPlanControllerFindOne<
   return query;
 }
 
+/**
+ * @summary required permisson: update_paid_treatment_plan
+ */
+export const paidTreatmentPlanControllerSetAsRevertable = (
+  id: string,
+  setPaidTreatmentPlanAsUnusedDto: SetPaidTreatmentPlanAsUnusedDto
+) => {
+  return apiInstance<void>({
+    url: `/api/paid-treatment-plans/${id}`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: setPaidTreatmentPlanAsUnusedDto,
+  });
+};
+
+export const getPaidTreatmentPlanControllerSetAsRevertableMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>,
+    TError,
+    { id: string; data: SetPaidTreatmentPlanAsUnusedDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>,
+  TError,
+  { id: string; data: SetPaidTreatmentPlanAsUnusedDto },
+  TContext
+> => {
+  const mutationKey = ['paidTreatmentPlanControllerSetAsRevertable'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>,
+    { id: string; data: SetPaidTreatmentPlanAsUnusedDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return paidTreatmentPlanControllerSetAsRevertable(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PaidTreatmentPlanControllerSetAsRevertableMutationResult = NonNullable<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>
+>;
+export type PaidTreatmentPlanControllerSetAsRevertableMutationBody =
+  SetPaidTreatmentPlanAsUnusedDto;
+export type PaidTreatmentPlanControllerSetAsRevertableMutationError = unknown;
+
+/**
+ * @summary required permisson: update_paid_treatment_plan
+ */
+export const usePaidTreatmentPlanControllerSetAsRevertable = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>,
+      TError,
+      { id: string; data: SetPaidTreatmentPlanAsUnusedDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerSetAsRevertable>>,
+  TError,
+  { id: string; data: SetPaidTreatmentPlanAsUnusedDto },
+  TContext
+> => {
+  const mutationOptions = getPaidTreatmentPlanControllerSetAsRevertableMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
 /**
  * @summary required permisson: read_paid_treatment_plan
  */

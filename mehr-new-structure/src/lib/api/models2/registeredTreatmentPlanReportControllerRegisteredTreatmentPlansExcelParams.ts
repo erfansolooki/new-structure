@@ -11,7 +11,6 @@ export type RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcel
   searchTerm?: string;
   doctorId?: string;
   categoryId?: string;
-  treatmentId?: string;
   status?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelStatus;
   paymentMethod?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelPaymentMethod;
   isPaid?: boolean;

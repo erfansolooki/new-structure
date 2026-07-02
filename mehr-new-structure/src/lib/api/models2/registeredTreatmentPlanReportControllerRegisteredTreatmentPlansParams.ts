@@ -14,7 +14,6 @@ export type RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansParam
   searchTerm?: string;
   doctorId?: string;
   categoryId?: string;
-  treatmentId?: string;
   status?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansStatus;
   paymentMethod?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansPaymentMethod;
   isPaid?: boolean;

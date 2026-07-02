@@ -6,6 +6,7 @@
  */
 
 export interface WalletTransferReportItemDto {
+  id: string;
   date: string;
   fromPatientName: string;
   fromPatientDocNumber: string;
