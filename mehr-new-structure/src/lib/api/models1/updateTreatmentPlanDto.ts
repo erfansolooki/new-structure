@@ -4,7 +4,8 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { UpdateTreatmentPlanDtoStatus } from './updateTreatmentPlanDtoStatus';
 
 export interface UpdateTreatmentPlanDto {
-  [key: string]: unknown;
+  status?: UpdateTreatmentPlanDtoStatus;
 }

@@ -8,5 +8,6 @@
 export type AppointmentsControllerGetFirstFreeSlotsParams = {
   treatmentCategoryId: string;
   doctorId?: string;
+  requiredTime?: string;
   page?: number;
 };

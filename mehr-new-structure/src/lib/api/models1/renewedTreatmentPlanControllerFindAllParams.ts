@@ -8,10 +8,15 @@ import type { RenewedTreatmentPlanControllerFindAllStatus } from './renewedTreat
 import type { RenewedTreatmentPlanControllerFindAllCancelStage } from './renewedTreatmentPlanControllerFindAllCancelStage';
 
 export type RenewedTreatmentPlanControllerFindAllParams = {
+  fromDate?: string;
+  toDate?: string;
   canceledPlanId?: string;
   newPlanId?: string;
   status?: RenewedTreatmentPlanControllerFindAllStatus;
   cancelStage?: RenewedTreatmentPlanControllerFindAllCancelStage;
+  patientId?: string;
+  doctorId?: string;
+  documentNumber?: string;
   page?: number;
   limit?: number;
 };

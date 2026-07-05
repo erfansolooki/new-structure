@@ -27,6 +27,7 @@ import type {
   TreatMentCategoryControllerFindAllPaginatedParams,
   TreatMentCategoryControllerFindAllParams,
   TreatMentCategoryControllerFindChilds200Item,
+  TreatMentCategoryControllerFindChildsParams,
   TreatMentCategoryControllerFindLeafChilds200Item,
   TreatMentCategoryControllerGetTree200Item,
   TreatMentCategoryControllerUpdate200,
@@ -793,16 +794,24 @@ export const useTreatMentCategoryControllerRemove = <TError = unknown, TContext 
 
   return useMutation(mutationOptions, queryClient);
 };
-export const treatMentCategoryControllerFindChilds = (id: string, signal?: AbortSignal) => {
+export const treatMentCategoryControllerFindChilds = (
+  id: string,
+  params?: TreatMentCategoryControllerFindChildsParams,
+  signal?: AbortSignal
+) => {
   return apiInstance<TreatMentCategoryControllerFindChilds200Item[]>({
     url: `/api/treatment-categories/${id}/children`,
     method: 'GET',
+    params,
     signal,
   });
 };
 
-export const getTreatMentCategoryControllerFindChildsQueryKey = (id?: string) => {
-  return [`/api/treatment-categories/${id}/children`] as const;
+export const getTreatMentCategoryControllerFindChildsQueryKey = (
+  id?: string,
+  params?: TreatMentCategoryControllerFindChildsParams
+) => {
+  return [`/api/treatment-categories/${id}/children`, ...(params ? [params] : [])] as const;
 };
 
 export const getTreatMentCategoryControllerFindChildsQueryOptions = <
@@ -810,6 +819,7 @@ export const getTreatMentCategoryControllerFindChildsQueryOptions = <
   TError = unknown,
 >(
   id: string,
+  params?: TreatMentCategoryControllerFindChildsParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -822,11 +832,12 @@ export const getTreatMentCategoryControllerFindChildsQueryOptions = <
 ) => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getTreatMentCategoryControllerFindChildsQueryKey(id);
+  const queryKey =
+    queryOptions?.queryKey ?? getTreatMentCategoryControllerFindChildsQueryKey(id, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof treatMentCategoryControllerFindChilds>>
-  > = ({ signal }) => treatMentCategoryControllerFindChilds(id, signal);
+  > = ({ signal }) => treatMentCategoryControllerFindChilds(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof treatMentCategoryControllerFindChilds>>,
@@ -845,6 +856,7 @@ export function useTreatMentCategoryControllerFindChilds<
   TError = unknown,
 >(
   id: string,
+  params: undefined | TreatMentCategoryControllerFindChildsParams,
   options: {
     query: Partial<
       UseQueryOptions<
@@ -869,6 +881,7 @@ export function useTreatMentCategoryControllerFindChilds<
   TError = unknown,
 >(
   id: string,
+  params?: TreatMentCategoryControllerFindChildsParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -893,6 +906,7 @@ export function useTreatMentCategoryControllerFindChilds<
   TError = unknown,
 >(
   id: string,
+  params?: TreatMentCategoryControllerFindChildsParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -910,6 +924,7 @@ export function useTreatMentCategoryControllerFindChilds<
   TError = unknown,
 >(
   id: string,
+  params?: TreatMentCategoryControllerFindChildsParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -921,7 +936,7 @@ export function useTreatMentCategoryControllerFindChilds<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getTreatMentCategoryControllerFindChildsQueryOptions(id, options);
+  const queryOptions = getTreatMentCategoryControllerFindChildsQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;
@@ -1290,6 +1305,83 @@ export const useTreatMentCategoryControllerSetDeppositSettings = <
   TContext
 > => {
   const mutationOptions = getTreatMentCategoryControllerSetDeppositSettingsMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const treatMentCategoryControllerActivateDeactivate = (id: string) => {
+  return apiInstance<void>({
+    url: `/api/treatment-categories/${id}/activate-deactivate`,
+    method: 'PATCH',
+  });
+};
+
+export const getTreatMentCategoryControllerActivateDeactivateMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerActivateDeactivate'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return treatMentCategoryControllerActivateDeactivate(id);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerActivateDeactivateMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>
+>;
+
+export type TreatMentCategoryControllerActivateDeactivateMutationError = unknown;
+
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const useTreatMentCategoryControllerActivateDeactivate = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerActivateDeactivate>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getTreatMentCategoryControllerActivateDeactivateMutationOptions(options);
 
   return useMutation(mutationOptions, queryClient);
 };

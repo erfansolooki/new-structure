@@ -10,11 +10,13 @@ export type TreatMentCategoryControllerFindAllPaginatedParams = {
   justRootNodes?: boolean;
   name?: string;
   persianName?: string;
+  search?: string;
   description?: string;
   parentId?: string;
   needsLab?: boolean;
   insuranceCategoryId?: string;
   sortByOrder?: TreatMentCategoryControllerFindAllPaginatedSortByOrder;
+  isActive?: boolean;
   page?: number;
   limit?: number;
 };

@@ -33,7 +33,6 @@ import type {
   TreatmentPlanControllerCreateMultiple201,
   TreatmentPlanControllerFindAllByUserParams,
   TreatmentPlanControllerFindAllParams,
-  TreatmentPlanControllerFindByInvoice200Item,
   TreatmentPlanControllerFindByInvoiceParams,
   TreatmentPlanControllerGetFilesParams,
   TreatmentPlanControllerGetHistoryByDateParams,
@@ -1250,7 +1249,7 @@ export const treatmentPlanControllerFindByInvoice = (
   params?: TreatmentPlanControllerFindByInvoiceParams,
   signal?: AbortSignal
 ) => {
-  return apiInstance<TreatmentPlanControllerFindByInvoice200Item[]>({
+  return apiInstance<void>({
     url: `/api/treatment-plans/invoice/${invoiceId}`,
     method: 'GET',
     params,

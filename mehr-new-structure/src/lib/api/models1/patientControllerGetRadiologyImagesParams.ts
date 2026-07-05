@@ -18,4 +18,5 @@ export type PatientControllerGetRadiologyImagesParams = {
   relatedId?: string;
   page?: number;
   limit?: number;
+  dentNameId?: string;
 };

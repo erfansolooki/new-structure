@@ -6,10 +6,10 @@
  */
 
 export interface UpdateCheckDto {
-  dueDate: string;
+  dueDate?: string;
   /** @minimum 1 */
-  amount: number;
-  bankName: string;
-  branch: string;
-  checkNumber: string;
+  amount?: number;
+  bankName?: string;
+  branch?: string;
+  checkNumber?: string;
 }

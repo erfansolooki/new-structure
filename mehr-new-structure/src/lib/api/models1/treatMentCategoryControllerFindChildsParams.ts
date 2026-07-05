@@ -4,9 +4,9 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
-import type { TreatMentCategoryControllerFindAllSortByOrder } from './treatMentCategoryControllerFindAllSortByOrder';
+import type { TreatMentCategoryControllerFindChildsSortByOrder } from './treatMentCategoryControllerFindChildsSortByOrder';
 
-export type TreatMentCategoryControllerFindAllParams = {
+export type TreatMentCategoryControllerFindChildsParams = {
   justRootNodes?: boolean;
   name?: string;
   persianName?: string;
@@ -15,7 +15,7 @@ export type TreatMentCategoryControllerFindAllParams = {
   parentId?: string;
   needsLab?: boolean;
   insuranceCategoryId?: string;
-  sortByOrder?: TreatMentCategoryControllerFindAllSortByOrder;
+  sortByOrder?: TreatMentCategoryControllerFindChildsSortByOrder;
   isActive?: boolean;
   page?: number;
   limit?: number;

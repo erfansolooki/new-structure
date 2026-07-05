@@ -6,12 +6,12 @@
  */
 
 export interface CreateCheckDto {
-  dueDate: string;
+  dueDate?: string;
   /** @minimum 1 */
   amount: number;
-  bankName: string;
-  branch: string;
-  checkNumber: string;
-  description: string;
+  bankName?: string;
+  branch?: string;
+  checkNumber?: string;
+  description?: string;
   userId: string;
 }
