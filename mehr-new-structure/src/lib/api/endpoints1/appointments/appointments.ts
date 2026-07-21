@@ -34,6 +34,8 @@ import type {
   AppointmentsControllerGetFirstFreeSlotsParams,
   AppointmentsControllerGetFreeDoctors200Item,
   AppointmentsControllerGetFreeDoctorsParams,
+  AppointmentsControllerGetSubstitutableCanceledParams,
+  AppointmentsControllerGetSubstitutableRushedParams,
   AppointmentsControllerGetUnitFreeSlotsParams,
   AppointmentsControllerLastUpdateParams,
   AppointmentsControllerPatientAppointmentsParams,
@@ -2503,17 +2505,22 @@ export const useAppointmentsControllerDisableRush = <TError = unknown, TContext 
  */
 export const appointmentsControllerGetSubstitutableCanceled = (
   id: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams,
   signal?: AbortSignal
 ) => {
-  return apiInstance<Appointment[]>({
+  return apiInstance<PaginatedAppointment>({
     url: `/api/appointments/${id}/substitutable-canceled`,
     method: 'GET',
+    params,
     signal,
   });
 };
 
-export const getAppointmentsControllerGetSubstitutableCanceledQueryKey = (id?: string) => {
-  return [`/api/appointments/${id}/substitutable-canceled`] as const;
+export const getAppointmentsControllerGetSubstitutableCanceledQueryKey = (
+  id?: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams
+) => {
+  return [`/api/appointments/${id}/substitutable-canceled`, ...(params ? [params] : [])] as const;
 };
 
 export const getAppointmentsControllerGetSubstitutableCanceledQueryOptions = <
@@ -2521,6 +2528,7 @@ export const getAppointmentsControllerGetSubstitutableCanceledQueryOptions = <
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2534,11 +2542,11 @@ export const getAppointmentsControllerGetSubstitutableCanceledQueryOptions = <
   const { query: queryOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableCanceledQueryKey(id);
+    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableCanceledQueryKey(id, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>
-  > = ({ signal }) => appointmentsControllerGetSubstitutableCanceled(id, signal);
+  > = ({ signal }) => appointmentsControllerGetSubstitutableCanceled(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableCanceled>>,
@@ -2557,6 +2565,7 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
   TError = unknown,
 >(
   id: string,
+  params: undefined | AppointmentsControllerGetSubstitutableCanceledParams,
   options: {
     query: Partial<
       UseQueryOptions<
@@ -2581,6 +2590,7 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2605,6 +2615,7 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2625,6 +2636,7 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableCanceledParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2636,7 +2648,11 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getAppointmentsControllerGetSubstitutableCanceledQueryOptions(id, options);
+  const queryOptions = getAppointmentsControllerGetSubstitutableCanceledQueryOptions(
+    id,
+    params,
+    options
+  );
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;
@@ -2650,16 +2666,24 @@ export function useAppointmentsControllerGetSubstitutableCanceled<
 /**
  * @summary required permisson: update_appointment
  */
-export const appointmentsControllerGetSubstitutableRushed = (id: string, signal?: AbortSignal) => {
-  return apiInstance<Appointment[]>({
+export const appointmentsControllerGetSubstitutableRushed = (
+  id: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<PaginatedAppointment>({
     url: `/api/appointments/${id}/substitutable-rushed`,
     method: 'GET',
+    params,
     signal,
   });
 };
 
-export const getAppointmentsControllerGetSubstitutableRushedQueryKey = (id?: string) => {
-  return [`/api/appointments/${id}/substitutable-rushed`] as const;
+export const getAppointmentsControllerGetSubstitutableRushedQueryKey = (
+  id?: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams
+) => {
+  return [`/api/appointments/${id}/substitutable-rushed`, ...(params ? [params] : [])] as const;
 };
 
 export const getAppointmentsControllerGetSubstitutableRushedQueryOptions = <
@@ -2667,6 +2691,7 @@ export const getAppointmentsControllerGetSubstitutableRushedQueryOptions = <
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2680,11 +2705,11 @@ export const getAppointmentsControllerGetSubstitutableRushedQueryOptions = <
   const { query: queryOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableRushedQueryKey(id);
+    queryOptions?.queryKey ?? getAppointmentsControllerGetSubstitutableRushedQueryKey(id, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>
-  > = ({ signal }) => appointmentsControllerGetSubstitutableRushed(id, signal);
+  > = ({ signal }) => appointmentsControllerGetSubstitutableRushed(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof appointmentsControllerGetSubstitutableRushed>>,
@@ -2703,6 +2728,7 @@ export function useAppointmentsControllerGetSubstitutableRushed<
   TError = unknown,
 >(
   id: string,
+  params: undefined | AppointmentsControllerGetSubstitutableRushedParams,
   options: {
     query: Partial<
       UseQueryOptions<
@@ -2727,6 +2753,7 @@ export function useAppointmentsControllerGetSubstitutableRushed<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2751,6 +2778,7 @@ export function useAppointmentsControllerGetSubstitutableRushed<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2771,6 +2799,7 @@ export function useAppointmentsControllerGetSubstitutableRushed<
   TError = unknown,
 >(
   id: string,
+  params?: AppointmentsControllerGetSubstitutableRushedParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -2782,7 +2811,11 @@ export function useAppointmentsControllerGetSubstitutableRushed<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getAppointmentsControllerGetSubstitutableRushedQueryOptions(id, options);
+  const queryOptions = getAppointmentsControllerGetSubstitutableRushedQueryOptions(
+    id,
+    params,
+    options
+  );
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;
