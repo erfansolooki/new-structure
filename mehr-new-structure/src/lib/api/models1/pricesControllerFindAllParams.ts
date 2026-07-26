@@ -17,5 +17,9 @@ export type PricesControllerFindAllParams = {
    * Filter by treatmentCategoryId using operators like $eq, $gte, etc.
    */
   'filter.treatmentCategoryId'?: string;
+  /**
+   * Filter by treatmentType using operators like $eq, $gte, etc.
+   */
+  'filter.treatmentType'?: string;
   sortBy?: string[];
 };
