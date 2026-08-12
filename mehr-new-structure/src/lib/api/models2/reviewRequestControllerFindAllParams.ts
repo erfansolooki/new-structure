@@ -18,6 +18,7 @@ export type ReviewRequestControllerFindAllParams = {
   sortBy?: ReviewRequestControllerFindAllSortBy;
   cancelStage?: ReviewRequestControllerFindAllCancelStage;
   patientId?: string;
+  date?: string;
   page?: number;
   limit?: number;
 };

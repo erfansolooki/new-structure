@@ -4,9 +4,15 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { AppointmentsReportControllerAppointmentsReportSortType } from './appointmentsReportControllerAppointmentsReportSortType';
 import type { AppointmentsReportControllerAppointmentsReportStatus } from './appointmentsReportControllerAppointmentsReportStatus';
 
 export type AppointmentsReportControllerAppointmentsReportParams = {
+  sortType?: AppointmentsReportControllerAppointmentsReportSortType;
+  /**
+   * If true, returns an Excel file instead of JSON grid data
+   */
+  exportGridData?: boolean;
   /**
    * Search term for patient name, document number, national code, or phone
    */
@@ -16,6 +22,9 @@ export type AppointmentsReportControllerAppointmentsReportParams = {
   unitId?: string;
   assistantId?: string;
   status?: AppointmentsReportControllerAppointmentsReportStatus;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   /**
    * Appointment date from
    */
@@ -36,10 +45,6 @@ export type AppointmentsReportControllerAppointmentsReportParams = {
   guestPatientLastName?: string;
   isRushed?: boolean;
   isSuspended?: boolean;
-  /**
-   * If true, returns Excel file instead of JSON grid data
-   */
-  exportGridData?: boolean;
   page?: number;
   limit?: number;
 };

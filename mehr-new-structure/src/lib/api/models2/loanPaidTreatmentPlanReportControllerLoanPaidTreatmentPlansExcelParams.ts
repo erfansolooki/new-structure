@@ -4,11 +4,15 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansExcelSortType } from './loanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansExcelSortType';
 
 export type LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansExcelParams = {
+  sortType?: LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansExcelSortType;
   searchTerm?: string;
   doctorId?: string;
-  categoryId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   /**
    * شناسه دندان (UUID)
    */

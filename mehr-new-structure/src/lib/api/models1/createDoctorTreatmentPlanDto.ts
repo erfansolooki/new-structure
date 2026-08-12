@@ -4,6 +4,7 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateDoctorTreatmentPlanDtoType } from './createDoctorTreatmentPlanDtoType';
 
 export interface CreateDoctorTreatmentPlanDto {
   doctorId: string;
@@ -16,4 +17,5 @@ export interface CreateDoctorTreatmentPlanDto {
    * @maximum 100
    */
   feePercent?: number;
+  type: CreateDoctorTreatmentPlanDtoType;
 }

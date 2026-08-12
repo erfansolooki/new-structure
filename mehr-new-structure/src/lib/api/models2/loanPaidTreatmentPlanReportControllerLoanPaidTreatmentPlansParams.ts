@@ -4,24 +4,28 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansSortType } from './loanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansSortType';
 
 export type LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansParams = {
+  sortType?: LoanPaidTreatmentPlanReportControllerLoanPaidTreatmentPlansSortType;
+  /**
+   * If true, returns an Excel file instead of JSON grid data
+   */
+  exportGridData?: boolean;
   /**
    * جستجو در نام، شماره پرونده یا کد ملی درمانپذیر
    */
   searchTerm?: string;
   doctorId?: string;
-  categoryId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   /**
    * شناسه دندان (UUID)
    */
   dentNameId?: string;
   fromDate?: string;
   toDate?: string;
-  /**
-   * If true, returns an Excel file instead of JSON grid data
-   */
-  exportGridData?: boolean;
   page?: number;
   limit?: number;
 };

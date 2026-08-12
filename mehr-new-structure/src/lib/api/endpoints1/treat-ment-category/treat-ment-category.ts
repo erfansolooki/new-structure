@@ -21,7 +21,14 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  AddMedicalClinic,
+  AddParentChildDto,
+  CreateTreatmentCategoryDescriptionDto,
   CreateTreatmentCategoryDto,
+  CreateTreatmentCategoryHeadLineDto,
+  TreatMentCategoryControllerCreate201,
+  TreatMentCategoryControllerCreateHeadLine201,
+  TreatMentCategoryControllerCreateTreatmentDescriptoin201,
   TreatMentCategoryControllerFindAll200Item,
   TreatMentCategoryControllerFindAllPaginated200,
   TreatMentCategoryControllerFindAllPaginatedParams,
@@ -29,7 +36,7 @@ import type {
   TreatMentCategoryControllerFindChilds200Item,
   TreatMentCategoryControllerFindChildsParams,
   TreatMentCategoryControllerFindLeafChilds200Item,
-  TreatMentCategoryControllerGetTree200Item,
+  TreatMentCategoryControllerFindParents200Item,
   TreatMentCategoryControllerUpdate200,
   TreatmentCategoryEntity,
   UpdateDepositSettingsDto,
@@ -41,11 +48,508 @@ import { apiInstance } from '../../../swaggerConfig/apiInstance';
 /**
  * @summary required permisson: create_treatment_category
  */
+export const treatMentCategoryControllerCreateHeadLine = (
+  createTreatmentCategoryHeadLineDto: CreateTreatmentCategoryHeadLineDto,
+  signal?: AbortSignal
+) => {
+  return apiInstance<TreatMentCategoryControllerCreateHeadLine201>({
+    url: `/api/treatment-categories/headline`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: createTreatmentCategoryHeadLineDto,
+    signal,
+  });
+};
+
+export const getTreatMentCategoryControllerCreateHeadLineMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>,
+    TError,
+    { data: CreateTreatmentCategoryHeadLineDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>,
+  TError,
+  { data: CreateTreatmentCategoryHeadLineDto },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerCreateHeadLine'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>,
+    { data: CreateTreatmentCategoryHeadLineDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerCreateHeadLine(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerCreateHeadLineMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>
+>;
+export type TreatMentCategoryControllerCreateHeadLineMutationBody =
+  CreateTreatmentCategoryHeadLineDto;
+export type TreatMentCategoryControllerCreateHeadLineMutationError = unknown;
+
+/**
+ * @summary required permisson: create_treatment_category
+ */
+export const useTreatMentCategoryControllerCreateHeadLine = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>,
+      TError,
+      { data: CreateTreatmentCategoryHeadLineDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateHeadLine>>,
+  TError,
+  { data: CreateTreatmentCategoryHeadLineDto },
+  TContext
+> => {
+  const mutationOptions = getTreatMentCategoryControllerCreateHeadLineMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: create_treatment_category
+ */
+export const treatMentCategoryControllerCreateTreatmentDescriptoin = (
+  createTreatmentCategoryDescriptionDto: CreateTreatmentCategoryDescriptionDto,
+  signal?: AbortSignal
+) => {
+  return apiInstance<TreatMentCategoryControllerCreateTreatmentDescriptoin201>({
+    url: `/api/treatment-categories/treatment-description`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: createTreatmentCategoryDescriptionDto,
+    signal,
+  });
+};
+
+export const getTreatMentCategoryControllerCreateTreatmentDescriptoinMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>,
+    TError,
+    { data: CreateTreatmentCategoryDescriptionDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>,
+  TError,
+  { data: CreateTreatmentCategoryDescriptionDto },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerCreateTreatmentDescriptoin'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>,
+    { data: CreateTreatmentCategoryDescriptionDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerCreateTreatmentDescriptoin(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerCreateTreatmentDescriptoinMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>
+>;
+export type TreatMentCategoryControllerCreateTreatmentDescriptoinMutationBody =
+  CreateTreatmentCategoryDescriptionDto;
+export type TreatMentCategoryControllerCreateTreatmentDescriptoinMutationError = unknown;
+
+/**
+ * @summary required permisson: create_treatment_category
+ */
+export const useTreatMentCategoryControllerCreateTreatmentDescriptoin = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>,
+      TError,
+      { data: CreateTreatmentCategoryDescriptionDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerCreateTreatmentDescriptoin>>,
+  TError,
+  { data: CreateTreatmentCategoryDescriptionDto },
+  TContext
+> => {
+  const mutationOptions =
+    getTreatMentCategoryControllerCreateTreatmentDescriptoinMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const treatMentCategoryControllerAddToTreatmentDecription = (
+  addParentChildDto: AddParentChildDto,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({
+    url: `/api/treatment-categories/add-parent-child`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: addParentChildDto,
+    signal,
+  });
+};
+
+export const getTreatMentCategoryControllerAddToTreatmentDecriptionMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>,
+    TError,
+    { data: AddParentChildDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>,
+  TError,
+  { data: AddParentChildDto },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerAddToTreatmentDecription'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>,
+    { data: AddParentChildDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerAddToTreatmentDecription(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerAddToTreatmentDecriptionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>
+>;
+export type TreatMentCategoryControllerAddToTreatmentDecriptionMutationBody = AddParentChildDto;
+export type TreatMentCategoryControllerAddToTreatmentDecriptionMutationError = unknown;
+
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const useTreatMentCategoryControllerAddToTreatmentDecription = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>,
+      TError,
+      { data: AddParentChildDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddToTreatmentDecription>>,
+  TError,
+  { data: AddParentChildDto },
+  TContext
+> => {
+  const mutationOptions =
+    getTreatMentCategoryControllerAddToTreatmentDecriptionMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const treatMentCategoryControllerRemoveFromTreatmentDescription = (
+  addParentChildDto: AddParentChildDto
+) => {
+  return apiInstance<void>({
+    url: `/api/treatment-categories/delete-parent-child`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: addParentChildDto,
+  });
+};
+
+export const getTreatMentCategoryControllerRemoveFromTreatmentDescriptionMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>,
+    TError,
+    { data: AddParentChildDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>,
+  TError,
+  { data: AddParentChildDto },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerRemoveFromTreatmentDescription'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>,
+    { data: AddParentChildDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerRemoveFromTreatmentDescription(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerRemoveFromTreatmentDescriptionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>
+>;
+export type TreatMentCategoryControllerRemoveFromTreatmentDescriptionMutationBody =
+  AddParentChildDto;
+export type TreatMentCategoryControllerRemoveFromTreatmentDescriptionMutationError = unknown;
+
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const useTreatMentCategoryControllerRemoveFromTreatmentDescription = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>,
+      TError,
+      { data: AddParentChildDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveFromTreatmentDescription>>,
+  TError,
+  { data: AddParentChildDto },
+  TContext
+> => {
+  const mutationOptions =
+    getTreatMentCategoryControllerRemoveFromTreatmentDescriptionMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const treatMentCategoryControllerAddMedicalClinic = (
+  addMedicalClinic: AddMedicalClinic,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({
+    url: `/api/treatment-categories/add-medical-clinic`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: addMedicalClinic,
+    signal,
+  });
+};
+
+export const getTreatMentCategoryControllerAddMedicalClinicMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>,
+    TError,
+    { data: AddMedicalClinic },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>,
+  TError,
+  { data: AddMedicalClinic },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerAddMedicalClinic'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>,
+    { data: AddMedicalClinic }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerAddMedicalClinic(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerAddMedicalClinicMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>
+>;
+export type TreatMentCategoryControllerAddMedicalClinicMutationBody = AddMedicalClinic;
+export type TreatMentCategoryControllerAddMedicalClinicMutationError = unknown;
+
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const useTreatMentCategoryControllerAddMedicalClinic = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>,
+      TError,
+      { data: AddMedicalClinic },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerAddMedicalClinic>>,
+  TError,
+  { data: AddMedicalClinic },
+  TContext
+> => {
+  const mutationOptions = getTreatMentCategoryControllerAddMedicalClinicMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const treatMentCategoryControllerRemoveMedicalClinic = (
+  addMedicalClinic: AddMedicalClinic
+) => {
+  return apiInstance<void>({
+    url: `/api/treatment-categories/delete-medical-clinic`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: addMedicalClinic,
+  });
+};
+
+export const getTreatMentCategoryControllerRemoveMedicalClinicMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>,
+    TError,
+    { data: AddMedicalClinic },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>,
+  TError,
+  { data: AddMedicalClinic },
+  TContext
+> => {
+  const mutationKey = ['treatMentCategoryControllerRemoveMedicalClinic'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>,
+    { data: AddMedicalClinic }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return treatMentCategoryControllerRemoveMedicalClinic(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatMentCategoryControllerRemoveMedicalClinicMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>
+>;
+export type TreatMentCategoryControllerRemoveMedicalClinicMutationBody = AddMedicalClinic;
+export type TreatMentCategoryControllerRemoveMedicalClinicMutationError = unknown;
+
+/**
+ * @summary required permisson: update_treatment_category
+ */
+export const useTreatMentCategoryControllerRemoveMedicalClinic = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>,
+      TError,
+      { data: AddMedicalClinic },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatMentCategoryControllerRemoveMedicalClinic>>,
+  TError,
+  { data: AddMedicalClinic },
+  TContext
+> => {
+  const mutationOptions = getTreatMentCategoryControllerRemoveMedicalClinicMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: create_treatment_category
+ */
 export const treatMentCategoryControllerCreate = (
   createTreatmentCategoryDto: CreateTreatmentCategoryDto,
   signal?: AbortSignal
 ) => {
-  return apiInstance<TreatmentCategoryEntity>({
+  return apiInstance<TreatMentCategoryControllerCreate201>({
     url: `/api/treatment-categories`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -271,7 +775,7 @@ export function useTreatMentCategoryControllerFindAllPaginated<
 }
 
 /**
- * @summary required permisson: read_treatment_category
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
  */
 export const treatMentCategoryControllerFindAll = (
   params?: TreatMentCategoryControllerFindAllParams,
@@ -375,7 +879,7 @@ export function useTreatMentCategoryControllerFindAll<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
- * @summary required permisson: read_treatment_category
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
  */
 
 export function useTreatMentCategoryControllerFindAll<
@@ -402,10 +906,10 @@ export function useTreatMentCategoryControllerFindAll<
 }
 
 /**
- * @summary required permisson: read_treatment_category
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
  */
 export const treatMentCategoryControllerGetTree = (signal?: AbortSignal) => {
-  return apiInstance<TreatMentCategoryControllerGetTree200Item[]>({
+  return apiInstance<TreatmentCategoryEntity[]>({
     url: `/api/treatment-categories/tree`,
     method: 'GET',
     signal,
@@ -494,7 +998,7 @@ export function useTreatMentCategoryControllerGetTree<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
- * @summary required permisson: read_treatment_category
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
  */
 
 export function useTreatMentCategoryControllerGetTree<
@@ -947,6 +1451,9 @@ export function useTreatMentCategoryControllerFindChilds<
   return query;
 }
 
+/**
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
+ */
 export const treatMentCategoryControllerFindLeafChilds = (id: string, signal?: AbortSignal) => {
   return apiInstance<TreatMentCategoryControllerFindLeafChilds200Item[]>({
     url: `/api/treatment-categories/${id}/leaf-children`,
@@ -1059,6 +1566,9 @@ export function useTreatMentCategoryControllerFindLeafChilds<
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary Depricated | این ای پی آی منسوخ شده و در نسخه های آینده حذف میشود
+ */
 
 export function useTreatMentCategoryControllerFindLeafChilds<
   TData = Awaited<ReturnType<typeof treatMentCategoryControllerFindLeafChilds>>,
@@ -1088,7 +1598,7 @@ export function useTreatMentCategoryControllerFindLeafChilds<
 }
 
 export const treatMentCategoryControllerFindParents = (id: string, signal?: AbortSignal) => {
-  return apiInstance<TreatmentCategoryEntity[]>({
+  return apiInstance<TreatMentCategoryControllerFindParents200Item[]>({
     url: `/api/treatment-categories/${id}/parents`,
     method: 'GET',
     signal,

@@ -10,6 +10,7 @@ export type ReviewControllerFindAllCancelStage =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ReviewControllerFindAllCancelStage = {
+  VISIT: 'VISIT',
   BEFORE_TREATMENT: 'BEFORE_TREATMENT',
   DURING_TREATMNET: 'DURING_TREATMNET',
 } as const;

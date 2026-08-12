@@ -4,21 +4,26 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
   DefinedUseQueryResult,
+  MutationFunction,
   QueryClient,
   QueryFunction,
   QueryKey,
   UndefinedInitialDataOptions,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from '@tanstack/react-query';
 
 import type {
   PaginatedTransactionResponse,
+  UpdateWalletTransactionDto,
+  WalletTransaction,
   WalletTransactionControllerFindAllByAdminParams,
   WalletTransactionControllerFindAllParams,
   WalletTransactionControllerFindCorrectionsParams,
@@ -579,3 +584,83 @@ export function useWalletTransactionControllerFindOne<
 
   return query;
 }
+
+/**
+ * @summary required permisson: update_wallet_transaction
+ */
+export const walletTransactionControllerUpdate = (
+  id: string,
+  updateWalletTransactionDto: UpdateWalletTransactionDto
+) => {
+  return apiInstance<WalletTransaction>({
+    url: `/api/wallet-transactions/${id}`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: updateWalletTransactionDto,
+  });
+};
+
+export const getWalletTransactionControllerUpdateMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof walletTransactionControllerUpdate>>,
+    TError,
+    { id: string; data: UpdateWalletTransactionDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof walletTransactionControllerUpdate>>,
+  TError,
+  { id: string; data: UpdateWalletTransactionDto },
+  TContext
+> => {
+  const mutationKey = ['walletTransactionControllerUpdate'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof walletTransactionControllerUpdate>>,
+    { id: string; data: UpdateWalletTransactionDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return walletTransactionControllerUpdate(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type WalletTransactionControllerUpdateMutationResult = NonNullable<
+  Awaited<ReturnType<typeof walletTransactionControllerUpdate>>
+>;
+export type WalletTransactionControllerUpdateMutationBody = UpdateWalletTransactionDto;
+export type WalletTransactionControllerUpdateMutationError = unknown;
+
+/**
+ * @summary required permisson: update_wallet_transaction
+ */
+export const useWalletTransactionControllerUpdate = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof walletTransactionControllerUpdate>>,
+      TError,
+      { id: string; data: UpdateWalletTransactionDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof walletTransactionControllerUpdate>>,
+  TError,
+  { id: string; data: UpdateWalletTransactionDto },
+  TContext
+> => {
+  const mutationOptions = getWalletTransactionControllerUpdateMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};

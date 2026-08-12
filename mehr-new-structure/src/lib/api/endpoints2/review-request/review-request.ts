@@ -25,8 +25,11 @@ import type {
   CreateReviewRequestDto,
   ReviewRequest,
   ReviewRequestControllerAssignToExpertDoctor200,
+  ReviewRequestControllerFindAllGropuedParams,
   ReviewRequestControllerFindAllParams,
+  ReviewRequestControllerReceivedReviewRequestsParams,
   ReviewRequestControllerRelatedReviewRequestsParams,
+  ReviewRequestControllerSentReviewRequestsParams,
   ReviewRequestControllerUpdate200,
   UpdateReviewRequestDto,
 } from '../../models2';
@@ -240,6 +243,153 @@ export function useReviewRequestControllerFindAll<
 }
 
 /**
+ * @summary Get review requests list grouped by patient and creation date
+ */
+export const reviewRequestControllerFindAllGropued = (
+  params?: ReviewRequestControllerFindAllGropuedParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({ url: `/api/review-requests/grouped`, method: 'GET', params, signal });
+};
+
+export const getReviewRequestControllerFindAllGropuedQueryKey = (
+  params?: ReviewRequestControllerFindAllGropuedParams
+) => {
+  return [`/api/review-requests/grouped`, ...(params ? [params] : [])] as const;
+};
+
+export const getReviewRequestControllerFindAllGropuedQueryOptions = <
+  TData = Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerFindAllGropuedParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getReviewRequestControllerFindAllGropuedQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>
+  > = ({ signal }) => reviewRequestControllerFindAllGropued(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type ReviewRequestControllerFindAllGropuedQueryResult = NonNullable<
+  Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>
+>;
+export type ReviewRequestControllerFindAllGropuedQueryError = unknown;
+
+export function useReviewRequestControllerFindAllGropued<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+  TError = unknown,
+>(
+  params: undefined | ReviewRequestControllerFindAllGropuedParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerFindAllGropued<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerFindAllGropuedParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerFindAllGropued<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerFindAllGropuedParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary Get review requests list grouped by patient and creation date
+ */
+
+export function useReviewRequestControllerFindAllGropued<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerFindAllGropuedParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerFindAllGropued>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getReviewRequestControllerFindAllGropuedQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
  * visit doctor can get all regestered review-requests, and expert doctor can get all assigned review-requests
  * @summary visitDoctor and expertDoctor can receive all related review-requests
  */
@@ -382,6 +532,315 @@ export function useReviewRequestControllerRelatedReviewRequests<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getReviewRequestControllerRelatedReviewRequestsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * visit doctor can get all regestered review-requests, and expert doctor can get all assigned review-requests
+ * @summary visitDoctor and expertDoctor can receive all related review-requests
+ */
+export const reviewRequestControllerSentReviewRequests = (
+  params?: ReviewRequestControllerSentReviewRequestsParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({
+    url: `/api/review-requests/sent-review-requests`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getReviewRequestControllerSentReviewRequestsQueryKey = (
+  params?: ReviewRequestControllerSentReviewRequestsParams
+) => {
+  return [`/api/review-requests/sent-review-requests`, ...(params ? [params] : [])] as const;
+};
+
+export const getReviewRequestControllerSentReviewRequestsQueryOptions = <
+  TData = Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerSentReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getReviewRequestControllerSentReviewRequestsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>
+  > = ({ signal }) => reviewRequestControllerSentReviewRequests(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type ReviewRequestControllerSentReviewRequestsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>
+>;
+export type ReviewRequestControllerSentReviewRequestsQueryError = unknown;
+
+export function useReviewRequestControllerSentReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+  TError = unknown,
+>(
+  params: undefined | ReviewRequestControllerSentReviewRequestsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerSentReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerSentReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerSentReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerSentReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary visitDoctor and expertDoctor can receive all related review-requests
+ */
+
+export function useReviewRequestControllerSentReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerSentReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerSentReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getReviewRequestControllerSentReviewRequestsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * visit doctor can get all regestered review-requests, and expert doctor can get all assigned review-requests
+ * @summary visitDoctor and expertDoctor can receive all related review-requests
+ */
+export const reviewRequestControllerReceivedReviewRequests = (
+  params?: ReviewRequestControllerReceivedReviewRequestsParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({
+    url: `/api/review-requests/received-review-requests`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getReviewRequestControllerReceivedReviewRequestsQueryKey = (
+  params?: ReviewRequestControllerReceivedReviewRequestsParams
+) => {
+  return [`/api/review-requests/received-review-requests`, ...(params ? [params] : [])] as const;
+};
+
+export const getReviewRequestControllerReceivedReviewRequestsQueryOptions = <
+  TData = Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerReceivedReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getReviewRequestControllerReceivedReviewRequestsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>
+  > = ({ signal }) => reviewRequestControllerReceivedReviewRequests(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type ReviewRequestControllerReceivedReviewRequestsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>
+>;
+export type ReviewRequestControllerReceivedReviewRequestsQueryError = unknown;
+
+export function useReviewRequestControllerReceivedReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+  TError = unknown,
+>(
+  params: undefined | ReviewRequestControllerReceivedReviewRequestsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerReceivedReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerReceivedReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+          TError,
+          Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useReviewRequestControllerReceivedReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerReceivedReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary visitDoctor and expertDoctor can receive all related review-requests
+ */
+
+export function useReviewRequestControllerReceivedReviewRequests<
+  TData = Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+  TError = unknown,
+>(
+  params?: ReviewRequestControllerReceivedReviewRequestsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof reviewRequestControllerReceivedReviewRequests>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getReviewRequestControllerReceivedReviewRequestsQueryOptions(
+    params,
+    options
+  );
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;

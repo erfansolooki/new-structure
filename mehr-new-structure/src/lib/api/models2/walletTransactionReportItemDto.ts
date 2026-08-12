@@ -8,6 +8,7 @@
 export interface WalletTransactionReportItemDto {
   id: string;
   date: string;
+  createdAt: string;
   patientName: string;
   patientDocNumber: string;
   paymentGate: string;
@@ -17,5 +18,6 @@ export interface WalletTransactionReportItemDto {
   toothNumber: string;
   isCorrected: boolean;
   statusText: string;
+  correctionCount: number;
   amount: number;
 }

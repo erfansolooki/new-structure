@@ -4,9 +4,11 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { AppointmentsReportControllerAppointmentsExcelSortType } from './appointmentsReportControllerAppointmentsExcelSortType';
 import type { AppointmentsReportControllerAppointmentsExcelStatus } from './appointmentsReportControllerAppointmentsExcelStatus';
 
 export type AppointmentsReportControllerAppointmentsExcelParams = {
+  sortType?: AppointmentsReportControllerAppointmentsExcelSortType;
   /**
    * Search term for patient name, document number, national code, or phone
    */
@@ -16,6 +18,9 @@ export type AppointmentsReportControllerAppointmentsExcelParams = {
   unitId?: string;
   assistantId?: string;
   status?: AppointmentsReportControllerAppointmentsExcelStatus;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   /**
    * Appointment date from (date field)
    */

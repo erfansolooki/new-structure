@@ -4,8 +4,10 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { WalletTransferReportControllerWalletTransferExcelSortType } from './walletTransferReportControllerWalletTransferExcelSortType';
 
 export type WalletTransferReportControllerWalletTransferExcelParams = {
+  sortType?: WalletTransferReportControllerWalletTransferExcelSortType;
   fromPatientId?: string;
   toPatientId?: string;
   fromDate?: string;

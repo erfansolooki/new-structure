@@ -10,4 +10,6 @@ export interface CreateReviewRequestDto {
   text?: string;
   treatmentPlanId: string;
   cancelStage?: CreateReviewRequestDtoCancelStage;
+  fileIdsFromDocument?: string[];
+  directUrls?: string[];
 }

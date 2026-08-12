@@ -4,9 +4,11 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { PatientRegistrationReportControllerPatientRegistrationExcelSortType } from './patientRegistrationReportControllerPatientRegistrationExcelSortType';
 import type { PatientRegistrationReportControllerPatientRegistrationExcelGender } from './patientRegistrationReportControllerPatientRegistrationExcelGender';
 
 export type PatientRegistrationReportControllerPatientRegistrationExcelParams = {
+  sortType?: PatientRegistrationReportControllerPatientRegistrationExcelSortType;
   /**
    * Search term to filter by first name, last name, case number, national code, or phone number
    */

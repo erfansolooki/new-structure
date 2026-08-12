@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { CreateTreatmentCategoryDtoDepositType } from './createTreatmentCategoryDtoDepositType';
+import type { CreateTreatmentCategoryDtoType } from './createTreatmentCategoryDtoType';
 
 export interface CreateTreatmentCategoryDto {
   name: string;
@@ -24,4 +25,5 @@ export interface CreateTreatmentCategoryDto {
   /** @minimum 0 */
   depositAmount?: number;
   depositType?: CreateTreatmentCategoryDtoDepositType;
+  type?: CreateTreatmentCategoryDtoType;
 }

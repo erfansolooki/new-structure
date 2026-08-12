@@ -12,8 +12,9 @@ export interface LoanPaidTreatmentPlanReportItemDto {
   patientDocNumber: string;
   nationalCode: string;
   doctorName: string;
-  categoryName: string;
-  treatmentTitle: string;
+  treatmentCategoryName: string;
+  treatmentName: string;
+  treatmentStepName: string;
   toothNumber: string;
   amount: number;
   loanAmount: number;

@@ -4,10 +4,14 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { CompletedTreatmentReportControllerCompletedTreatmentExcelSortType } from './completedTreatmentReportControllerCompletedTreatmentExcelSortType';
 
 export type CompletedTreatmentReportControllerCompletedTreatmentExcelParams = {
+  sortType?: CompletedTreatmentReportControllerCompletedTreatmentExcelSortType;
   patientId?: string;
-  categoryId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   doctorId?: string;
   fromDate?: string;
   toDate?: string;

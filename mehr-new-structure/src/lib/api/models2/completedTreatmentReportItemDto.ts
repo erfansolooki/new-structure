@@ -11,8 +11,9 @@ export interface CompletedTreatmentReportItemDto {
   patientName: string;
   patientDocNumber: string;
   nationalCode: string;
-  categoryName: string;
-  treatmentTitle: string;
+  treatmentCategoryName: string;
+  treatmentName: string;
+  treatmentStepName: string;
   treatmentDescription: string;
   treatmentPlanDescription: string;
   toothNumber: string;

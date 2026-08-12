@@ -14,8 +14,9 @@ export interface RegisteredTreatmentPlanReportItemDto {
   patientDocNumber: string;
   nationalCode: string;
   doctorName: string;
-  categoryName: string;
-  treatmentTitle: string;
+  treatmentCategoryName: string;
+  treatmentName: string;
+  treatmentStepName: string;
   status: RegisteredTreatmentPlanReportItemDtoStatus;
   isSelected: boolean;
   isPaid: boolean;

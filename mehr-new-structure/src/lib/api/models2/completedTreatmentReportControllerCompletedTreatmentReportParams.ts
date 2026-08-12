@@ -4,17 +4,21 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { CompletedTreatmentReportControllerCompletedTreatmentReportSortType } from './completedTreatmentReportControllerCompletedTreatmentReportSortType';
 
 export type CompletedTreatmentReportControllerCompletedTreatmentReportParams = {
-  patientId?: string;
-  categoryId?: string;
-  doctorId?: string;
-  fromDate?: string;
-  toDate?: string;
+  sortType?: CompletedTreatmentReportControllerCompletedTreatmentReportSortType;
   /**
    * If true, returns an Excel file instead of JSON grid data
    */
   exportGridData?: boolean;
+  patientId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
+  doctorId?: string;
+  fromDate?: string;
+  toDate?: string;
   page?: number;
   limit?: number;
 };

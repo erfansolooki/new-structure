@@ -4,6 +4,7 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { CreatePriceDtoType } from './createPriceDtoType';
 
 export interface CreatePriceDto {
   /** @minimum 0 */
@@ -17,4 +18,5 @@ export interface CreatePriceDto {
   supportAmount: number;
   treatmentCategoryId: string;
   insuranceCategoryId: string;
+  type: CreatePriceDtoType;
 }

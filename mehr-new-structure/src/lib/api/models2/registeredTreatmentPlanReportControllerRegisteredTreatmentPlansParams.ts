@@ -4,25 +4,29 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansSortType } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansSortType';
 import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansStatus } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansStatus';
 import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansPaymentMethod } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansPaymentMethod';
 
 export type RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansParams = {
+  sortType?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansSortType;
+  /**
+   * If true, returns an Excel file instead of JSON grid data
+   */
+  exportGridData?: boolean;
   /**
    * جستجو در نام، شماره پرونده یا کد ملی درمانپذیر
    */
   searchTerm?: string;
   doctorId?: string;
-  categoryId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   status?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansStatus;
   paymentMethod?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansPaymentMethod;
   isPaid?: boolean;
   fromDate?: string;
   toDate?: string;
-  /**
-   * If true, returns an Excel file instead of JSON grid data
-   */
-  exportGridData?: boolean;
   page?: number;
   limit?: number;
 };

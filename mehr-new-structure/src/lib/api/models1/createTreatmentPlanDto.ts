@@ -4,6 +4,7 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateTreatmentPlanDtoType } from './createTreatmentPlanDtoType';
 
 export interface CreateTreatmentPlanDto {
   description?: string;
@@ -27,4 +28,5 @@ export interface CreateTreatmentPlanDto {
   renewDescription?: string;
   needsReview?: boolean;
   reviewText?: string;
+  type: CreateTreatmentPlanDtoType;
 }

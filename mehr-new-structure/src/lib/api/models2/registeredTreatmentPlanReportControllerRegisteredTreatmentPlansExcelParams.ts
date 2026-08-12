@@ -4,13 +4,17 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelSortType } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelSortType';
 import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelStatus } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelStatus';
 import type { RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelPaymentMethod } from './registeredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelPaymentMethod';
 
 export type RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelParams = {
+  sortType?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelSortType;
   searchTerm?: string;
   doctorId?: string;
-  categoryId?: string;
+  treatmentCategoryId?: string;
+  treatmentId?: string;
+  treatmentStepId?: string;
   status?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelStatus;
   paymentMethod?: RegisteredTreatmentPlanReportControllerRegisteredTreatmentPlansExcelPaymentMethod;
   isPaid?: boolean;

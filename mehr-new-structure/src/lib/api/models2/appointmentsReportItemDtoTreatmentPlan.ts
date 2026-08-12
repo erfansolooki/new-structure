@@ -7,8 +7,9 @@
 
 export type AppointmentsReportItemDtoTreatmentPlan = {
   description: string;
-  categoryName: string;
-  treatmentTitle: string;
+  treatmentCategoryName: string;
+  treatmentName: string;
+  treatmentStepName: string;
   dentNameId: string;
   dentNameNumber: string;
   status: string;

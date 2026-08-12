@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { TreatMentCategoryControllerFindAllSortByOrder } from './treatMentCategoryControllerFindAllSortByOrder';
+import type { TreatMentCategoryControllerFindAllType } from './treatMentCategoryControllerFindAllType';
 
 export type TreatMentCategoryControllerFindAllParams = {
   justRootNodes?: boolean;
@@ -17,6 +18,7 @@ export type TreatMentCategoryControllerFindAllParams = {
   insuranceCategoryId?: string;
   sortByOrder?: TreatMentCategoryControllerFindAllSortByOrder;
   isActive?: boolean;
+  type?: TreatMentCategoryControllerFindAllType;
   page?: number;
   limit?: number;
 };

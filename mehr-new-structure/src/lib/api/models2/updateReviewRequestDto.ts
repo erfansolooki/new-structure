@@ -9,4 +9,6 @@ import type { UpdateReviewRequestDtoStatus } from './updateReviewRequestDtoStatu
 export interface UpdateReviewRequestDto {
   text?: string;
   status?: UpdateReviewRequestDtoStatus;
+  fileIdsFromDocument?: string[];
+  directUrls?: string[];
 }

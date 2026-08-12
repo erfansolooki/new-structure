@@ -4,8 +4,10 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { WalletDecreaseReportControllerWalletDecreaseExcelSortType } from './walletDecreaseReportControllerWalletDecreaseExcelSortType';
 
 export type WalletDecreaseReportControllerWalletDecreaseExcelParams = {
+  sortType?: WalletDecreaseReportControllerWalletDecreaseExcelSortType;
   patientId?: string;
   fromDate?: string;
   toDate?: string;

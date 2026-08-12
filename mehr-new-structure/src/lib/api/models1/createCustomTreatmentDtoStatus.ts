@@ -11,6 +11,7 @@ export type CreateCustomTreatmentDtoStatus =
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CreateCustomTreatmentDtoStatus = {
   inprogress: 'inprogress',
+  selected: 'selected',
   completed: 'completed',
   cancelled: 'cancelled',
 } as const;

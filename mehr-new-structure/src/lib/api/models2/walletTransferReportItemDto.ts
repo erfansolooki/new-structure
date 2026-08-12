@@ -8,6 +8,7 @@
 export interface WalletTransferReportItemDto {
   id: string;
   date: string;
+  createdAt: string;
   fromPatientName: string;
   fromPatientDocNumber: string;
   fromNationalCode: string;
@@ -15,4 +16,7 @@ export interface WalletTransferReportItemDto {
   toPatientDocNumber: string;
   toNationalCode: string;
   amount: number;
+  isCorrected: boolean;
+  correctionCount: number;
+  statusText: string;
 }

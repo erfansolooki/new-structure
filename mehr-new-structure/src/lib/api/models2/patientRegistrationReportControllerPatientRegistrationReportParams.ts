@@ -4,9 +4,15 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { PatientRegistrationReportControllerPatientRegistrationReportSortType } from './patientRegistrationReportControllerPatientRegistrationReportSortType';
 import type { PatientRegistrationReportControllerPatientRegistrationReportGender } from './patientRegistrationReportControllerPatientRegistrationReportGender';
 
 export type PatientRegistrationReportControllerPatientRegistrationReportParams = {
+  sortType?: PatientRegistrationReportControllerPatientRegistrationReportSortType;
+  /**
+   * If true, returns an Excel file instead of JSON grid data
+   */
+  exportGridData?: boolean;
   /**
    * Search term to filter by first name, last name, case number, national code, or phone number
    */
@@ -27,10 +33,6 @@ export type PatientRegistrationReportControllerPatientRegistrationReportParams =
    * Gender
    */
   gender?: PatientRegistrationReportControllerPatientRegistrationReportGender;
-  /**
-   * If true, returns an Excel file instead of JSON grid data
-   */
-  exportGridData?: boolean;
   page?: number;
   limit?: number;
 };

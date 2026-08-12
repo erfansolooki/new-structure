@@ -4,15 +4,17 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { WalletDecreaseReportControllerWalletDecreaseReportSortType } from './walletDecreaseReportControllerWalletDecreaseReportSortType';
 
 export type WalletDecreaseReportControllerWalletDecreaseReportParams = {
-  patientId?: string;
-  fromDate?: string;
-  toDate?: string;
+  sortType?: WalletDecreaseReportControllerWalletDecreaseReportSortType;
   /**
    * If true, returns an Excel file instead of JSON grid data
    */
   exportGridData?: boolean;
+  patientId?: string;
+  fromDate?: string;
+  toDate?: string;
   page?: number;
   limit?: number;
 };

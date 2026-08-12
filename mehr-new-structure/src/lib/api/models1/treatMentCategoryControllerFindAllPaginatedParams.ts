@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { TreatMentCategoryControllerFindAllPaginatedSortByOrder } from './treatMentCategoryControllerFindAllPaginatedSortByOrder';
+import type { TreatMentCategoryControllerFindAllPaginatedType } from './treatMentCategoryControllerFindAllPaginatedType';
 
 export type TreatMentCategoryControllerFindAllPaginatedParams = {
   justRootNodes?: boolean;
@@ -17,6 +18,7 @@ export type TreatMentCategoryControllerFindAllPaginatedParams = {
   insuranceCategoryId?: string;
   sortByOrder?: TreatMentCategoryControllerFindAllPaginatedSortByOrder;
   isActive?: boolean;
+  type?: TreatMentCategoryControllerFindAllPaginatedType;
   page?: number;
   limit?: number;
 };

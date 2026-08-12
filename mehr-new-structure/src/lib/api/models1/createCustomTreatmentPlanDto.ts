@@ -4,6 +4,7 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateCustomTreatmentPlanDtoType } from './createCustomTreatmentPlanDtoType';
 
 export interface CreateCustomTreatmentPlanDto {
   description?: string;
@@ -25,4 +26,5 @@ export interface CreateCustomTreatmentPlanDto {
   activeInsuranceId: string;
   generatePreInvoice?: boolean;
   invoiceId?: string;
+  type: CreateCustomTreatmentPlanDtoType;
 }

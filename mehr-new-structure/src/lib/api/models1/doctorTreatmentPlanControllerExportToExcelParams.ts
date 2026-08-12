@@ -4,11 +4,13 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { DoctorTreatmentPlanControllerExportToExcelType } from './doctorTreatmentPlanControllerExportToExcelType';
 
 export type DoctorTreatmentPlanControllerExportToExcelParams = {
   doctorId?: string;
   treatmentCategoryId?: string;
   name?: string;
+  type?: DoctorTreatmentPlanControllerExportToExcelType;
   page?: number;
   limit?: number;
 };

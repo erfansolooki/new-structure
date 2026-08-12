@@ -4,11 +4,13 @@
  * clinic reservation system api
  * OpenAPI spec version: 1.0.0
  */
+import type { DoctorTreatmentPlanControllerFindAllType } from './doctorTreatmentPlanControllerFindAllType';
 
 export type DoctorTreatmentPlanControllerFindAllParams = {
   doctorId?: string;
   treatmentCategoryId?: string;
   name?: string;
+  type?: DoctorTreatmentPlanControllerFindAllType;
   page?: number;
   limit?: number;
 };

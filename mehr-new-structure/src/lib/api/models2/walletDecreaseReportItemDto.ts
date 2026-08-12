@@ -8,6 +8,7 @@
 export interface WalletDecreaseReportItemDto {
   id: string;
   date: string;
+  createdAt: string;
   patientName: string;
   patientDocNumber: string;
   nationalCode: string;
@@ -16,4 +17,5 @@ export interface WalletDecreaseReportItemDto {
   reductionReason: string;
   isCorrected: boolean;
   statusText: string;
+  correctionCount: number;
 }

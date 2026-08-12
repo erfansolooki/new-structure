@@ -4,16 +4,18 @@
  * clinic reservation system api
  * OpenAPI spec version: 2.0.0
  */
+import type { WalletTransferReportControllerWalletTransferReportSortType } from './walletTransferReportControllerWalletTransferReportSortType';
 
 export type WalletTransferReportControllerWalletTransferReportParams = {
-  fromPatientId?: string;
-  toPatientId?: string;
-  fromDate?: string;
-  toDate?: string;
+  sortType?: WalletTransferReportControllerWalletTransferReportSortType;
   /**
    * If true, returns an Excel file instead of JSON grid data
    */
   exportGridData?: boolean;
+  fromPatientId?: string;
+  toPatientId?: string;
+  fromDate?: string;
+  toDate?: string;
   page?: number;
   limit?: number;
 };
