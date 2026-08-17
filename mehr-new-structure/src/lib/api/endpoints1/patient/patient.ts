@@ -1603,6 +1603,85 @@ export const usePatientControllerCreateDocument = <TError = unknown, TContext = 
 
   return useMutation(mutationOptions, queryClient);
 };
+/**
+ * @summary required permisson: update_patient
+ */
+export const patientControllerUpdateInsuranceInfo = (
+  id: string,
+  updateInsuranceInfoDto: UpdateInsuranceInfoDto
+) => {
+  return apiInstance<InsuranceInfo>({
+    url: `/api/patients/insurance-info/${id}`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: updateInsuranceInfoDto,
+  });
+};
+
+export const getPatientControllerUpdateInsuranceInfoMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>,
+    TError,
+    { id: string; data: UpdateInsuranceInfoDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>,
+  TError,
+  { id: string; data: UpdateInsuranceInfoDto },
+  TContext
+> => {
+  const mutationKey = ['patientControllerUpdateInsuranceInfo'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>,
+    { id: string; data: UpdateInsuranceInfoDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return patientControllerUpdateInsuranceInfo(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PatientControllerUpdateInsuranceInfoMutationResult = NonNullable<
+  Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>
+>;
+export type PatientControllerUpdateInsuranceInfoMutationBody = UpdateInsuranceInfoDto;
+export type PatientControllerUpdateInsuranceInfoMutationError = unknown;
+
+/**
+ * @summary required permisson: update_patient
+ */
+export const usePatientControllerUpdateInsuranceInfo = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>,
+      TError,
+      { id: string; data: UpdateInsuranceInfoDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof patientControllerUpdateInsuranceInfo>>,
+  TError,
+  { id: string; data: UpdateInsuranceInfoDto },
+  TContext
+> => {
+  const mutationOptions = getPatientControllerUpdateInsuranceInfoMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
 export const patientControllerUpload = (
   id: string,
   patientControllerUploadBody: PatientControllerUploadBody,

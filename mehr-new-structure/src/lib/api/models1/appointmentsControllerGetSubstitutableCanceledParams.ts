@@ -25,6 +25,7 @@ export type AppointmentsControllerGetSubstitutableCanceledParams = {
   isRushed?: boolean;
   sortType?: AppointmentsControllerGetSubstitutableCanceledSortType;
   sortBy?: AppointmentsControllerGetSubstitutableCanceledSortBy;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;

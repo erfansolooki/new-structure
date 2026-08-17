@@ -22,6 +22,7 @@ export type AppointmentsControllerCountParams = {
   isRushed?: boolean;
   sortType?: string;
   sortBy?: string;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;

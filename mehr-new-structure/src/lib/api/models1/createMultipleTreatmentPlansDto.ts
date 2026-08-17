@@ -29,4 +29,6 @@ export interface CreateMultipleTreatmentPlansDto {
   needsReview?: boolean;
   reviewText?: string;
   type: CreateMultipleTreatmentPlansDtoType;
+  fileIdsFromDocument?: string[];
+  directUrls?: string[];
 }

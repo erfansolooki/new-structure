@@ -10,5 +10,6 @@ export interface CreateMedicalSystemPriceDto {
   /** @minimum 0 */
   price: number;
   treatmentCategoryId: string;
+  insuranceCategoryId: string;
   treatmentType: CreateMedicalSystemPriceDtoTreatmentType;
 }

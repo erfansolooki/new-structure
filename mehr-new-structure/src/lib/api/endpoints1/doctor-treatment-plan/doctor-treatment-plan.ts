@@ -30,6 +30,8 @@ import type {
   DoctorTreatmentPlanControllerExportToExcelParams,
   DoctorTreatmentPlanControllerFindAll200,
   DoctorTreatmentPlanControllerFindAllParams,
+  DoctorTreatmentPlanControllerFindChilds200Item,
+  DoctorTreatmentPlanControllerFindChildsParams,
   DoctorTreatmentPlanPaginatedResopnse,
   UpdateDoctorTreatmentPlanDto,
 } from '../../models1';
@@ -587,6 +589,152 @@ export function useDoctorTreatmentPlanControllerExportToExcel<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getDoctorTreatmentPlanControllerExportToExcelQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+export const doctorTreatmentPlanControllerFindChilds = (
+  params?: DoctorTreatmentPlanControllerFindChildsParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<DoctorTreatmentPlanControllerFindChilds200Item[]>({
+    url: `/api/doctor-treatment-plans/children`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getDoctorTreatmentPlanControllerFindChildsQueryKey = (
+  params?: DoctorTreatmentPlanControllerFindChildsParams
+) => {
+  return [`/api/doctor-treatment-plans/children`, ...(params ? [params] : [])] as const;
+};
+
+export const getDoctorTreatmentPlanControllerFindChildsQueryOptions = <
+  TData = Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+  TError = unknown,
+>(
+  params?: DoctorTreatmentPlanControllerFindChildsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getDoctorTreatmentPlanControllerFindChildsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>
+  > = ({ signal }) => doctorTreatmentPlanControllerFindChilds(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type DoctorTreatmentPlanControllerFindChildsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>
+>;
+export type DoctorTreatmentPlanControllerFindChildsQueryError = unknown;
+
+export function useDoctorTreatmentPlanControllerFindChilds<
+  TData = Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+  TError = unknown,
+>(
+  params: undefined | DoctorTreatmentPlanControllerFindChildsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+          TError,
+          Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useDoctorTreatmentPlanControllerFindChilds<
+  TData = Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+  TError = unknown,
+>(
+  params?: DoctorTreatmentPlanControllerFindChildsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+          TError,
+          Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useDoctorTreatmentPlanControllerFindChilds<
+  TData = Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+  TError = unknown,
+>(
+  params?: DoctorTreatmentPlanControllerFindChildsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+export function useDoctorTreatmentPlanControllerFindChilds<
+  TData = Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+  TError = unknown,
+>(
+  params?: DoctorTreatmentPlanControllerFindChildsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof doctorTreatmentPlanControllerFindChilds>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getDoctorTreatmentPlanControllerFindChildsQueryOptions(params, options);
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;

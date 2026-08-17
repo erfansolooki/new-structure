@@ -25,6 +25,7 @@ export type AppointmentsControllerDoctorAppointmentsParams = {
   isRushed?: boolean;
   sortType?: AppointmentsControllerDoctorAppointmentsSortType;
   sortBy?: AppointmentsControllerDoctorAppointmentsSortBy;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;

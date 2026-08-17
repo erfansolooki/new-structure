@@ -22,6 +22,7 @@ export type AppointmentsControllerLastUpdateParams = {
   isRushed?: boolean;
   sortType?: string;
   sortBy?: string;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;

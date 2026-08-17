@@ -25,6 +25,7 @@ export type AppointmentsControllerFindAllParams = {
   isRushed?: boolean;
   sortType?: AppointmentsControllerFindAllSortType;
   sortBy?: AppointmentsControllerFindAllSortBy;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;

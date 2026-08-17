@@ -25,6 +25,7 @@ export type AppointmentsControllerAssistantAppointmentsParams = {
   isRushed?: boolean;
   sortType?: AppointmentsControllerAssistantAppointmentsSortType;
   sortBy?: AppointmentsControllerAssistantAppointmentsSortBy;
+  documentNumber?: string;
   isSuspended?: boolean;
   page?: number;
   limit?: number;
