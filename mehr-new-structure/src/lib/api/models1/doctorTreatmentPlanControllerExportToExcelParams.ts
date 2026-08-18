@@ -11,6 +11,7 @@ export type DoctorTreatmentPlanControllerExportToExcelParams = {
   treatmentCategoryId?: string;
   name?: string;
   type?: DoctorTreatmentPlanControllerExportToExcelType;
+  justRootNodes?: boolean;
   page?: number;
   limit?: number;
 };

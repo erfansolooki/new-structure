@@ -6,6 +6,8 @@
  */
 import type { RenewedTreatmentPlanControllerFindAllStatus } from './renewedTreatmentPlanControllerFindAllStatus';
 import type { RenewedTreatmentPlanControllerFindAllCancelStage } from './renewedTreatmentPlanControllerFindAllCancelStage';
+import type { RenewedTreatmentPlanControllerFindAllSortBy } from './renewedTreatmentPlanControllerFindAllSortBy';
+import type { RenewedTreatmentPlanControllerFindAllSortType } from './renewedTreatmentPlanControllerFindAllSortType';
 
 export type RenewedTreatmentPlanControllerFindAllParams = {
   fromDate?: string;
@@ -17,6 +19,8 @@ export type RenewedTreatmentPlanControllerFindAllParams = {
   patientId?: string;
   doctorId?: string;
   documentNumber?: string;
+  sortBy?: RenewedTreatmentPlanControllerFindAllSortBy;
+  sortType?: RenewedTreatmentPlanControllerFindAllSortType;
   page?: number;
   limit?: number;
 };

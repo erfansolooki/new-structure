@@ -10,6 +10,7 @@ export type RenewedTreatmentPlanControllerFindAllCancelStage =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const RenewedTreatmentPlanControllerFindAllCancelStage = {
+  VISIT: 'VISIT',
   BEFORE_TREATMENT: 'BEFORE_TREATMENT',
   DURING_TREATMNET: 'DURING_TREATMNET',
 } as const;

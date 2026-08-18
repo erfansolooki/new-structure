@@ -6,6 +6,8 @@
  */
 import type { TreatmentPlanControllerFindAllSortType } from './treatmentPlanControllerFindAllSortType';
 import type { TreatmentPlanControllerFindAllSortby } from './treatmentPlanControllerFindAllSortby';
+import type { TreatmentPlanControllerFindAllStatus } from './treatmentPlanControllerFindAllStatus';
+import type { TreatmentPlanControllerFindAllType } from './treatmentPlanControllerFindAllType';
 
 export type TreatmentPlanControllerFindAllParams = {
   dentNameId?: string;
@@ -17,8 +19,13 @@ export type TreatmentPlanControllerFindAllParams = {
   isHead?: boolean;
   isUnforseen?: boolean;
   isSelected?: boolean;
+  noActiveAppointment?: boolean;
   sortType?: TreatmentPlanControllerFindAllSortType;
   sortby?: TreatmentPlanControllerFindAllSortby;
+  status?: TreatmentPlanControllerFindAllStatus;
+  fromDate?: string;
+  toDate?: string;
+  type?: TreatmentPlanControllerFindAllType;
   page?: number;
   limit?: number;
 };

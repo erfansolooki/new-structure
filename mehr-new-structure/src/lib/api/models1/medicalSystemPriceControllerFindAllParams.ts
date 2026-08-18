@@ -14,6 +14,10 @@ export type MedicalSystemPriceControllerFindAllParams = {
    */
   'filter.treatmentCategoryId'?: string;
   /**
+   * Filter by insuranceCategoryId using operators like $eq, $gte, etc.
+   */
+  'filter.insuranceCategoryId'?: string;
+  /**
    * Filter by treatmentType using operators like $eq, $gte, etc.
    */
   'filter.treatmentType'?: string;

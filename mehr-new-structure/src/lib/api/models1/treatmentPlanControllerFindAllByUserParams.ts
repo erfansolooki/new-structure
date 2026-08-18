@@ -6,6 +6,8 @@
  */
 import type { TreatmentPlanControllerFindAllByUserSortType } from './treatmentPlanControllerFindAllByUserSortType';
 import type { TreatmentPlanControllerFindAllByUserSortby } from './treatmentPlanControllerFindAllByUserSortby';
+import type { TreatmentPlanControllerFindAllByUserStatus } from './treatmentPlanControllerFindAllByUserStatus';
+import type { TreatmentPlanControllerFindAllByUserType } from './treatmentPlanControllerFindAllByUserType';
 
 export type TreatmentPlanControllerFindAllByUserParams = {
   dentNameId?: string;
@@ -17,8 +19,13 @@ export type TreatmentPlanControllerFindAllByUserParams = {
   isHead?: boolean;
   isUnforseen?: boolean;
   isSelected?: boolean;
+  noActiveAppointment?: boolean;
   sortType?: TreatmentPlanControllerFindAllByUserSortType;
   sortby?: TreatmentPlanControllerFindAllByUserSortby;
+  status?: TreatmentPlanControllerFindAllByUserStatus;
+  fromDate?: string;
+  toDate?: string;
+  type?: TreatmentPlanControllerFindAllByUserType;
   page?: number;
   limit?: number;
 };

@@ -11,6 +11,7 @@ export type DoctorTreatmentPlanControllerFindAllParams = {
   treatmentCategoryId?: string;
   name?: string;
   type?: DoctorTreatmentPlanControllerFindAllType;
+  justRootNodes?: boolean;
   page?: number;
   limit?: number;
 };
