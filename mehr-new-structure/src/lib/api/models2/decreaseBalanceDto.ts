@@ -5,13 +5,12 @@
  * OpenAPI spec version: 2.0.0
  */
 
-export interface IncreaseBalanceDto {
-  checkId?: string;
+export interface DecreaseBalanceDto {
   paymentGateId: string;
-  date?: string;
-  isLoan?: boolean;
   /** @minimum 1 */
   amount: number;
   toWalletId: string;
   userDescription?: string;
+  date?: string;
+  isLoan?: boolean;
 }

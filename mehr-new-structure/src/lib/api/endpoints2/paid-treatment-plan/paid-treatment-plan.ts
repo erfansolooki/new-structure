@@ -24,6 +24,7 @@ import type {
   PaidTreatmentPlan,
   PaidTreatmentPlanControllerFindAllParams,
   PaidTreatmentPlanControllerFindMineParams,
+  PaidTreatmentPlanControllerFindPatientsInvoiceParams,
   SetPaidTreatmentPlanAsUnusedDto,
 } from '../../models2';
 
@@ -145,6 +146,170 @@ export function usePaidTreatmentPlanControllerFindAll<
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getPaidTreatmentPlanControllerFindAllQueryOptions(params, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
+export const paidTreatmentPlanControllerFindPatientsInvoice = (
+  patientId: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  signal?: AbortSignal
+) => {
+  return apiInstance<void>({
+    url: `/api/paid-treatment-plans/${patientId}/invoice`,
+    method: 'GET',
+    params,
+    signal,
+  });
+};
+
+export const getPaidTreatmentPlanControllerFindPatientsInvoiceQueryKey = (
+  patientId?: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams
+) => {
+  return [`/api/paid-treatment-plans/${patientId}/invoice`, ...(params ? [params] : [])] as const;
+};
+
+export const getPaidTreatmentPlanControllerFindPatientsInvoiceQueryOptions = <
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+  TError = unknown,
+>(
+  patientId: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+        TError,
+        TData
+      >
+    >;
+  }
+) => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getPaidTreatmentPlanControllerFindPatientsInvoiceQueryKey(patientId, params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>
+  > = ({ signal }) => paidTreatmentPlanControllerFindPatientsInvoice(patientId, params, signal);
+
+  return { queryKey, queryFn, enabled: !!patientId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type PaidTreatmentPlanControllerFindPatientsInvoiceQueryResult = NonNullable<
+  Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>
+>;
+export type PaidTreatmentPlanControllerFindPatientsInvoiceQueryError = unknown;
+
+export function usePaidTreatmentPlanControllerFindPatientsInvoice<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+  TError = unknown,
+>(
+  patientId: string,
+  params: undefined | PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindPatientsInvoice<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+  TError = unknown,
+>(
+  patientId: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+          TError,
+          Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>
+        >,
+        'initialData'
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function usePaidTreatmentPlanControllerFindPatientsInvoice<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+  TError = unknown,
+>(
+  patientId: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+/**
+ * @summary required permisson: read_paid_treatment_plan
+ */
+
+export function usePaidTreatmentPlanControllerFindPatientsInvoice<
+  TData = Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+  TError = unknown,
+>(
+  patientId: string,
+  params?: PaidTreatmentPlanControllerFindPatientsInvoiceParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof paidTreatmentPlanControllerFindPatientsInvoice>>,
+        TError,
+        TData
+      >
+    >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getPaidTreatmentPlanControllerFindPatientsInvoiceQueryOptions(
+    patientId,
+    params,
+    options
+  );
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>;

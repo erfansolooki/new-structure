@@ -1286,3 +1286,74 @@ export const useReviewRequestControllerAssignToExpertDoctor = <
 
   return useMutation(mutationOptions, queryClient);
 };
+/**
+ * @summary required permisson: update_review_request
+ */
+export const reviewRequestControllerReopen = (id: string) => {
+  return apiInstance<void>({ url: `/api/review-requests/${id}/reopen`, method: 'PATCH' });
+};
+
+export const getReviewRequestControllerReopenMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof reviewRequestControllerReopen>>,
+    TError,
+    { id: string },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof reviewRequestControllerReopen>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationKey = ['reviewRequestControllerReopen'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof reviewRequestControllerReopen>>,
+    { id: string }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return reviewRequestControllerReopen(id);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type ReviewRequestControllerReopenMutationResult = NonNullable<
+  Awaited<ReturnType<typeof reviewRequestControllerReopen>>
+>;
+
+export type ReviewRequestControllerReopenMutationError = unknown;
+
+/**
+ * @summary required permisson: update_review_request
+ */
+export const useReviewRequestControllerReopen = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof reviewRequestControllerReopen>>,
+      TError,
+      { id: string },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof reviewRequestControllerReopen>>,
+  TError,
+  { id: string },
+  TContext
+> => {
+  const mutationOptions = getReviewRequestControllerReopenMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
