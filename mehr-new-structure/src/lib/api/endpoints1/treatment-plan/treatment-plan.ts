@@ -24,6 +24,7 @@ import type {
   CreateCustomTreatmentPlanDto,
   CreateMultipleTreatmentPlansDto,
   CreateTreatmentPlanDto,
+  EditTreatmentPlanDto,
   File,
   FilesPaginatedResponseDto,
   ToggleSelectMultiplePlans,
@@ -2087,6 +2088,85 @@ export const useTreatmentPlanControllerRemove = <TError = unknown, TContext = un
   TContext
 > => {
   const mutationOptions = getTreatmentPlanControllerRemoveMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+/**
+ * @summary required permisson: edit_treatment_plan
+ */
+export const treatmentPlanControllerEdit = (
+  id: string,
+  editTreatmentPlanDto: EditTreatmentPlanDto
+) => {
+  return apiInstance<void>({
+    url: `/api/treatment-plans/${id}/edit`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: editTreatmentPlanDto,
+  });
+};
+
+export const getTreatmentPlanControllerEditMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof treatmentPlanControllerEdit>>,
+    TError,
+    { id: string; data: EditTreatmentPlanDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof treatmentPlanControllerEdit>>,
+  TError,
+  { id: string; data: EditTreatmentPlanDto },
+  TContext
+> => {
+  const mutationKey = ['treatmentPlanControllerEdit'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof treatmentPlanControllerEdit>>,
+    { id: string; data: EditTreatmentPlanDto }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return treatmentPlanControllerEdit(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type TreatmentPlanControllerEditMutationResult = NonNullable<
+  Awaited<ReturnType<typeof treatmentPlanControllerEdit>>
+>;
+export type TreatmentPlanControllerEditMutationBody = EditTreatmentPlanDto;
+export type TreatmentPlanControllerEditMutationError = unknown;
+
+/**
+ * @summary required permisson: edit_treatment_plan
+ */
+export const useTreatmentPlanControllerEdit = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof treatmentPlanControllerEdit>>,
+      TError,
+      { id: string; data: EditTreatmentPlanDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof treatmentPlanControllerEdit>>,
+  TError,
+  { id: string; data: EditTreatmentPlanDto },
+  TContext
+> => {
+  const mutationOptions = getTreatmentPlanControllerEditMutationOptions(options);
 
   return useMutation(mutationOptions, queryClient);
 };
