@@ -13,6 +13,8 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  AssistantLoginDto,
+  AssistantLoginResponse,
   EmailVerificationDto,
   ForgetPassDto,
   LoginByFingerprintDto,
@@ -96,6 +98,80 @@ export const useAuthControllerLogin = <TError = unknown, TContext = unknown>(
   TContext
 > => {
   const mutationOptions = getAuthControllerLoginMutationOptions(options);
+
+  return useMutation(mutationOptions, queryClient);
+};
+export const authControllerAssistantLogin = (
+  assistantLoginDto: AssistantLoginDto,
+  signal?: AbortSignal
+) => {
+  return apiInstance<AssistantLoginResponse>({
+    url: `/api/auth/assistant-login`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: assistantLoginDto,
+    signal,
+  });
+};
+
+export const getAuthControllerAssistantLoginMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof authControllerAssistantLogin>>,
+    TError,
+    { data: AssistantLoginDto },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof authControllerAssistantLogin>>,
+  TError,
+  { data: AssistantLoginDto },
+  TContext
+> => {
+  const mutationKey = ['authControllerAssistantLogin'];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof authControllerAssistantLogin>>,
+    { data: AssistantLoginDto }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return authControllerAssistantLogin(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AuthControllerAssistantLoginMutationResult = NonNullable<
+  Awaited<ReturnType<typeof authControllerAssistantLogin>>
+>;
+export type AuthControllerAssistantLoginMutationBody = AssistantLoginDto;
+export type AuthControllerAssistantLoginMutationError = unknown;
+
+export const useAuthControllerAssistantLogin = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof authControllerAssistantLogin>>,
+      TError,
+      { data: AssistantLoginDto },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof authControllerAssistantLogin>>,
+  TError,
+  { data: AssistantLoginDto },
+  TContext
+> => {
+  const mutationOptions = getAuthControllerAssistantLoginMutationOptions(options);
 
   return useMutation(mutationOptions, queryClient);
 };
